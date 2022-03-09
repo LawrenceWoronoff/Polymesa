@@ -122,6 +122,8 @@
             @endAuth
             @Guest
             <div class="d-flex align-items-center">
+                <a href="{{url('donate')}}" style="color:#495057"><span class="d-none d-xl-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
+
                 <a href="{{url('login')}}" style="color:#495057"><span class="d-none d-xl-inline-block ms-1 fw-normal font-size-16"> Log in </span></a>
                 <span class="d-none d-xl-inline-block border border-1 border-secondary mx-2 py-2"></span>
                 <a href="{{url('register')}}" style="color:#495057"><span class="d-none d-xl-inline-block ms-1 fw-normal font-size-16"> Join </span></a>

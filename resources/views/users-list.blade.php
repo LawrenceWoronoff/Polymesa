@@ -401,11 +401,6 @@
 
 @endsection
 @section('script')
-    <!-- <script src="{{ URL::asset('/assets/libs/datatables/datatables.min.js') }}"></script>
-    <script src="{{ URL::asset('/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script> -->
-    <!-- <script src="{{ URL::asset('/assets/js/pages/ecommerce-datatables.init.js') }}"></script> -->
-
-
 
     <script>
         var table;
@@ -413,15 +408,6 @@
             table = $('.datatable').DataTable();
             $(".dataTables_length select").addClass('form-select form-select-sm');
         });
-        $( document ).ready(function() {
-            // $('.btn-setactive').click(function(){
-            //     console.log($(this)[0].checked);
-            //     if($(this)[0].checked)
-            //         $(this).parent().find("label").html('Active');
-            //     else
-            //         $(this).parent().find("label").html('Inactive');
-            // })
-        })
         function toogleActive(obj){
             var jobj = $(obj);
             var status = jobj.attr('data-status');

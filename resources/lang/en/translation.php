@@ -4,6 +4,7 @@ return [
   "Menu"=> "Menu",
 
   "Home" => "Home",
+  "Donate" => "Donate",
 
   // Customer Menu
   "Dashboard"=> "Dashboard",

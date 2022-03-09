@@ -26,16 +26,19 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        
         if($request->path() == '/')
         {
             return view('landing-page');
         }
 
+        
+
         if (Auth::check()) {
             
 
         } else {    // If I am a guest
-            if($request->path() != 'media-detail')  // if the page that I want to go is not media detail page and need middleware..
+            if($request->path() != 'media-detail' && $request->path() != 'donate')  // if the page that I want to go is not media detail page and need middleware..
             {
                 return redirect()->route('login');
             }
