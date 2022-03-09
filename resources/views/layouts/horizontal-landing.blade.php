@@ -100,6 +100,8 @@
                 </div>
             </div>
             @Auth            
+            <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#495057"><span class="d-none d-xl-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
+
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

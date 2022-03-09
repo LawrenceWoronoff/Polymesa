@@ -107,57 +107,8 @@
                 </div>
             </div>
 
-            <!-- <div class="dropdown d-none d-lg-inline-block ms-1">
-                <button type="button" class="btn header-item noti-icon waves-effect"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="uil-apps"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                    <div class="px-lg-2">
-                        <div class="row g-0">
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/github.png') }}" alt="Github">
-                                    <span>GitHub</span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/bitbucket.png') }}" alt="bitbucket">
-                                    <span>Bitbucket</span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/dribbble.png') }}" alt="dribbble">
-                                    <span>Dribbble</span>
-                                </a>
-                            </div>
-                        </div>
 
-                        <div class="row g-0">
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/dropbox.png') }}" alt="dropbox">
-                                    <span>Dropbox</span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/mail_chimp.png') }}" alt="mail_chimp">
-                                    <span>Mail Chimp</span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="{{ URL::asset('/assets/images/brands/slack.png') }}" alt="slack">
-                                    <span>Slack</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+            <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#e9ecef"><span class="d-none d-xl-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
 
             <div class="dropdown d-none d-lg-inline-block ms-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
@@ -165,92 +116,6 @@
                 </button>
             </div>
 
-            <!-- <div class="dropdown d-inline-block">
-                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="uil-bell"></i>
-                    <span class="badge bg-danger rounded-pill">3</span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                    aria-labelledby="page-header-notifications-dropdown">
-                    <div class="p-3">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h5 class="m-0 font-size-16"> @lang('translation.Notifications') </h5>
-                            </div>
-                            <div class="col-auto">
-                                <a href="#!" class="small"> @lang('translation.Mark_read')</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-simplebar style="max-height: 230px;">
-                        <a href="" class="text-reset notification-item">
-                            <div class="d-flex align-items-start">
-                                <div class="avatar-xs me-3">
-                                    <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                        <i class="uil-shopping-basket"></i>
-                                    </span>
-                                </div>
-                                <div class="flex-1">
-                                    <h6 class="mt-0 mb-1">@lang('translation.order_placed')</h6>
-                                    <div class="font-size-12 text-muted">
-                                        <p class="mb-1">@lang('translation.languages_grammar')</p>
-                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> @lang('translation.3_min_ago')</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="" class="text-reset notification-item">
-                            <div class="d-flex align-items-start">
-                                <img src="{{ URL::asset('/assets/images/users/avatar-3.jpg') }}"
-                                    class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                <div class="flex-1">
-                                    <h6 class="mt-0 mb-1">James Lemire</h6>
-                                    <div class="font-size-12 text-muted">
-                                        <p class="mb-1">@lang('translation.simplified_English')</p>
-                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> @lang('translation.1_hours_ago')</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="" class="text-reset notification-item">
-                            <div class="d-flex align-items-start">
-                                <div class="avatar-xs me-3">
-                                    <span class="avatar-title bg-success rounded-circle font-size-16">
-                                        <i class="uil-truck"></i>
-                                    </span>
-                                </div>
-                                <div class="flex-1">
-                                    <h6 class="mt-0 mb-1">@lang('translation.item_shipped')</h6>
-                                    <div class="font-size-12 text-muted">
-                                        <p class="mb-1">@lang('translation.languages_grammar')</p>
-                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> @lang('translation.3_min_ago')</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="" class="text-reset notification-item">
-                            <div class="d-flex align-items-start">
-                                <img src="{{ URL::asset('/assets/images/users/avatar-4.jpg') }}"
-                                    class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                <div class="flex-1">
-                                    <h6 class="mt-0 mb-1">Salena Layfield</h6>
-                                    <div class="font-size-12 text-muted">
-                                        <p class="mb-1">@lang('translation.friend_occidental')</p>
-                                        <p class="mb-0"><i class="mdi mdi-clock-outline"></i> @lang('translation.1_hours_ago')</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="p-2 border-top d-grid">
-                        <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
-                            <i class="uil-arrow-circle-right me-1"></i> @lang('translation.View_More')..
-                        </a>
-                    </div>
-                </div>
-            </div> -->
             @Auth            
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
