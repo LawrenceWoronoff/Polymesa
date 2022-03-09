@@ -49,8 +49,6 @@ class HomeController extends Controller
 
     public function root()
     {
-        var_dump('afdsf');
-        exit(0);
         return view('landing-page');
     }
 
