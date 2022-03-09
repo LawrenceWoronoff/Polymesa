@@ -48,8 +48,8 @@
                             </div>
                         </div>
                         <div class="col-lg-10">
-                            <figure class="zoom img-fluid" onmousemove="zoom(event)" style="background-image: url('/assets/images/small/background1.jpg')">
-                                <img src="{{ URL::asset('/assets/images/small/background1.jpg') }}" />
+                            <figure class="zoom img-fluid" onmousemove="zoom(event)" style="background-image: url('public/assets/images/small/background1.jpg')">
+                                <img src="{{ URL::asset('public/assets/images/small/background1.jpg') }}" />
                                 
                             </figure>
                         </div>

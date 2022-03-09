@@ -39,5 +39,5 @@
 
 @endsection
 @section('script')
-    <script src="{{ URL::asset('/assets/js/pages/fontawesome.init.js') }}"></script>
+    <script src="{{ URL::asset('public/assets/js/pages/fontawesome.init.js') }}"></script>
 @endsection

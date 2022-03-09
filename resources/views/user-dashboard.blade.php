@@ -73,46 +73,46 @@
                                     <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>                                    
-                                    <img src="{{ URL::asset('/assets/images/small/img-1.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-1.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
-                                    <img src="{{ URL::asset('/assets/images/small/img-2.jpg') }}" class="img-fluid" alt="Responsive image">
-                                </div>
-                                <div class="mb-2 px-1 col-lg-3">
-                                    <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
-                                        <i class="fas fa-award font-size-20 text-white"></i>
-                                    </div>
-                                    <img src="{{ URL::asset('/assets/images/small/img-3.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-2.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>
-                                    <img src="{{ URL::asset('/assets/images/small/img-4.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-3.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
-                                    <img src="{{ URL::asset('/assets/images/small/img-5.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
+                                        <i class="fas fa-award font-size-20 text-white"></i>
+                                    </div>
+                                    <img src="{{ URL::asset('public/assets/images/small/img-4.jpg') }}" class="img-fluid" alt="Responsive image">
+                                </div>
+                                <div class="mb-2 px-1 col-lg-3">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-5.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>   
-                                    <img src="{{ URL::asset('/assets/images/small/img-6.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-6.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>
-                                    <img src="{{ URL::asset('/assets/images/small/img-7.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-7.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>                                    
-                                    <img src="{{ URL::asset('/assets/images/small/img-1.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-1.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
-                                    <img src="{{ URL::asset('/assets/images/small/img-6.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-6.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                     <div class=overlay></div>
                                     <i class="far fa-play-circle position-absolute" style="cursor: pointer; font-size: 50px; color: #f9f7f7; top: calc(50% - 25px); left: calc(50% - 25px);"></i>
 
-                                    <img src="{{ URL::asset('/assets/images/small/img-5.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-5.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class=overlay></div>
@@ -131,13 +131,13 @@
                                     <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>
-                                    <img src="{{ URL::asset('/assets/images/small/img-3.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-3.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class=overlay></div>
                                     <i class="far fa-play-circle position-absolute" style="cursor: pointer; font-size: 50px; color: #f9f7f7; top: calc(50% - 25px); left: calc(50% - 25px);"></i>
 
-                                    <img src="{{ URL::asset('/assets/images/small/img-4.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-4.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class=overlay></div>
@@ -146,27 +146,27 @@
                                     <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>                                    
-                                    <img src="{{ URL::asset('/assets/images/small/img-1.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-1.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class=overlay></div>
                                     <i class="far fa-play-circle position-absolute" style="cursor: pointer; font-size: 50px; color: #f9f7f7; top: calc(50% - 25px); left: calc(50% - 25px);"></i>
 
-                                    <img src="{{ URL::asset('/assets/images/small/img-1.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-1.jpg') }}" class="img-fluid" alt="Responsive image">
 
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class=overlay></div>
                                     <i class="far fa-play-circle position-absolute" style="cursor: pointer; font-size: 50px; color: #f9f7f7; top: calc(50% - 25px); left: calc(50% - 25px);"></i>
 
-                                    <img src="{{ URL::asset('/assets/images/small/img-2.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-2.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
 
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class=overlay></div>
                                     <i class="far fa-play-circle position-absolute" style="cursor: pointer; font-size: 50px; color: #f9f7f7; top: calc(50% - 25px); left: calc(50% - 25px);"></i>
 
-                                    <img src="{{ URL::asset('/assets/images/small/img-2.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-2.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 <div class="mb-2 px-1 col-lg-3">
                                     <div class=overlay></div>
@@ -175,7 +175,7 @@
                                     <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>
-                                    <img src="{{ URL::asset('/assets/images/small/img-3.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-3.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                                 
                                 <div class="mb-2 px-1 col-lg-3">
@@ -185,7 +185,7 @@
                                     <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>   
-                                    <img src="{{ URL::asset('/assets/images/small/img-6.jpg') }}" class="img-fluid" alt="Responsive image">
+                                    <img src="{{ URL::asset('public/assets/images/small/img-6.jpg') }}" class="img-fluid" alt="Responsive image">
                                 </div>
                             </div>
                         </div>

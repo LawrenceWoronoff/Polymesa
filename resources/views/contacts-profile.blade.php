@@ -23,7 +23,7 @@
                         
                         <div class="clearfix"></div>
                         <div>
-                            <img src="{{ URL::asset('/assets/images/users/avatar-4.jpg') }}" alt=""
+                            <img src="{{ URL::asset('public/assets/images/users/avatar-4.jpg') }}" alt=""
                                 class="avatar-lg rounded-circle img-thumbnail">
                         </div>
                         <h5 class="mt-3 mb-1">Hernandez David</h5>

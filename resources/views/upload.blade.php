@@ -4,7 +4,7 @@
 @endsection
 @section('css')
     <!-- plugin css -->
-    <link href="{{ URL::asset('/assets/libs/dropzone/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('public/assets/libs/dropzone/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('content')
@@ -141,7 +141,7 @@
 @endsection
 @section('script')
     <!-- Plugins js -->
-    <script src="{{ URL::asset('/assets/libs/dropzone/dropzone.min.js') }}"></script>
+    <script src="{{ URL::asset('public/assets/libs/dropzone/dropzone.min.js') }}"></script>
     <script>
         $("#tag_filter").change(function(){
             $("#available_tags").show();
