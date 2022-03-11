@@ -178,7 +178,7 @@
                             </a>
                         </li>                     
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('admin-fonts')}}">
+                            <a class="nav-link" href="{{url('admin-fonts')}}" target="_blank">
                                 <i class="fab fa-font-awesome-flag me-2"></i> @lang('translation.Admin_Fonts')
                             </a>
                         </li>

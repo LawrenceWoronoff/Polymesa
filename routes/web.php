@@ -56,6 +56,15 @@ Route::get('/donate', [HomeController::class, 'donate']);
 Route::get('/users-list',   [UserController::class, 'index']);
 
 Route::get('/categories',   [CategoryController::class, 'index']);
+Route::post('/categories/add',   [CategoryController::class, 'create'])->name('categories/add');
+Route::post('/categories/getInfo',   [CategoryController::class, 'getInfo'])->name('categories/getInfo');
+Route::post('/categories/destroy',   [CategoryController::class, 'destroy'])->name('categories/destroy');
+
+Route::get('/subcategories/{id}',    [CategoryController::class, 'subcategoryIndex'])->name('subcategories');
+Route::post('/subcategories/destroy',    [CategoryController::class, 'destroy_subcategory'])->name('subcategories/destroy');
+Route::post('/subcategories/add',    [CategoryController::class, 'subcategory_add'])->name('subcategories/add');
+
+
 
 Route::get('/tags',                 [TagController::class, 'index']);
 Route::post('/tags-add',            [TagController::class, 'addFeaturedTag'])->name('tags/add');

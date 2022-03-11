@@ -128,34 +128,5 @@
         });
         table.buttons().container().appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
         $(".dataTables_length select").addClass('form-select form-select-sm');
-
-        function removeUser(obj) {
-            var jBtn = $(obj);
-            console.log($(obj).parent());
-            Swal.fire({
-                title: "Are you sure?",
-                text: "Do you want to delete this tag?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#34c38f",
-                cancelButtonColor: "#f46a6a",
-                confirmButtonText: "Yes, delete it!"
-            }).then(function (result) {
-                if (result.value) {
-                    
-                    // jBtn.parents('tr').remove().draw();
-                    // console.log( jBtn.parents('tr'));
-                    // table
-                    //     .row( jBtn.parents('tr') )
-                    //     .remove()
-                    //     .draw();
-
-                    // table.rows({ search: 'applied' }).iterator( 'row', function ( context, index ) {
-                    //     $(this.cell(index, 0).nodes()).html(index + 1);
-                    // });
-                    Swal.fire("Deleted!", "The user has been deleted.", "success");
-                }
-            });
-        }
     </script>
 @endsection

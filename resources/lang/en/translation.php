@@ -34,6 +34,8 @@ return [
   "Delete" => "Delete",
   "Please_Confirm" => "Please Confirm",
   "Delete_Tag_Confirm" => "Are you sure you want to delete tag?",
+  "Delete_Category_Confirm" => "Are you sure you want to delete category?",
+
 
 
   "Detail" => "Detail",
