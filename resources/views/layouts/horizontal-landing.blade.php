@@ -113,6 +113,12 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
+                    @if ( Auth::user()->role == 'admin') 
+                        <a class="dropdown-item" href="{{ url('users-list') }}"><i class="fas fa-home font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">@lang('translation.Dashboard')</span></a>
+                    @elseif(Auth::user()->role == 'customer')
+                        <a class="dropdown-item" href="{{ url('user-dashboard') }}"><i class="fas fa-home font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">@lang('translation.Dashboard')</span></a>
+                    @endif
+                    
                     <a class="dropdown-item" href="contacts-profile"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">@lang('translation.View_Profile')</span></a>
                     <a class="dropdown-item" href="#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">@lang('translation.Lock_screen')</span></a>
                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">@lang('translation.Sign_out')</span></a>

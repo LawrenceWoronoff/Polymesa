@@ -8,8 +8,8 @@
 </head>
 
 @section('body')
-
     <body data-layout="horizontal" data-topbar="colored">
+    @include('sweet::alert')
     @show
 
     <!-- Begin page -->
@@ -22,6 +22,7 @@
             <div class="page-content">
                 <!-- Start content -->
                 <div class="container-fluid">
+
                     @yield('content')
                 </div> <!-- content -->
             </div>

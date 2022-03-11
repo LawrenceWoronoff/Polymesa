@@ -151,7 +151,19 @@
                                 </div>
                             </div>
                             <div class="mb-3 row">
-                                <label for="example-text-input" class="col-md-4 col-form-label">Email address</label>
+                                <label for="example-text-input" class="col-md-4 col-form-label">Password</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="password" value="" id="example-text-input" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="example-text-input" class="col-md-4 col-form-label">Confirm Password</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="password" value="" id="example-text-input" placeholder="Confirm Password">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label for="example-text-input" class="col-md-4 col-form-label">Sign in with</label>
                                 <div class="col-md-8">
                                     <button type="button" class="btn btn-light btn-rounded mx-2" style="width: 100px;">Facebook</button>
                                     <button type="button" class="btn btn-secondary btn-rounded mx-2" style="width: 100px;">Google</button>

@@ -25,15 +25,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {
-        
+    {   
         if($request->path() == '/')
         {
             return view('landing-page');
         }
-
-        
-
         if (Auth::check()) {
             
 
@@ -48,6 +44,10 @@ class HomeController extends Controller
             return view($request->path());
         }
         return abort(404);
+    }
+    public function donate()
+    {
+        return view('donate');
     }
 
     public function root()

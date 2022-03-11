@@ -11,7 +11,12 @@
  
  <script src="{{ URL::asset('public/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
  <script src="{{ URL::asset('public/assets/libs/datatables/datatables.min.js') }}"></script>
+ <script src="{{ URL::asset('public/assets/libs/jszip/jszip.min.js') }}"></script>
+<script src="{{ URL::asset('public/assets/libs/pdfmake/pdfmake.min.js') }}"></script>
+
 <script src="{{ URL::asset('public/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
  @yield('script')
 

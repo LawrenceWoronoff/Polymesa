@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 use DB;
 
-class User extends Authenticatable
+class Tag extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -18,11 +18,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table  = 'featured_tags';
+
     protected $fillable = [
-        'username', 'firstname', 'lastname', 'email', 'password', 'role', 'gender', 'avatar', 'city', 'country', 'birthdate', 'bio',
-        'facebook', 'twitter', 'instagram', 'soundcloud', 'youtube', 'website', 'patereon', 'signinwith', 'communication', 'emailNotification',
-        'bitcoin', 'xrp', 'ether', 'degecoin', 'litecoin', 'paypal', 'stripe', 'zelle', 'venmo', 'cashapp',
-        'status',
+        'id', 'name'
     ];
 
     /**
@@ -31,8 +30,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
-        // 'remember_token',
+        
     ];
 
     /**
@@ -44,9 +42,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function getUploadedAttribute($value) {
-        $user_id = $this->attributes['id'];
-        return DB::table('medias')->where('userId', $user_id)->count();
-    }
 }

@@ -8,8 +8,10 @@
 
 
 <link href="{{ URL::asset('public/assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+
 <link href="{{ URL::asset('public/assets/libs/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ URL::asset('public/assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 
 <!-- Style for Media Player List -->
-<link rel='stylesheet' href='https://cdn.plyr.io/3.6.2/plyr.css'>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

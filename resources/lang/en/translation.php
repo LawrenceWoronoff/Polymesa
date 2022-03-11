@@ -29,6 +29,12 @@ return [
   "French_Dictionary" => "French Dictionary",
   "Serbian_Dictionary" => "Serbian Dictionary",
   
+  // Modal Label
+  "Close" => "Close",
+  "Delete" => "Delete",
+  "Please_Confirm" => "Please Confirm",
+  "Delete_Tag_Confirm" => "Are you sure you want to delete tag?",
+
 
   "Detail" => "Detail",
 

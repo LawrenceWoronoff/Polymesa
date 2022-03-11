@@ -43,28 +43,28 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        <?php $index = 0; foreach ($users_fetch as $user) {  $index++;?>
                         <tr>
                             <td>
-                                1
+                                {{ $index }}
                             </td>
                             <td>
                                 <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-2.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">ramon094
+                                    <img src="{{asset($user->avatar)}}" alt="" class="avatar-xs rounded-circle me-2">{{ $user->username }}
                                 </a> 
                             </td>
                             <td>
-                                Ramon Juan
+                                {{ $user->lastname. ' '. $user->firstname }}
                             </td>
-                            <td>cloudrider.m92@gmail.com</td>
+                            <td>{{ $user->email }}</td>
                             <td>
-                                15
+                                {{ $user->uploaded }}
                             </td>
                             <td>
                                 <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
                             </td>
                             <td>
-                                10/20/2021
+                                {{ date_format($user->created_at, 'm/d/Y') }}
                             </td>
                             <td>
                                 <a href="{{url('user-edit')}}" class="px-3 text-primary user-edit"><i
@@ -73,325 +73,7 @@
                                         class="uil uil-trash-alt font-size-18"></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-3.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">david18
-                                </a> 
-                            </td>
-                            <td>
-                                David Hernandez
-                            </td>
-                            <td>jdavid18@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="{{url('user-edit')}}" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">pepske
-                                </a> 
-                            </td>
-                            <td>
-                                Peske peski
-                            </td>
-                            <td>cloudrider.m92@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="{{url('user-edit')}}" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">pepske
-                                </a> 
-                            </td>
-                            <td>
-                                Peske peski
-                            </td>
-                            <td>cloudrider.m92@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="{{url('user-edit')}}" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                5
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">pepske
-                                </a> 
-                            </td>
-                            <td>
-                                Peske peski
-                            </td>
-                            <td>cloudrider.m92@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="{{url('user-edit')}}" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                6
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">pepske
-                                </a> 
-                            </td>
-                            <td>
-                                Peske peski
-                            </td>
-                            <td>cloudrider.m92@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="{{url('user-edit')}}" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                7
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">pepske
-                                </a> 
-                            </td>
-                            <td>
-                                Peske peski
-                            </td>
-                            <td>cloudrider.m92@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="{{url('user-edit')}}" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                8
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">pepske
-                                </a> 
-                            </td>
-                            <td>
-                                Peske peski
-                            </td>
-                            <td>cloudrider.m92@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="console.log('edit 3');" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                9
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">pepske
-                                </a> 
-                            </td>
-                            <td>
-                                Peske peski
-                            </td>
-                            <td>cloudrider.m92@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="console.log('edit 3');" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                10
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">pepske
-                                </a> 
-                            </td>
-                            <td>
-                                Peske peski
-                            </td>
-                            <td>cloudrider.m92@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="console.log('edit 3');" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                11
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">pepske
-                                </a> 
-                            </td>
-                            <td>
-                                Peske peski
-                            </td>
-                            <td>cloudrider.m92@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="console.log('edit 3');" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                12
-                            </td>
-                            <td>
-                                <a href="javascript: void(0);" class="text-dark fw-bold">
-                                    <img src="{{asset('public/assets/images/users/avatar-1.jpg')}}" alt="" class="avatar-xs rounded-circle me-2">pepske
-                                </a> 
-                            </td>
-                            <td>
-                                Peske peski
-                            </td>
-                            <td>cloudrider123.m92@gmail.com</td>
-                            <td>
-                                15
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
-                            </td>
-                            <td>
-                                10/20/2021
-                            </td>
-                            <td>
-                                <a href="console.log('edit 3');" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
-                            </td>
-                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>

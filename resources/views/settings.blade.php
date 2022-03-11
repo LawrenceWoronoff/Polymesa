@@ -14,8 +14,12 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+
+                    <form action="{{route('settings/update')}}" method="POST">
+                    @csrf
+
                     <div class="d-flex justify-content-end align-items-center mb-3">
-                        <button type="button" class="btn btn-success waves-effect waves-light me-3" id="add_subcategory">
+                        <button type="submit" class="btn btn-success waves-effect waves-light me-3" id="add_subcategory">
                             <i class="mdi mdi-check me-1"></i> Save
                         </button>
                     </div>
@@ -27,19 +31,19 @@
                             <div class="mb-3 row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Freshman</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="number" value="David" id="example-text-input">
+                                    <input class="form-control" type="number" value="{{setting('freshman')}}" id="freshman" name="freshman">
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Junior</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="number" value="David" id="example-text-input">
+                                    <input class="form-control" type="number" value="{{setting('junior')}}" id="junior" name="junior">
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Senior</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="number" value="David" id="example-text-input">
+                                    <input class="form-control" type="number" value="{{setting('senior')}}" id="senior" name="senior">
                                 </div>
                             </div>
                             <div class="mb-3 row">
@@ -57,13 +61,13 @@
                             <div class="mb-3 row">
                                 <label for="example-text-input" class="col-md-3 col-form-label">Minimum likes</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="number" value="David" id="example-text-input">
+                                    <input class="form-control" type="number" value="{{setting('minimumLikes')}}"  id="minimumLikes" name="minimumLikes">
                                 </div>
                             </div>
                             <p class="text-info text-start small">Note: The app will show the pictures with more than "x" likes from other users. Users are the one who curate the pictures/media".</p>
                         </div>
                     </div>
-                    
+                    </form>
                 </div>
             </div>
         </div>
