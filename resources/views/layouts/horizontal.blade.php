@@ -130,7 +130,7 @@
                     <!-- item-->
                     
 
-                    <a class="dropdown-item" href="contacts-profile"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">@lang('translation.View_Profile')</span></a>
+                    <a class="dropdown-item" href="{{ route('contacts-profile') }}"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">@lang('translation.View_Profile')</span></a>
                     
                     <a class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">@lang('translation.Sign_out')</span></a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -204,7 +204,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('contacts-profile')}}">
+                            <a class="nav-link" href="{{route('contacts-profile', Auth::user()->id)}}">
                                 <i class="fas fa-user me-2"></i> @lang('translation.Profile')
                             </a>
                         </li>

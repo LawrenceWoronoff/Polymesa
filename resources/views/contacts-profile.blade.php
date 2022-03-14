@@ -23,11 +23,11 @@
                         
                         <div class="clearfix"></div>
                         <div>
-                            <img src="{{ URL::asset('public/assets/images/users/avatar-4.jpg') }}" alt=""
+                            <img src="{{ asset($user->avatar) }}" alt=""
                                 class="avatar-lg rounded-circle img-thumbnail">
                         </div>
-                        <h5 class="mt-3 mb-1">Hernandez David</h5>
-                        <p class="text-muted">Admin</p>
+                        <h5 class="mt-3 mb-1">{{$user->lastname. ' '. $user->firstname}}</h5>
+                        <p class="text-muted">{{Str::ucfirst($user->role)}}</p>
                         
                     </div>
 
@@ -35,36 +35,36 @@
 
                     <div class="text-muted">
                         <h5 class="font-size-16">About me</h5>
-                        <p>Hi I'm Marcus,has been the industry's standard dummy text To an English person, it will seem like
-                            simplified English, as a skeptical Cambridge.</p>
-                        <div class="table-responsive mt-4 row">
-                            <div class="mt-4 col-lg-6">
+                        <textarea class="bio-area text-muted" rows="4" disabled>{{$user->bio}}</textarea>
+                        
+                        <div class="table-responsive mt-2 row">
+                            <div class="mt-2 col-lg-6">
                                 <p class="mb-1">First Name :</p>
-                                <h5 class="font-size-16">David</h5>
+                                <h5 class="font-size-16">{{$user->firstname}}</h5>
                             </div>
-                            <div class="mt-4 col-lg-6">
+                            <div class="mt-2 col-lg-6">
                                 <p class="mb-1">Last Name :</p>
-                                <h5 class="font-size-16">Hernandez</h5>
+                                <h5 class="font-size-16">{{$user->lastname}}</h5>
                             </div>
-                            <div class="mt-4 col-lg-6">
+                            <div class="mt-2 col-lg-6">
                                 <p class="mb-1">Gender :</p>
-                                <h5 class="font-size-16">Male</h5>
+                                <h5 class="font-size-16">{{$user->gender}}</h5>
                             </div>
-                            <div class="mt-4 col-lg-6">
+                            <div class="mt-2 col-lg-6">
                                 <p class="mb-1">City :</p>
-                                <h5 class="font-size-16">Miami</h5>
+                                <h5 class="font-size-16">{{$user->city}}</h5>
                             </div>
-                            <div class="mt-4 col-lg-6">
+                            <div class="mt-2 col-lg-6">
                                 <p class="mb-1">Country :</p>
-                                <h5 class="font-size-16">United States</h5>
+                                <h5 class="font-size-16">{{$user->country}}</h5>
                             </div>
-                            <div class="mt-4 col-lg-6">
+                            <div class="mt-2 col-lg-6">
                                 <p class="mb-1">E-mail :</p>
-                                <h5 class="font-size-16">david18@gmail.com</h5>
+                                <h5 class="font-size-16">{{$user->email}}</h5>
                             </div>
-                            <div class="mt-4 col-lg-6">
+                            <div class="mt-2 col-lg-6">
                                 <p class="mb-1">Date of birth :</p>
-                                <h5 class="font-size-16">20/Jun/1969</h5>
+                                <h5 class="font-size-16">{{date('d/M/Y', strtotime($user->birthdate))}}</h5>
                             </div>
 
                         </div>
@@ -108,25 +108,25 @@
                                             <li class="feed-item">
                                                 <div class="feed-item-list">
                                                     <h5 class="font-size-16"><i class="fab fa-facebook me-2"></i>Facebook</h5>
-                                                    <p>https://facebook.com/DavidHernandez</p>
+                                                    <p>{{$user->facebook == '' ? 'No link matched' : $user->facebook}}</p>
                                                 </div>
                                             </li>
                                             <li class="feed-item">
                                                 <div class="feed-item-list">
                                                     <h5 class="font-size-16"><i class="fab fa-twitter me-2"></i>Twitter</h5>
-                                                    <p>No link matched</p>
+                                                    <p>{{$user->twitter == '' ? 'No link matched' : $user->twitter}}</p>
                                                 </div>
                                             </li>
                                             <li class="feed-item">
                                                 <div class="feed-item-list">
                                                     <h5 class="font-size-16"><i class="fab fa-instagram-square me-2"></i>Instagram</h5>
-                                                    <p>https://instagram.com/DavidHernandez</p>
+                                                    <p>{{$user->instagram == '' ? 'No link matched' : $user->instagram}}</p>
                                                 </div>
                                             </li>
                                             <li class="feed-item">
                                                 <div class="feed-item-list">
                                                     <h5 class="font-size-16"><i class="fab fa-soundcloud me-2"></i>SoundCloud</h5>
-                                                    <p>https://soudcloud.com/DavidHernandez</p>
+                                                    <p>{{$user->soundcloud == '' ? 'No link matched' : $user->soundcloud}}</p>
                                                 </div>
                                             </li>
                                         </ul>
@@ -136,19 +136,19 @@
                                             <li class="feed-item">
                                                 <div class="feed-item-list">
                                                     <h5 class="font-size-16"><i class="fab fa-youtube me-2"></i>YouTube</h5>
-                                                    <p>No link matched</p>
+                                                    <p>{{$user->youtube == '' ? 'No link matched' : $user->youtube}}</p>
                                                 </div>
                                             </li>
                                             <li class="feed-item">
                                                 <div class="feed-item-list">
-                                                    <h5 class="font-size-16"><i class="fas fa-network-wired me-2"></i>Website</h5>
-                                                    <p>https://portofolio.com/DavidHernandez</p>
+                                                    <h5 class="font-size-16"><i class="fas fa-network-wired me-2"></i>website</h5>
+                                                    <p>{{$user->website == '' ? 'No link matched' : $user->Website}}</p>
                                                 </div>
                                             </li>
                                             <li class="feed-item">
                                                 <div class="feed-item-list">
                                                     <h5 class="font-size-16"><i class="fab fa-patreon me-2"></i>Patreon</h5>
-                                                    <p>https://patreon.com/DavidHernandez</p>
+                                                    <p>{{$user->patreon == '' ? 'No link matched' : $user->patreon}}</p>
                                                 </div>
                                             </li>
                                         </ul>
@@ -163,46 +163,32 @@
                             <div class="col-lg-6">
                                 <div class="mb-4">
                                     <p class="mb-1">Paypal :</p>
-                                    <h5 class="font-size-16">jdavid18@gmail.com</h5>
+                                    <h5 class="font-size-16">{{$user->paypal == '' ? 'No address found' : $user->paypal}}</h5>
                                 </div>
                                 <div class="mb-4">
                                     <p class="mb-1">Stripe :</p>
-                                    <h5 class="font-size-16">jdavidstripe18@outlook.com</h5>
+                                    <h5 class="font-size-16">{{$user->stripe == '' ? 'No address found' : $user->stripe}}</h5>
                                 </div>
                                 <div class="mb-4">
                                     <p class="mb-1">Zelle :</p>
-                                    <h5 class="font-size-16">No address matched</h5>
+                                    <h5 class="font-size-16">{{$user->zelle == '' ? 'No address found' : $user->zelle}}</h5>
                                 </div>
                                 <div class="mb-4">
                                     <p class="mb-1">Venmo :</p>
-                                    <h5 class="font-size-16">No address matched</h5>
+                                    <h5 class="font-size-16">{{$user->venmo == '' ? 'No address found' : $user->venmo}}</h5>
                                 </div>
                                 <div class="mb-4">
                                     <p class="mb-1">CashApp :</p>
-                                    <h5 class="font-size-16">No address matched</h5>
+                                    <h5 class="font-size-16">{{$user->cashapp == '' ? 'No address found' : $user->cashapp}}</h5>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="mb-4">
-                                <p class="mb-1">BitCoin :</p>
-                                    <h5 class="font-size-16">1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2 </h5>
-                                </div>
-                                <div class="mb-4">
-                                    <p class="mb-1">XRP :</p>
-                                    <h5 class="font-size-16">No address matched</h5>
-                                </div>
-                                <div class="mb-4">
-                                    <p class="mb-1">Ether :</p>
-                                    <h5 class="font-size-16">0x0AD5970F352f1E1Ef364928D8D1C2e66854e4b51</h5>
-                                </div>
-                                <div class="mb-4">
-                                    <p class="mb-1">Degecoin :</p>
-                                    <h5 class="font-size-16">No address matched</h5>
-                                </div>
-                                <div class="mb-4">
-                                    <p class="mb-1">Litecoin :</p>
-                                    <h5 class="font-size-16">jdavid18@gmail.com</h5>
-                                </div>
+                                <?php $index = 0; foreach($cryptos as $crypto) { $index ++;?>
+                                    <div class="mb-4">
+                                        <p class="mb-1">{{ $crypto->name }} :</p>
+                                        <h5 class="font-size-16">{{array_key_exists($crypto->name, $user->cryptos) ? ($user->cryptos[$crypto->name] != '' ? $user->cryptos[$crypto->name] : 'No Wallet found') : 'No Wallet found'}} </h5>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -213,7 +199,7 @@
                                 Email Address
                             </div>
                             <div class="col-lg-10">
-                                jdavid18@gmail.com
+                                {{$user->email}}
                             </div>
                         </div>
                         <div class="row my-4">
@@ -221,8 +207,8 @@
                                 Sign in with
                             </div>
                             <div class="col-lg-10 row">
-                                <button type="button" class="btn btn-light btn-rounded mx-2" style="width: 100px;">Facebook</button>
-                                <button type="button" class="btn btn-secondary btn-rounded mx-2" style="width: 100px;">Google</button>
+                                <button type="button" class="btn {{array_key_exists("0", $user->signinwith) ? ($user->signinwith['0'] == 1 ? 'btn-secondary' : 'btn-light') : 'btn-light'}} btn-rounded mx-2" style="width: 100px;">Facebook</button>
+                                <button type="button" class="btn {{array_key_exists("1", $user->signinwith) ? ($user->signinwith['1'] == 1 ? 'btn-secondary' : 'btn-light') : 'btn-light'}} btn-rounded mx-2" style="width: 100px;">Google</button>
                             </div>
                         </div>
                         <div class="row my-4">
@@ -231,13 +217,13 @@
                             </div>
                             <div class="col-lg-10 row">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="communiation_private_messages" checked="">
+                                    <input class="form-check-input" type="checkbox" id="communiation_private_messages" {{array_key_exists("0", $user->communication) ? ($user->communication["0"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="communiation_private_messages">
                                         Disable private messages
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="communiation_comments">
+                                    <input class="form-check-input" type="checkbox" id="communiation_comments" {{array_key_exists("1", $user->communication) ? ($user->communication["1"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="communiation_comments">
                                         Disable comments
                                     </label>
@@ -250,31 +236,31 @@
                             </div>
                             <div class="col-lg-10 row">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="email_private_messages" checked="">
+                                    <input class="form-check-input" type="checkbox" id="email_private_messages" {{array_key_exists("0", $user->emailNotification) ? ($user->emailNotification["0"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="email_private_messages">
                                         private messages
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="email_news">
+                                    <input class="form-check-input" type="checkbox" id="email_news" {{array_key_exists("1", $user->emailNotification) ? ($user->emailNotification["0"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="email_news">
                                         Send me latest news and tips
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="email_important" checked="">
+                                    <input class="form-check-input" type="checkbox" id="email_important" {{array_key_exists("2", $user->emailNotification) ? ($user->emailNotification["0"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="email_important">
                                         Send me latest important notifications
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="email_comments" checked="">
+                                    <input class="form-check-input" type="checkbox" id="email_comments" {{array_key_exists("3", $user->emailNotification) ? ($user->emailNotification["0"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="email_comments">
                                         Notify me of new comments
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="email_new_images">
+                                    <input class="form-check-input" type="checkbox" id="email_new_images" {{array_key_exists("4", $user->emailNotification) ? ($user->emailNotification["0"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="email_new_images">
                                         Notify me of new images uploaded by friends
                                     </label>

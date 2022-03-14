@@ -52,9 +52,6 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'root']);
 Route::get('/donate', [HomeController::class, 'donate']);
 
-
-
-
 // ============= Admin Role Routes ============= //
 Route::get('/users',   [UserController::class, 'index'])->name('user-list');
 Route::get('/users/add',     [UserController::class, 'create'])->name('users/add');
@@ -97,6 +94,11 @@ Route::get('/admin-fonts',  [FontController::class, 'index']);
 Route::get('/user-dashboard',   [DashboardController::class, 'index']);
 Route::get('/user-statistics',  [StatisticController::class, 'index']);
 Route::get('/upload',           [MediaController::class, 'upload']);
-Route::get('/contacts-profile', [ProfileController::class, 'index']);
+
+Route::get('/contacts-profile', [ProfileController::class, 'index'])->name('contacts-profile');
+Route::get('/contacts-profile-edit', [ProfileController::class, 'edit'])->name('contacts-profile-edit');
+Route::post('/contacts-profile/update', [ProfileController::class, 'update'])->name('contacts-profile/update');
+
+
 Route::get('/community-voting', [MediaController::class, 'voting']);
 

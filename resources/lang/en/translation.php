@@ -19,6 +19,8 @@ return [
   "Categories" => "Categories",
   "Tags" => "Tags",
   "Cryptocoins" => "Crypto Coins",
+  "ProfileEdit" => "Edit Profile",
+
 
   // Admin Label
   "UserList" => "User List",

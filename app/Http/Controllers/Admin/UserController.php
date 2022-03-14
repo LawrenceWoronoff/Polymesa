@@ -49,10 +49,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->user->find($id);
-        $user->signinwith = (array)(json_decode($user->signinwith));
+        $user->signinwiths = (array)(json_decode($user->signinwith));
         $user->cryptos = (array)(json_decode($user->cryptoSet));
-        $user->communication = (array)(json_decode($user->communication));
-        $user->emailNotification = (array)(json_decode($user->emailNotification));
+        $user->communications = (array)(json_decode($user->communication));
+        $user->emailNotifications = (array)(json_decode($user->emailNotification));
 
         $cryptos = $this->crypto->query()->get();
         return view('user-edit', ['cryptos' => $cryptos, 'user' => $user]);

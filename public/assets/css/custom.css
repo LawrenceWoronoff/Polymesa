@@ -707,3 +707,10 @@
     height: 45%;
   }
 }
+
+.bio-area{
+  border: none;
+  resize: none;
+  background: transparent;
+  width: 100%
+}

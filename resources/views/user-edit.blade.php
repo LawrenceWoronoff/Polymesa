@@ -97,7 +97,7 @@
                             <div class="mb-3 row">
                                 <label for="bio" class="col-md-3 col-form-label">About me</label>
                                 <div class="col-md-9">
-                                    <textarea class="form-control" placeholder="In a few words, tell us about yourself" rows="3" id="bio" name="bio">{{$user->bio}}</textarea>
+                                    <textarea class="form-control" placeholder="In a few words, tell us about yourself" rows="5" id="bio" name="bio">{{$user->bio}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -168,64 +168,64 @@
                             <div class="mb-3 row">
                                 <label for="signinwith" class="col-md-4 col-form-label">Sign in with</label>
                                 <div class="col-md-8">
-                                    <button type="button" class="btn btn-rounded mx-2 {{array_key_exists("0", $user->signinwith) ? ($user->signinwith['0'] == 1 ? 'btn-secondary' : 'btn-light') : 'btn-light'}}" style="width: 100px;" onclick="toogleSign(this, 0)" data-status="{{array_key_exists("0", $user->signinwith) ? ($user->signinwith['0'] == 1 ? 'active' : 'inactive') : 'inactive'}}" >Facebook</button>
-                                    <button type="button" class="btn btn-rounded mx-2 {{array_key_exists("1", $user->signinwith) ? ($user->signinwith['1'] == 1 ? 'btn-secondary' : 'btn-light') : 'btn-light'}}" style="width: 100px;" onclick="toogleSign(this, 1)" data-status="{{array_key_exists("1", $user->signinwith) ? ($user->signinwith['1'] == 1 ? 'active' : 'inactive') : 'inactive'}}">Google</button>
+                                    <button type="button" class="btn btn-rounded mx-2 {{array_key_exists("0", $user->signinwiths) ? ($user->signinwiths['0'] == 1 ? 'btn-secondary' : 'btn-light') : 'btn-light'}}" style="width: 100px;" onclick="toogleSign(this, 0)" data-status="{{array_key_exists("0", $user->signinwiths) ? ($user->signinwiths['0'] == 1 ? 'active' : 'inactive') : 'inactive'}}" >Facebook</button>
+                                    <button type="button" class="btn btn-rounded mx-2 {{array_key_exists("1", $user->signinwiths) ? ($user->signinwiths['1'] == 1 ? 'btn-secondary' : 'btn-light') : 'btn-light'}}" style="width: 100px;" onclick="toogleSign(this, 1)" data-status="{{array_key_exists("1", $user->signinwiths) ? ($user->signinwiths['1'] == 1 ? 'active' : 'inactive') : 'inactive'}}">Google</button>
                                 </div>
-                                <input class="form-control" type="text" value="" id="signinwith" name="signinwith" hidden>
+                                <input class="form-control" type="text" value="{{$user->signinwith}}" id="signinwith" name="signinwith" hidden>
                             </div>
                             <div class="mb-3 row">
                                 <label for="example-text-input" class="col-md-4 col-form-label pt-0">Communication</label>
                                 <div class="col-md-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="communiation_private_messages" {{array_key_exists("0", $user->communication) ? ($user->communication["0"] == 1 ? 'checked' : '') : '' }}  onclick="toogleCommunication(this, 0)">
+                                        <input class="form-check-input" type="checkbox" id="communiation_private_messages" {{array_key_exists("0", $user->communications) ? ($user->communications["0"] == 1 ? 'checked' : '') : '' }} onclick="toogleCommunication(this, 0)">
                                         <label class="form-check-label" for="communiation_private_messages">
                                             Disable private messages
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="communiation_comments" {{array_key_exists("1", $user->communication) ? ($user->communication["1"] == 1 ? 'checked' : '') : '' }}  onclick="toogleCommunication(this, 1)">
+                                        <input class="form-check-input" type="checkbox" id="communiation_comments" {{array_key_exists("1", $user->communications) ? ($user->communications["1"] == 1 ? 'checked' : '') : '' }}  onclick="toogleCommunication(this, 1)">
                                         <label class="form-check-label" for="communiation_comments">
                                             Disable comments
                                         </label>
                                     </div>
                                 </div>
-                                <input class="form-control" type="text" value="" id="communication" name="communication" hidden>
+                                <input class="form-control" type="text" value="{{$user->communication}}" id="communication" name="communication" hidden>
                             </div>
                             <div class="mb-3 row">
                                 <label for="example-text-input" class="col-md-4 col-form-label pt-0">Email notifications</label>
                                 <div class="col-md-8">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="email_private_messages" {{array_key_exists("0", $user->emailNotification) ? ($user->emailNotification["0"] == 1 ? 'checked' : '') : '' }} onclick="toogleNotification(this, 0)">
+                                        <input class="form-check-input" type="checkbox" id="email_private_messages" {{array_key_exists("0", $user->emailNotifications) ? ($user->emailNotifications["0"] == 1 ? 'checked' : '') : '' }} onclick="toogleNotification(this, 0)">
                                         <label class="form-check-label" for="email_private_messages">
                                             private messages
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="email_news" {{array_key_exists("1", $user->emailNotification) ? ($user->emailNotification["1"] == 1 ? 'checked' : '') : '' }} onclick="toogleNotification(this, 1)">
+                                        <input class="form-check-input" type="checkbox" id="email_news" {{array_key_exists("1", $user->emailNotifications) ? ($user->emailNotifications["1"] == 1 ? 'checked' : '') : '' }} onclick="toogleNotification(this, 1)">
                                         <label class="form-check-label" for="email_news">
                                             Send me latest news and tips
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="email_important" {{array_key_exists("2", $user->emailNotification) ? ($user->emailNotification["2"] == 1 ? 'checked' : '') : '' }} onclick="toogleNotification(this, 2)">
+                                        <input class="form-check-input" type="checkbox" id="email_important" {{array_key_exists("2", $user->emailNotifications) ? ($user->emailNotifications["2"] == 1 ? 'checked' : '') : '' }} onclick="toogleNotification(this, 2)">
                                         <label class="form-check-label" for="email_important">
                                             Send me latest important notifications
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="email_comments" {{array_key_exists("3", $user->emailNotification) ? ($user->emailNotification["3"] == 1 ? 'checked' : '') : '' }} onclick="toogleNotification(this, 3)">
+                                        <input class="form-check-input" type="checkbox" id="email_comments" {{array_key_exists("3", $user->emailNotifications) ? ($user->emailNotifications["3"] == 1 ? 'checked' : '') : '' }} onclick="toogleNotification(this, 3)">
                                         <label class="form-check-label" for="email_comments">
                                             Notify me of new comments
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="email_new_images" {{array_key_exists("4", $user->emailNotification) ? ($user->emailNotification["4"] == 1 ? 'checked' : '') : '' }} onclick="toogleNotification(this, 4)">
+                                        <input class="form-check-input" type="checkbox" id="email_new_images" {{array_key_exists("4", $user->emailNotifications) ? ($user->emailNotifications["4"] == 1 ? 'checked' : '') : '' }} onclick="toogleNotification(this, 4)">
                                         <label class="form-check-label" for="email_new_images">
                                             Notify me of new images uploaded by friends
                                         </label>
                                     </div>
                                 </div>
-                                <input class="form-control" type="text" value="" id="emailNotification" name="emailNotification" hidden>
+                                <input class="form-control" type="text" value="{{$user->emailNotification}}" id="emailNotification" name="emailNotification" hidden>
 
                             </div>
                         </div>
