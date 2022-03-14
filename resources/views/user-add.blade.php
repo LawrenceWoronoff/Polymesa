@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <form action="{{route('users/store')}}" method="POST">
+                <form action="{{route('users/store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body p-4">
                     <div class="row">
@@ -33,7 +33,7 @@
                                     <div class="profile-pic-wrapper">
                                         <div class="pic-holder">
                                             <!-- uploaded pic shown here -->
-                                            <img id="profilePic" class="pic" src="https://source.unsplash.com/random/150x150">
+                                            <img id="profilePic" class="pic" src="{{asset('public/assets/images/users/default-avatar.png')}}">
 
                                             <label for="newProfilePhoto" class="upload-file-block">
                                             <div class="text-center">
@@ -350,54 +350,55 @@
             if (!files.length || !window.FileReader) {
                 return;
             }
+
             if (/^image/.test(files[0].type)) {
                 // only image file
                 var reader = new FileReader(); // instance of the FileReader
                 reader.readAsDataURL(files[0]); // read the local file
 
                 reader.onloadend = function () {
-                $(holder).addClass("uploadInProgress");
-                $(holder).find(".pic").attr("src", this.result);
-                $(holder).append(
-                    '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
-                );
-
-                // Dummy timeout; call API or AJAX below
-                setTimeout(() => {
-                    $(holder).removeClass("uploadInProgress");
-                    $(holder).find(".upload-loader").remove();
-                    // If upload successful
-                    if (Math.random() < 0.9) {
-                    $(wrapper).append(
-                        '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
+                    $(holder).addClass("uploadInProgress");
+                    $(holder).find(".pic").attr("src", this.result);
+                    $(holder).append(
+                        '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
                     );
 
-                    // Clear input after upload
-                    $(triggerInput).val("");
-
+                    // Dummy timeout; call API or AJAX below
                     setTimeout(() => {
-                        $(wrapper).find('[role="alert"]').remove();
-                    }, 3000);
-                    } else {
-                    $(holder).find(".pic").attr("src", currentImg);
-                    $(wrapper).append(
-                        '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
-                    );
+                        $(holder).removeClass("uploadInProgress");
+                        $(holder).find(".upload-loader").remove();
+                        // If upload successful
+                        if (Math.random() < 0.9) {
+                            $(wrapper).append(
+                                '<div class="snackbar show" role="alert"><i class="fa fa-check-circle text-success"></i> Profile image updated successfully</div>'
+                            );
 
-                    // Clear input after upload
-                    $(triggerInput).val("");
-                    setTimeout(() => {
-                        $(wrapper).find('[role="alert"]').remove();
-                    }, 3000);
-                    }
-                }, 1500);
+                            // Clear input after upload
+                            // $(triggerInput).val("");
+
+                            setTimeout(() => {
+                                $(wrapper).find('[role="alert"]').remove();
+                            }, 3000);
+                        } else {
+                            $(holder).find(".pic").attr("src", currentImg);
+                            $(wrapper).append(
+                                '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                            );
+
+                            // Clear input after upload
+                            // $(triggerInput).val("");
+                            setTimeout(() => {
+                                $(wrapper).find('[role="alert"]').remove();
+                            }, 3000);
+                        }
+                    }, 1500);
                 };
             } else {
                 $(wrapper).append(
-                '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
+                    '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
                 );
                 setTimeout(() => {
-                $(wrapper).find('role="alert"').remove();
+                    $(wrapper).find('role="alert"').remove();
                 }, 3000);
             }
         });

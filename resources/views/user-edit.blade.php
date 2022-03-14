@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <form action="{{route('users/update', $user->id)}}" method="POST"  enctype="multipart/form-data">
+                <form action="{{route('users/update', $user->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body p-4">
                     <div class="row">
@@ -33,7 +33,7 @@
                                     <div class="profile-pic-wrapper">
                                         <div class="pic-holder">
                                             <!-- uploaded pic shown here -->
-                                            <img id="profilePic" class="pic" src="{{asset('public/assets/images/users/default-avatar.png')}}">
+                                            <img id="profilePic" class="pic" src="{{asset($user->avatar)}}">
 
                                             <label for="newProfilePhoto" class="upload-file-block">
                                             <div class="text-center">

@@ -61,10 +61,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required | unique:users',
+            'username' => 'required | unique:users,deleted_at,NULL',
+            'email' => 'required | unique:users,deleted_at,NULL',
+
             'password' => 'required',
             'confirmPassword' => 'required | same:password',
         ]);
+        $file = $request->file('profile_pic');
+        // var_dump($file);
+        // exit(0);
 
         $data = array(
             'username' => $request->username,
@@ -74,7 +79,6 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'role' => 'customer',
             'gender' => $request->gender,
-            'avatar' => '',                      //Image Path uploaded
             'city' => $request->city,
             'country' => $request->country,
             'birthdate' => $request->birthdate,
@@ -97,6 +101,15 @@ class UserController extends Controller
             'cashapp' => $request->cashapp,
             'status' => 'active',
         );
+        
+        if($file) {
+            $fileName = time().'_'.$file->getClientOriginalName();
+            $data['avatar'] = 'public/assets/images/users/'. $fileName;
+            $file->move('public/assets/images/users/', $fileName);
+        } else {
+            $data['avatar'] = 'public/assets/images/users/default-avatar.png';
+        }
+
         $this->user->create($data);
 
         return redirect()->route('user-list')->with('success', 'New User Added.');
@@ -117,7 +130,6 @@ class UserController extends Controller
             'lastname' => $request->lastname,
             'email' => $request->email,
             'gender' => $request->gender,
-            'avatar' => '',                      //Image Path uploaded
             'city' => $request->city,
             'country' => $request->country,
             'birthdate' => $request->birthdate,
@@ -144,6 +156,8 @@ class UserController extends Controller
             $fileName = time().'_'.$file->getClientOriginalName();
             $data['avatar'] = 'public/assets/images/users/'. $fileName;
             $file->move('public/assets/images/users/', $fileName);
+        } else {
+            
         }
 
         if($request->password != '')
