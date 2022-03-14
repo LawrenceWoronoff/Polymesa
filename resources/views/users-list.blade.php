@@ -17,7 +17,7 @@
     @endcomponent
 
     <div class="d-flex justify-content-end">
-        <a href="{{url('user-add')}}">
+        <a href="{{url('users/add')}}">
             <button type="button" class="btn btn-success waves-effect waves-light mb-3">
                 <i class="mdi mdi-plus me-1"></i> Add User
             </button>
@@ -61,16 +61,38 @@
                                 {{ $user->uploaded }}
                             </td>
                             <td>
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)">Active</button>
+                                @if($user->status == 'active')
+                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light" data-status="active" onclick="toogleActive(this)" data-id = "{{$user->id}}">Active</button>
+                                @else
+                                    <button type="button" class="btn btn-secondary btn-rounded waves-effect waves-light" data-status="deactive" onclick="toogleActive(this)" data-id = "{{$user->id}}">Dective</button>
+                                @endif
                             </td>
                             <td>
                                 {{ date_format($user->created_at, 'm/d/Y') }}
                             </td>
                             <td>
-                                <a href="{{url('user-edit')}}" class="px-3 text-primary user-edit"><i
-                                        class="uil uil-pen font-size-18"></i></a>
-                                <a class="px-3 text-danger" onclick="removeUser(this)"><i
-                                        class="uil uil-trash-alt font-size-18"></i></a>
+                                <div class="d-flex">
+                                    <a href="{{route('users/edit', $user->id)}}" class="px-3 text-primary user-edit"><i
+                                            class="uil uil-pen font-size-18"></i></a>
+                                    <form action="{{route('users/destroy', $user->id)}}" method="POST">
+                                        @csrf
+                                        <a class="px-3 text-danger" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#deleteUser{{$user->id}}"><i class="uil uil-trash-alt font-size-18"></i></a>
+
+                                        <!-- <button type="button" class="btn btn-danger px-1 py-0" data-bs-toggle="modal" data-bs-target="#deleteUser{{$user->id}}"><i class='uil uil-trash-alt font-size-16'></i></button> -->
+                                        <div class="modal fade" id="deleteUser{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteUser" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content p-4">
+                                                    <div class="modal-body text-center">
+                                                        <h3 class="mb-3">{{ __('translation.Please_Confirm') }}</h3>
+                                                        <p class="mb-5 font-size-18">{{__('translation.Delete_User_Confirm')}}</p>
+                                                        <button type="button" class="btn btn-secondary me-2 col-md-5 pull-left" data-bs-dismiss="modal">{{__('translation.Close')}}</button>
+                                                        <button type="submit" class="btn btn-danger col-md-5 pull-right">{{__('translation.Delete')}}</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         <?php } ?>
@@ -93,47 +115,64 @@
         function toogleActive(obj){
             var jobj = $(obj);
             var status = jobj.attr('data-status');
-            if(status == 'active'){
-                jobj.html('Inactive');
-                jobj.attr('data-status', 'inactive');
-                jobj.removeClass('btn-success');
-                jobj.addClass('btn-secondary');
-            }
-            else{
-                jobj.html('Active');
-                jobj.attr('data-status', 'active');
-                jobj.removeClass('btn-secondary');
-                jobj.addClass('btn-success');
-            }
-        }
-
-        function removeUser(obj) {
-            var jBtn = $(obj);
-            console.log($(obj).parent());
-            Swal.fire({
-                title: "Are you sure?",
-                text: "Do you want to delete selected user?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#34c38f",
-                cancelButtonColor: "#f46a6a",
-                confirmButtonText: "Yes, delete it!"
-            }).then(function (result) {
-                if (result.value) {
-                    
-                    // jBtn.parents('tr').remove().draw();
-                    // console.log( jBtn.parents('tr'));
-                    // table
-                    //     .row( jBtn.parents('tr') )
-                    //     .remove()
-                    //     .draw();
-
-                    // table.rows({ search: 'applied' }).iterator( 'row', function ( context, index ) {
-                    //     $(this.cell(index, 0).nodes()).html(index + 1);
-                    // });
-                    Swal.fire("Deleted!", "The user has been deleted.", "success");
-                }
+            var id = jobj.attr('data-id');
+            var param = {
+                id : id,
+                status : (status == 'active' ? 'deactive' : 'active'),
+            };
+            $.ajax({
+                url: "{{URL::to('/users/changeStatus')}}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(param),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (result) {
+                    if(status == 'active'){
+                        jobj.html('Deactive');
+                        jobj.attr('data-status', 'Deactive');
+                        jobj.removeClass('btn-success');
+                        jobj.addClass('btn-secondary');
+                    }
+                    else{
+                        jobj.html('Active');
+                        jobj.attr('data-status', 'active');
+                        jobj.removeClass('btn-secondary');
+                        jobj.addClass('btn-success');
+                    }
+                },
             });
         }
+
+        // function removeUser(obj) {
+        //     var jBtn = $(obj);
+        //     console.log($(obj).parent());
+        //     Swal.fire({
+        //         title: "Are you sure?",
+        //         text: "Do you want to delete selected user?",
+        //         icon: "warning",
+        //         showCancelButton: true,
+        //         confirmButtonColor: "#34c38f",
+        //         cancelButtonColor: "#f46a6a",
+        //         confirmButtonText: "Yes, delete it!"
+        //     }).then(function (result) {
+        //         if (result.value) {
+                    
+        //             // jBtn.parents('tr').remove().draw();
+        //             // console.log( jBtn.parents('tr'));
+        //             // table
+        //             //     .row( jBtn.parents('tr') )
+        //             //     .remove()
+        //             //     .draw();
+
+        //             // table.rows({ search: 'applied' }).iterator( 'row', function ( context, index ) {
+        //             //     $(this.cell(index, 0).nodes()).html(index + 1);
+        //             // });
+        //             Swal.fire("Deleted!", "The user has been deleted.", "success");
+        //         }
+        //     });
+        // }
     </script>
 @endsection

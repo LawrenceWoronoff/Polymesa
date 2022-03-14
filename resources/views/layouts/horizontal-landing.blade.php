@@ -114,7 +114,7 @@
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
                     @if ( Auth::user()->role == 'admin') 
-                        <a class="dropdown-item" href="{{ url('users-list') }}"><i class="fas fa-home font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">@lang('translation.Dashboard')</span></a>
+                        <a class="dropdown-item" href="{{ url('users') }}"><i class="fas fa-home font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">@lang('translation.Dashboard')</span></a>
                     @elseif(Auth::user()->role == 'customer')
                         <a class="dropdown-item" href="{{ url('user-dashboard') }}"><i class="fas fa-home font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">@lang('translation.Dashboard')</span></a>
                     @endif

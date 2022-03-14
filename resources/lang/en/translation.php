@@ -18,6 +18,7 @@ return [
   "Users"=> "Users",
   "Categories" => "Categories",
   "Tags" => "Tags",
+  "Cryptocoins" => "Crypto Coins",
 
   // Admin Label
   "UserList" => "User List",
@@ -35,8 +36,10 @@ return [
   "Please_Confirm" => "Please Confirm",
   "Delete_Tag_Confirm" => "Are you sure you want to delete tag?",
   "Delete_Category_Confirm" => "Are you sure you want to delete category?",
+  "Delete_Crypto_Confirm" => "Are you sure you want to delete Crypto Coin?",
+  "Delete_User_Confirm" => "Are you sure you want to delete user?",
 
-
+  
 
   "Detail" => "Detail",
 

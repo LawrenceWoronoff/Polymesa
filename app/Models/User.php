@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use SoftDeletes;
 
 use DB;
 
@@ -21,7 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'username', 'firstname', 'lastname', 'email', 'password', 'role', 'gender', 'avatar', 'city', 'country', 'birthdate', 'bio',
         'facebook', 'twitter', 'instagram', 'soundcloud', 'youtube', 'website', 'patereon', 'signinwith', 'communication', 'emailNotification',
-        'bitcoin', 'xrp', 'ether', 'degecoin', 'litecoin', 'paypal', 'stripe', 'zelle', 'venmo', 'cashapp',
+        'cryptoSet', 'paypal', 'stripe', 'zelle', 'venmo', 'cashapp',
         'status',
     ];
 

@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\FontController;
 use App\Http\Controllers\Admin\DictionaryController;
+use App\Http\Controllers\Admin\CryptoController;
+
+
 
 
 use App\Http\Controllers\Customer\DashboardController;
@@ -53,7 +56,14 @@ Route::get('/donate', [HomeController::class, 'donate']);
 
 
 // ============= Admin Role Routes ============= //
-Route::get('/users-list',   [UserController::class, 'index']);
+Route::get('/users',   [UserController::class, 'index'])->name('user-list');
+Route::get('/users/add',     [UserController::class, 'create'])->name('users/add');
+Route::post('/users/store',     [UserController::class, 'store'])->name('users/store');
+Route::get('/users/edit/{id}',     [UserController::class, 'edit'])->name('users/edit');
+Route::post('/users/update/{id}',     [UserController::class, 'update'])->name('users/update');
+Route::post('/users/changeStatus',     [UserController::class, 'changeStatus'])->name('users/changeStatus');
+Route::post('/users/destroy/{id}',    [UserController::class, 'destroy'])->name('users/destroy');
+
 
 Route::get('/categories',   [CategoryController::class, 'index']);
 Route::post('/categories/add',   [CategoryController::class, 'create'])->name('categories/add');
@@ -64,7 +74,9 @@ Route::get('/subcategories/{id}',    [CategoryController::class, 'subcategoryInd
 Route::post('/subcategories/destroy',    [CategoryController::class, 'destroy_subcategory'])->name('subcategories/destroy');
 Route::post('/subcategories/add',    [CategoryController::class, 'subcategory_add'])->name('subcategories/add');
 
-
+Route::get('/cryptos',                 [CryptoController::class, 'index']);
+Route::post('/cryptos-add',            [CryptoController::class, 'addCrypto'])->name('cryptos/add');
+Route::post('/cryptos/destroy/{id}',   [CryptoController::class, 'destroy'])->name('cryptos/destroy');
 
 Route::get('/tags',                 [TagController::class, 'index']);
 Route::post('/tags-add',            [TagController::class, 'addFeaturedTag'])->name('tags/add');

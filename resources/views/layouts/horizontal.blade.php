@@ -158,7 +158,7 @@
                         
                         @if(Auth::user()->role == "admin")
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('users-list')}}">
+                            <a class="nav-link" href="{{url('users')}}">
                                 <i class="fas fa-users me-2"></i> @lang('translation.Users')
                             </a>
                         </li>
@@ -170,6 +170,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('tags')}}">
                                 <i class="fas fa-tags me-2"></i> @lang('translation.Tags')
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('cryptos')}}">
+                                <i class="fab fa-bitcoin me-2"></i> @lang('translation.Cryptocoins')
                             </a>
                         </li>
                         <li class="nav-item">
