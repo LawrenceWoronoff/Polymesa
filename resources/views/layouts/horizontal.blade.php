@@ -204,7 +204,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('contacts-profile', Auth::user()->id)}}">
+                            <a class="nav-link" href="{{route('contacts-profile')}}">
                                 <i class="fas fa-user me-2"></i> @lang('translation.Profile')
                             </a>
                         </li>

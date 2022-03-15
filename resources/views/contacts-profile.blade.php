@@ -242,25 +242,25 @@
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="email_news" {{array_key_exists("1", $user->emailNotification) ? ($user->emailNotification["0"] == 1 ? 'checked' : '') : '' }}>
+                                    <input class="form-check-input" type="checkbox" id="email_news" {{array_key_exists("1", $user->emailNotification) ? ($user->emailNotification["1"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="email_news">
                                         Send me latest news and tips
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="email_important" {{array_key_exists("2", $user->emailNotification) ? ($user->emailNotification["0"] == 1 ? 'checked' : '') : '' }}>
+                                    <input class="form-check-input" type="checkbox" id="email_important" {{array_key_exists("2", $user->emailNotification) ? ($user->emailNotification["2"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="email_important">
                                         Send me latest important notifications
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="email_comments" {{array_key_exists("3", $user->emailNotification) ? ($user->emailNotification["0"] == 1 ? 'checked' : '') : '' }}>
+                                    <input class="form-check-input" type="checkbox" id="email_comments" {{array_key_exists("3", $user->emailNotification) ? ($user->emailNotification["3"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="email_comments">
                                         Notify me of new comments
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="email_new_images" {{array_key_exists("4", $user->emailNotification) ? ($user->emailNotification["0"] == 1 ? 'checked' : '') : '' }}>
+                                    <input class="form-check-input" type="checkbox" id="email_new_images" {{array_key_exists("4", $user->emailNotification) ? ($user->emailNotification["4"] == 1 ? 'checked' : '') : '' }}>
                                     <label class="form-check-label" for="email_new_images">
                                         Notify me of new images uploaded by friends
                                     </label>
