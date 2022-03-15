@@ -209,8 +209,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('community-voting')}}">
-                                <i class="fas fa-thumbs-up me-2"></i> @lang('translation.Community_Voting')
+                            <a class="nav-link" href="{{url('media-curation')}}">
+                                <i class="fas fa-thumbs-up me-2"></i> @lang('translation.Media_Curation')
                             </a>
                         </li>
                         

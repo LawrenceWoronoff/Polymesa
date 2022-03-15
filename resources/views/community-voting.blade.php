@@ -1,12 +1,12 @@
 @extends('layouts.master-layouts')
 @section('title')
-    @lang('translation.Community_Voting')
+    @lang('translation.Media_Curation')
 @endsection
 
 @section('content')
     @component('common-components.breadcrumb')
         @slot('pagetitle') Home @endslot
-        @slot('title') @lang('translation.Community_Voting') @endslot
+        @slot('title') @lang('translation.Media_Curation') @endslot
         @slot('sub_title')  @endslot
     @endcomponent
 

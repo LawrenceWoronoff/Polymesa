@@ -11,7 +11,7 @@ return [
   "Statistics"=> "Statistics",
   "Upload" => "Upload",
   "Profile" => "Profile",
-  "Community_Voting" => "Community Voting",
+  "Media_Curation" => "Media Curation",
   "Admin_Fonts" => "Admin Fonts",
 
   // Admin Menu

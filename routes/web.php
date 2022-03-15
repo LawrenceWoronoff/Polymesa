@@ -104,5 +104,5 @@ Route::get('/contacts-profile-edit', [ProfileController::class, 'edit'])->name('
 Route::post('/contacts-profile/update', [ProfileController::class, 'update'])->name('contacts-profile/update');
 
 
-Route::get('/community-voting', [MediaController::class, 'voting']);
+Route::get('/media-curation', [MediaController::class, 'voting']);
 
