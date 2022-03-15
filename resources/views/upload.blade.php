@@ -88,7 +88,7 @@
                                     <div class="mb-3 row">
                                         <label for="tag_filter" class="col-md-4 col-form-label">Enter Tag</label>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" value="" id="tag_filter">
+                                            <input class="form-control" type="text" value="" id="tag_filter" placeholder="Please input over 3 characters.">
                                         </div>
                                     </div>
                                 </div>
@@ -110,20 +110,8 @@
                                     <div>
                                         <h5 class="font-size-16 mt-4 fw-bold">Available Tags</h5>
                                     </div>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruit</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruitcake</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruitarian</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruitcarry</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruit-drying</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruit-eating</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruiter</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruitied</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruitcacky</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruitknife</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruiterew</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruitbrining</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruitegg</button>
-                                    <button type="button" class="btn btn-outline-secondary m-1 select-tag">fruitbag</button>
+                                    <div id="available_tags_list" style="max-height: 500px; overflow:auto;">
+                                    </div>
                                 </div>
 
                             </div>
@@ -143,23 +131,62 @@
     <!-- Plugins js -->
     <script src="{{ URL::asset('public/assets/libs/dropzone/dropzone.min.js') }}"></script>
     <script>
-        $("#tag_filter").change(function(){
+        $("#tag_filter").change(function(){     // When user type value in filter tag input
+            var keyword = $(this).val();
+            if(keyword.length < 3)
+                return;
+
+            var param = {
+                keyword : keyword,
+            };
+            $.ajax({
+                url: "{{URL::to('/tags/search')}}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(param),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (result) {
+                    var html = "";
+                    for(i = 0; i < result.length; i++)
+                        html += '<button type="button" class="btn btn-outline-secondary m-1 select-tag" onclick="selectTag(this)">' + result[i] + '</button>';
+                    
+                    $("#available_tags_list").html(html);
+                },
+            });
+
             $("#available_tags").show();
         })
 
-        $(".select-tag").click(function(){
+        function selectTag(obj){    // When user click one of available tag
+            $this = $(obj);
+            var tag_name = $this.html().trim();
+            
+            // ======= Check if the tag is already selected ======== //
+            var children = $("#tag_list")[0].children;
+            for(var i = 0; i < children.length; i++)
+            {
+                console.log(children[i].children[0].innerHTML);
+                if(children[i].children[0].innerHTML == tag_name)
+                {
+                    Swal.fire("Warning", "You have already selected this tag.", "warning");
+                    return;
+                }
+            }
+
             $("#selected_tags").show();
             $("#selected_tag_label").show();
 
             $("#available_tags").hide();
-            var tag_name = $(this).html();
-            console.log(tag_name);
-            var element = '<p class="selected-tag m-1">'+ tag_name +'<i class="fas fa-trash-alt text-danger ms-2 deselect-tag" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deselect Tag" onclick="deSelectTag(this)"></i></p>'
+            $("#tag_filter").val('');
+            
+            var element = '<p class="selected-tag m-1"><span>'+ tag_name +'</span><i class="fas fa-trash-alt text-danger ms-2 deselect-tag" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Deselect Tag" onclick="deSelectTag(this)"></i></p>'
             $("#tag_list").append(element);
-        })
+        }
 
-        function deSelectTag(obj){
-            console.log('REmove');
+        function deSelectTag(obj){      // When user click trash icon of selected tag.
             $(obj).parent().remove();
 
             console.log('length', $("#tag_list").children().length);

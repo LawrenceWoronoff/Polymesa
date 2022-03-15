@@ -10,18 +10,21 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\Tag;
-// use App\Models\Category;
+use App\Models\Englishdictionary;
 
 class TagController extends Controller
 {
     protected $tag;
+    protected $english;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Tag $tag)
+    public function __construct(Tag $tag, Englishdictionary $english)
     {
+        $this->english = $english;
         $this->tag = $tag;
     }
 
@@ -54,5 +57,22 @@ class TagController extends Controller
     {
         $this->tag->find($id)->delete();
         return redirect()->back()->with('success', 'Featured Tag Deleted.');
+    }
+
+    // APIs for tags and dictionary
+    public function search(Request $request)
+    {
+        $keyword = $request->keyword;
+        $available_tags = array();
+        
+        $results = $this->english->query()->where('key_phrase', 'LIKE', '%'. $keyword. '%')->get();
+        foreach($results as $word)
+            array_push($available_tags, $word->key_phrase);
+
+        $results2 = $this->tag->query()->where('name', 'LIKE', '%'. $keyword. '%')->get();
+        foreach($results2 as $word)
+            array_push($available_tags, $word->name);
+
+        return json_encode($available_tags);
     }
 }

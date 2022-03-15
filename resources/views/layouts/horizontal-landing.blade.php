@@ -130,12 +130,12 @@
             @endAuth
             @Guest
             <div class="d-flex align-items-center">
-                <a href="{{url('donate')}}" style="color:#495057"><span class="d-none d-xl-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
+                <a href="{{url('donate')}}" style="color:#495057"><span class="d-xl-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
 
-                <a href="{{url('login')}}" style="color:#495057"><span class="d-none d-xl-inline-block ms-1 fw-normal font-size-16"> Log in </span></a>
-                <span class="d-none d-xl-inline-block border border-1 border-secondary mx-2 py-2"></span>
-                <a href="{{url('register')}}" style="color:#495057"><span class="d-none d-xl-inline-block ms-1 fw-normal font-size-16"> Join </span></a>
-                <a href="{{url('upload')}}" <button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4 ms-4"><i class="fas fa-upload me-2"></i>Upload</button> </a>
+                <a href="{{url('login')}}" style="color:#495057"><span class="d-xl-inline-block ms-1 fw-normal font-size-16"> Log in </span></a>
+                <span class="d-xl-inline-block border border-1 border-secondary mx-2 py-2"></span>
+                <a href="{{url('register')}}" style="color:#495057"><span class="d-xl-inline-block ms-1 fw-normal font-size-16"> Join </span></a>
+                <a href="{{url('upload')}}" <button type="button" class="d-none d-xl-inline-block btn btn-success btn-rounded waves-effect waves-light px-4 ms-4"><i class="fas fa-upload me-2"></i>Upload</button> </a>
             </div>
             @endGuest
 
@@ -154,49 +154,14 @@
     
                 <div class="collapse navbar-collapse" id="topnav-menu-content">
                     <ul class="navbar-nav">
+                        @foreach($categories as $category)
+                        <li class="nav-item">
+                            <a class="nav-link" href="">
+                                <i class="{{$category->className}} me-2"></i> {{$category->name}}
+                            </a>
+                        </li>
+                        @endforeach
                         
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="far fa-images me-2"></i> Image
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="fas fa-video me-2"></i> Video
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="fas fa-music me-2"></i> Music
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="fas fa-broadcast-tower me-2"></i> Sound Effect
-                            </a>
-                        </li>                     
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="fas fa-boxes me-2"></i> Postcast
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="fas fa-chalkboard-teacher me-2"></i> Post Card
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="fas fas fa-globe me-2"></i> News
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <i class="fas fa-file-video me-2"></i> Movie
-                            </a>
-                        </li>
-                        
-
                         <!-- 
                         
 

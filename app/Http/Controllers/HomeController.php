@@ -7,16 +7,21 @@ use Auth;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\Category;
+
+
 class HomeController extends Controller
 {
+    protected $category;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Category $category)
     {
         // $this->middleware('auth');
+        $this->category = $category;
     }
 
     /**
@@ -52,7 +57,8 @@ class HomeController extends Controller
 
     public function root()
     {
-        return view('landing-page');
+        $categories = $this->category->query()->get();
+        return view('landing-page', ['categories' => $categories]);
     }
 
     /*Language Translation*/

@@ -24,10 +24,9 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton5">
-                                <a class="dropdown-item" href="#">Image</a>
-                                <a class="dropdown-item" href="#">Vector</a>
-                                <a class="dropdown-item" href="#">Video</a>
-                                <a class="dropdown-item" href="#">Audio</a>
+                                @foreach($categories as $category)
+                                    <a class="dropdown-item" href="#">{{$category->name}}</a>
+                                @endforeach
                             </div>
                         </div>
                     </div>

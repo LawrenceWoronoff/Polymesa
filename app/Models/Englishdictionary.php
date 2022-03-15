@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 
 use DB;
 
-class Tag extends Authenticatable
+class Englishdictionary extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -18,10 +18,10 @@ class Tag extends Authenticatable
      *
      * @var array
      */
-    protected $table  = 'featured_tags';
+    protected $table  = 'english_dictionary';
 
     protected $fillable = [
-        'id', 'name'
+        'id', 'key_phrase'
     ];
 
     /**

@@ -78,6 +78,10 @@ Route::post('/cryptos/destroy/{id}',   [CryptoController::class, 'destroy'])->na
 Route::get('/tags',                 [TagController::class, 'index']);
 Route::post('/tags-add',            [TagController::class, 'addFeaturedTag'])->name('tags/add');
 Route::post('/tags/destroy/{id}',   [TagController::class, 'destroy'])->name('tags/destroy');
+// APIs for tags search 
+Route::post('/tags/search',           [TagController::class, 'search'])->name('tags/search');
+
+// =======================
 
 Route::get('/settings',             [SettingController::class, 'index']);
 Route::post('/settings/update',     [SettingController::class, 'update'])->name('settings/update');
