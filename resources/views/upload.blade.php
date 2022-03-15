@@ -43,14 +43,14 @@
                         <div class="col-lg-8 col-md-12">
                             <form action="#" class="dropzone">
                                 <div class="fallback">
-                                    <input name="file" type="file" multiple="multiple">
+                                    <input name="file" type="file">
                                 </div>
                                 <div class="dz-message needsclick">
                                     <div class="mb-3">
                                         <i class="display-4 text-muted uil uil-cloud-upload"></i>
                                     </div>
 
-                                    <h4 class="font-size-18">Drag and drop media files anywhere on the form</h4>
+                                    <h4 class="font-size-18">Drag and drop media file anywhere on the form</h4>
                                     <p class="font-size-16">7 uploads remaining this week</p>
                                 </div>
                             </form>

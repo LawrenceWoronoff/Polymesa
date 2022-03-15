@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="dropdown d-inline-block language-switch">
+            <div class="dropdown d-none d-lg-inline-block language-switch">
                 <button type="button" class="btn header-item waves-effect"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:black;">
                     @switch(Session::get('lang'))
@@ -130,12 +130,12 @@
             @endAuth
             @Guest
             <div class="d-flex align-items-center">
-                <a href="{{url('donate')}}" style="color:#495057"><span class="d-xl-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
+                <a href="{{url('donate')}}" style="color:#495057"><span class="d-lg-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
 
-                <a href="{{url('login')}}" style="color:#495057"><span class="d-xl-inline-block ms-1 fw-normal font-size-16"> Log in </span></a>
+                <a href="{{url('login')}}" style="color:#495057"><span class="d-lg-inline-block ms-1 fw-normal font-size-16"> Log in </span></a>
                 <span class="d-xl-inline-block border border-1 border-secondary mx-2 py-2"></span>
-                <a href="{{url('register')}}" style="color:#495057"><span class="d-xl-inline-block ms-1 fw-normal font-size-16"> Join </span></a>
-                <a href="{{url('upload')}}" <button type="button" class="d-none d-xl-inline-block btn btn-success btn-rounded waves-effect waves-light px-4 ms-4"><i class="fas fa-upload me-2"></i>Upload</button> </a>
+                <a href="{{url('register')}}" style="color:#495057"><span class="d-lg-inline-block ms-1 fw-normal font-size-16"> Join </span></a>
+                <a href="{{url('upload')}}" <button type="button" class="d-none d-lg-inline-block btn btn-success btn-rounded waves-effect waves-light px-4 ms-4"><i class="fas fa-upload me-2"></i>Upload</button> </a>
             </div>
             @endGuest
 
