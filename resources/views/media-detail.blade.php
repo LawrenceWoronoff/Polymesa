@@ -80,7 +80,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="py-2 font-size-20"><a href="https://polymesa.com/jdavid18">https://polymesa.com/jdavaid18</a></div>
-                            <div id="ownder_section" class="d-flex py-4" style="border-bottom: solid 1px #d0d0d0">
+                            <div id="ownder_section" class="d-flex py-2" style="border-bottom: solid 1px #d0d0d0">
                                 <img src="{{ asset('public/assets/images/users/avatar-1.jpg') }}" alt="" class="rounded-circle avatar-md">
                                 <div class="ms-4">
                                     <p class="mb-2 mt-2 font-size-18">Nemanja Djordjevic / 123 images</p>
