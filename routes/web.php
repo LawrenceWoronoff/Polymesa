@@ -106,3 +106,5 @@ Route::post('/contacts-profile/update', [ProfileController::class, 'update'])->n
 
 Route::get('/media-curation', [MediaController::class, 'voting']);
 
+
+Route::get('/media-detail', [MediaController::class, 'mediaDetail'])->name('media-detail');

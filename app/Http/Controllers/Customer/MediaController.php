@@ -8,19 +8,25 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+
 use App\Models\User;
+use App\Models\Category;
 
 class MediaController extends Controller
 {
     protected $user;
+    protected $category;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, Category $category)
     {
         $this->user = $user;
+        $this->category = $category;
+
         // $this->middleware('auth');
     }
 
@@ -44,5 +50,12 @@ class MediaController extends Controller
     public function voting(Request $request)
     {
         return view('community-voting');
+    }
+
+    public function mediaDetail(Request $request)
+    {
+        $categories = $this->category->query()->get();
+
+        return view('media-detail', ['categories' => $categories]);
     }
 }

@@ -52,7 +52,8 @@ class HomeController extends Controller
     }
     public function donate()
     {
-        return view('donate');
+        $categories = $this->category->query()->get();
+        return view('donate', ['categories' => $categories]);
     }
 
     public function root()
