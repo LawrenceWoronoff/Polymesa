@@ -100,6 +100,17 @@
                                     <textarea class="form-control" placeholder="In a few words, tell us about yourself" rows="3" id="bio" name="bio">{{old('bio')}}</textarea>
                                 </div>
                             </div>
+                            <div class="mb-3 row">
+                                <label for="example-text-input" class="col-md-3 col-form-label">User Type<span class="text-danger fw-bold"> </span></label>
+                                <div class="col-md-9">
+                                    <select class="form-select" style="max-width: 150px;" name="userType" id="userType">
+                                        <option selected>freshman</option>
+                                        <option>junior</option>
+                                        <option>senior</option>
+                                        <option>unlimited</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-4 px-4">  <!-- Online Profile & Options -->
                             <h4 class="font-size-18 pb-2 mb-4 border-bottom border-2">Online Profiles</h4>

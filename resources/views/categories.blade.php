@@ -92,7 +92,6 @@
                                 <option selected>Video</option>
                                 <option>Image</option>
                                 <option>Audio</option>
-                                <option>Document</option>
                             </select>
                         </div>
                     </div>

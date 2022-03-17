@@ -9,18 +9,22 @@ use Auth;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use App\Models\Category;
 
 class DashboardController extends Controller
 {
     protected $user;
+    protected $category;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, Category $category)
     {
         $this->user = $user;
+        $this->category = $category;
         // $this->middleware('auth');
     }
 
@@ -31,9 +35,8 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-        $users_fetch = $this->user->query()->where('role', 'customer')->get();
-        // var_dump($users_fetch);
-        // exit(0);
-        return view('user-dashboard', []);
+        $categories = $this->category->query()->get();
+        
+        return view('user-dashboard', ['categories' => $categories]);
     }
 }

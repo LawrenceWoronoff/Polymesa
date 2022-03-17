@@ -70,6 +70,8 @@ Route::post('/categories/destroy',   [CategoryController::class, 'destroy'])->na
 Route::get('/subcategories/{id}',    [CategoryController::class, 'subcategoryIndex'])->name('subcategories');
 Route::post('/subcategories/destroy',    [CategoryController::class, 'destroy_subcategory'])->name('subcategories/destroy');
 Route::post('/subcategories/add',    [CategoryController::class, 'subcategory_add'])->name('subcategories/add');
+Route::post('/subcategories/getFromCategory',    [CategoryController::class, 'getFromCategory'])->name('subcategories/getFromCategory');
+
 
 Route::get('/cryptos',                 [CryptoController::class, 'index']);
 Route::post('/cryptos-add',            [CryptoController::class, 'addCrypto'])->name('cryptos/add');
@@ -91,13 +93,11 @@ Route::get('/tags/serbian-dictionary',   [DictionaryController::class, 'serbian'
 Route::get('/tags/spanish-dictionary',   [DictionaryController::class, 'spanish'])->name('spanish-dictionary');
 Route::get('/tags/french-dictionary',   [DictionaryController::class, 'french'])->name('french-dictionary');
 
-
 Route::get('/admin-fonts',  [FontController::class, 'index']);
 
 // ============= Customer Role Routes ============= //
 Route::get('/user-dashboard',   [DashboardController::class, 'index']);
 Route::get('/user-statistics',  [StatisticController::class, 'index']);
-Route::get('/upload',           [MediaController::class, 'upload']);
 
 Route::get('/contacts-profile', [ProfileController::class, 'index'])->name('contacts-profile');
 Route::get('/contacts-profile-edit', [ProfileController::class, 'edit'])->name('contacts-profile-edit');
@@ -105,6 +105,9 @@ Route::post('/contacts-profile/update', [ProfileController::class, 'update'])->n
 
 
 Route::get('/media-curation', [MediaController::class, 'voting']);
+Route::get('/media-detail/{id}', [MediaController::class, 'mediaDetail'])->name('media-detail');
 
-
-Route::get('/media-detail', [MediaController::class, 'mediaDetail'])->name('media-detail');
+Route::get('/upload',           [MediaController::class, 'upload']);
+Route::post('/upload/store',    [MediaController::class, 'store'])->name('upload/store');
+Route::post('/upload/delete',   [MediaController::class, 'fileDestroy'])->name('upload/delete');
+Route::post('/upload/addMedia', [MediaController::class, 'addMedia'])->name('upload/addMedia');

@@ -68,8 +68,6 @@ class UserController extends Controller
             'confirmPassword' => 'required | same:password',
         ]);
         $file = $request->file('profile_pic');
-        // var_dump($file);
-        // exit(0);
 
         $data = array(
             'username' => $request->username,
@@ -99,6 +97,7 @@ class UserController extends Controller
             'zelle' => $request->zelle,
             'venmo' => $request->venmo,
             'cashapp' => $request->cashapp,
+            'userType' => $request->userType,
             'status' => 'active',
         );
         
@@ -150,6 +149,7 @@ class UserController extends Controller
             'zelle' => $request->zelle,
             'venmo' => $request->venmo,
             'cashapp' => $request->cashapp,
+            'userType' => $request->userType,
         );
         
         if($file) {

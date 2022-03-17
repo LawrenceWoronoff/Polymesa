@@ -16,25 +16,21 @@
                                     <div class="d-flex justify-content-between">
                                         <div>
                                             <i class="fas fa-award me-2 hand-cursor" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Featured Media"></i>
-                                            <span class="me-2 hand-cursor">Child</span>
-                                            <span class="me-2 hand-cursor">Birds</span>
-                                            <span class="me-2 hand-cursor">sea</span>
-                                            <span class="me-2 hand-cursor">loneliness</span>
-                                            <span class="me-2 hand-cursor">sadness</span>
-                                            <span class="me-2 hand-cursor">reverie</span>
-                                            <span class="me-2 hand-cursor">beach</span>
+                                            @foreach(json_decode($media->taglist) as $tag)
+                                            <span class="me-2 hand-cursor">{{$tag}}</span>
+                                            @endforeach
                                         </div>
                                         <div class="hand-cursor" style = "width: 35px; height: 35px; background:#574a4187; border-radius:50%;">
                                             <i class="fas fa-flag me-2 p-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Report"></i>
                                         </div>
                                     </div>
                                 </div>
-                                <img src="{{ URL::asset('public/assets/images/gallery/1.jpg') }}" class="img-fluid w-100" alt="Responsive image">
+                                <img src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" class="img-fluid w-100" alt="Responsive image">
                             </div>
                             
                             <div class="comment-section d-none d-md-block">
                                 <div class="d-flex pb-3 pt-4 add_comment">
-                                    <img src="{{ asset('public/assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-sm">
+                                    <img src="{{ asset($media->user->avatar) }}" alt="" class="rounded-circle avatar-sm">
                                     <textarea class="form-control comment_text ms-4 w-100" placeholder="Add your comment ..."></textarea>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -79,17 +75,17 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="py-2 font-size-20"><a href="https://polymesa.com/jdavid18">https://polymesa.com/jdavaid18</a></div>
+                            <div class="py-2 font-size-20"><a href="https://polymesa.com/{{$media->user->username}}">https://polymesa.com/{{$media->user->username}}</a></div>
                             <div id="ownder_section" class="d-flex py-2" style="border-bottom: solid 1px #d0d0d0">
-                                <img src="{{ asset('public/assets/images/users/avatar-1.jpg') }}" alt="" class="rounded-circle avatar-md">
+                                <img src="{{ asset($media->user->avatar) }}" alt="" class="rounded-circle avatar-md">
                                 <div class="ms-4">
-                                    <p class="mb-2 mt-2 font-size-18">Nemanja Djordjevic / 123 images</p>
+                                    <p class="mb-2 mt-2 font-size-18">{{$media->user->lastname. ' '. $media->user->firstname}} / {{$media->user->uploaded}} images</p>
                                     <button type="button" class="min-width-100 btn btn-soft-dark btn-rounded waves-effect waves-light px-4 py-1">Follow</button>
                                 </div>
                             </div>
-                            
+
                             <div id="rate_section" class="py-4" style="border-bottom: solid 1px #d0d0d0">
-                                <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold"><i class="fas fa-thumbs-up me-2"></i>124</button>
+                                <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold"><i class="fas fa-thumbs-up me-2"></i>{{$media->liked}}</button>
                                 <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1"><i class="far fa-bookmark"></i></button>
                                 <button type="button" class="min-width-100 btn btn-soft-dark btn-rounded waves-effect waves-light px-4 py-1"><i class="fas fa-share-alt"></i></button>
                             </div>
@@ -103,39 +99,56 @@
                                 <button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4 py-2 font-size-20"><i class="fas fa-download me-2"></i>Free Download</button>
                             </div>
                             <div id="media_detail_info" class="mt-4 p-4 text-secondary" style="background: #f6f5fa">
-                                <i class="fas fa-camera me-2 font-size-20" style="color:#b3b3b3;"></i><span class="font-size-20 text-info">Nikon D7500</span>
-                                <p class="mb-2 mt-2 font-size-16">Sigma 17-70mm F2.8-4 DC Macro OS HS....</p>
-                                <p class="mb-4 font-size-16">62.00mm f/8.0 1/640s ISO 125</p>
+                                @if($final_img_info['make'] != null)
+                                <i class="fas fa-camera me-2 font-size-20" style="color:#b3b3b3;"></i><span class="font-size-20 text-info">{{$final_img_info['make']}}</span>
+                                @endif
+                                @if($final_img_info['model'] != null) 
+                                <p class="mb-2 mt-2 font-size-16">{{$final_img_info['model']}}</p>
+                                @endif
+                                <p class="mb-4 font-size-16">
+                                    @if($final_img_info['FocalLength'] != null) 
+                                        {{$final_img_info['FocalLength']}}mm · 
+                                    @endif
+                                    @if($final_img_info['ApertureFNumber'] != null)
+                                        {{$final_img_info['ApertureFNumber']}} · 
+                                    @endif
+                                    @if($final_img_info['ShutterSpeedValue'] != null)
+                                        1/{{$final_img_info['ShutterSpeedValue']}}s · 
+                                    @endif
+                                    @if($final_img_info['ISO'] != null)
+                                        ISO {{$final_img_info['ISO']}}
+                                    @endif
+                                </p>
                                 <p class="mb-4" style="border-bottom: solid 1px #d0d0d0"></p>
                                 <div class="d-flex justify-content-between">
                                     <p class="m-0 font-size-18">Image type</p>
-                                    <p class="m-0 font-size-18">JPG</p>
+                                    <p class="m-0 font-size-18">{{$final_img_info['fileExtension']}}</p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <p class="m-0 font-size-18">Resolution</p>
-                                    <p class="m-0 font-size-18">5568x3712</p>
+                                    <p class="m-0 font-size-18">{{$final_img_info['width']}} x {{$final_img_info['height']}}</p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <p class="m-0 font-size-18">Published</p>
-                                    <p class="m-0 font-size-18">Aug.4, 2021</p>
+                                    <p class="m-0 font-size-18">{{date('M.d, Y', strtotime($media->created_at))}}</p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <p class="m-0 font-size-18">Category</p>
-                                    <p class="m-0 text-info font-size-18">Nature/Landscapes</p>
+                                    <p class="m-0 text-info font-size-18">{{$media->category->name}}/{{$media->subcategory->name}}</p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <p class="m-0 font-size-18">Views</p>
-                                    <p class="m-0 font-size-18">102387</p>
+                                    <p class="m-0 font-size-18">{{$media->views}}</p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <p class="m-0 font-size-18">Downloads</p>
-                                    <p class="m-0 font-size-18">84233</p>
+                                    <p class="m-0 font-size-18">{{$media->downloads}}</p>
                                 </div>
                             </div>
 
                             <div class="comment-section d-sm-block d-md-none">
                                 <div class="d-flex pb-3 pt-4 add_comment">
-                                    <img src="{{ asset('public/assets/images/users/avatar-2.jpg') }}" alt="" class="rounded-circle avatar-sm">
+                                    <img src="{{ asset($media->user->avatar) }}" alt="" class="rounded-circle avatar-sm">
                                     <textarea class="form-control comment_text ms-4 w-100" placeholder="Add your comment ..."></textarea>
                                 </div>
                                 <div class="d-flex justify-content-end">

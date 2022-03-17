@@ -108,4 +108,12 @@ class CategoryController extends Controller
 
         return redirect()->back()->with('success', 'SubCategory Added.');
     }
+
+    public function getFromCategory(Request $request)
+    {
+        $category_id = $request->category_id;
+        $subcategories = $this->subcategory->query()->where('parentID', $category_id)->get();
+
+        return json_encode($subcategories);
+    }
 }

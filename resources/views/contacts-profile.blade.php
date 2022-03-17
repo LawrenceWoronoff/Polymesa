@@ -66,7 +66,10 @@
                                 <p class="mb-1">Date of birth :</p>
                                 <h5 class="font-size-16">{{date('d/M/Y', strtotime($user->birthdate))}}</h5>
                             </div>
-
+                            <div class="mt-2 col-lg-6">
+                                <p class="mb-1">User Type :</p>
+                                <h5 class="font-size-16">{{ $user->userType }}</h5>
+                            </div>
                         </div>
                     </div>
                 </div>

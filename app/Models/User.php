@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'username', 'firstname', 'lastname', 'email', 'password', 'role', 'gender', 'avatar', 'city', 'country', 'birthdate', 'bio',
         'facebook', 'twitter', 'instagram', 'soundcloud', 'youtube', 'website', 'patereon', 'signinwith', 'communication', 'emailNotification',
-        'cryptoSet', 'paypal', 'stripe', 'zelle', 'venmo', 'cashapp',
+        'cryptoSet', 'paypal', 'stripe', 'zelle', 'venmo', 'cashapp', 'userType', 
         'status',
     ];
 
@@ -34,7 +34,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        // 'remember_token',
+        'remember_token',
     ];
 
     /**

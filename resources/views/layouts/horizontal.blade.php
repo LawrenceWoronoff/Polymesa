@@ -108,7 +108,7 @@
             </div>
 
 
-            <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#e9ecef"><span class="d-none d-xl-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
+            <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#e9ecef"><span class="d-none d-md-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
 
             <div class="dropdown d-none d-lg-inline-block ms-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
