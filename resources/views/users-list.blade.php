@@ -68,7 +68,7 @@
                                 @endif
                             </td>
                             <td>
-                                {{ date_format($user->created_at, 'm/d/Y') }}
+                                {{ date('m/d/Y', strtotime($user->created_at)) }}
                             </td>
                             <td>
                                 <div class="d-flex">

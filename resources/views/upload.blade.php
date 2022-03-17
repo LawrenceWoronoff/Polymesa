@@ -365,9 +365,33 @@
                     console.log(result);
                     if(result['mediaType'] == "Image" && imageExtensions.includes(extension) ||
                        result['mediaType'] == "Video" && videoExtensions.includes(extension) ||
-                       result['mediaType'] == "Audio" && audioExtensions.includes(extension)){
+                       result['mediaType'] == "Audio" && audioExtensions.includes(extension)){  // ====== When the category file type and uploaded file type is matched.
+                        var taglist = [];
+                        $('#tag_list').children().each(function(){
+                            taglist.push($(this).children()[0].innerHTML);
+                        })
 
-                    } else{
+                        var mediaParam = {
+                            categoryId : $("#category").val(),
+                            subcategoryId : $("#subcategory").val(),
+                            path : fileName,
+                            taglist : JSON.stringify(taglist),
+                        };
+                        $.ajax({
+                            url: "{{URL::to('/upload/addMedia')}}",
+                            type: 'POST',
+                            dataType: 'json',
+                            contentType: 'application/json',
+                            data: JSON.stringify(mediaParam),
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (result) {
+                                Swal.fire("Success", "File Uploaded Successfully", "success");
+                                window.location.href = "{{URL::to('user-dashboard')}}"
+                            },
+                        });
+                    } else{     // ===== If not
                         Swal.fire("Warning", "Uploaded media type and category file type is not matched.", "warning");
                         return;
                     }

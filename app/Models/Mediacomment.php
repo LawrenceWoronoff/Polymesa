@@ -9,8 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use DB;
+use Carbon\Carbon;
 
-class Media extends Authenticatable
+class Mediacomment extends Authenticatable
 {
     use HasFactory, Notifiable;
     // use SoftDeletes;
@@ -20,10 +21,10 @@ class Media extends Authenticatable
      *
      * @var array
      */
-    protected $table  = 'medias';
+    protected $table  = 'media_comments';
 
     protected $fillable = [
-        'userId', 'title', 'categoryId', 'subcategoryId', 'path', 'taglist', 'views', 'downloads', 
+        'id', 'userId', 'mediaId', 'comment'
     ];
 
     /**
@@ -48,23 +49,8 @@ class Media extends Authenticatable
       return $this->belongsTo('App\Models\User', 'userId');
     }
 
-    public function category()
+    public function getCreatedAtAttribute($value)
     {
-        return $this->belongsTo('App\Models\Category', 'categoryId');
-    }
-
-    public function subcategory()
-    {
-        return $this->belongsTo('App\Models\Subcategory', 'subcategoryId');
-    }
-
-    public function getLikedAttribute($value) {
-        $media_id = $this->attributes['id'];
-        return DB::table('media_rates')->where('mediaId', $media_id)->sum('liked');
-    }
-
-    public function getCommentedAttribute($value) {
-        $media_id = $this->attributes['id'];
-        return DB::table('media_comments')->where('mediaId', $media_id)->get()->count();
+        return Carbon::parse($value)->diffForHumans();
     }
 }

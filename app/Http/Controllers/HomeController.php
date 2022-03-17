@@ -8,20 +8,23 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 
 use App\Models\Category;
-
+use App\Models\Media;
 
 class HomeController extends Controller
 {
     protected $category;
+    protected $media;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct(Category $category, Media $media)
     {
         // $this->middleware('auth');
         $this->category = $category;
+        $this->media = $media;
     }
 
     /**
@@ -58,8 +61,9 @@ class HomeController extends Controller
 
     public function root()
     {
+        $medias = $this->media->query()->get();
         $categories = $this->category->query()->get();
-        return view('landing-page', ['categories' => $categories]);
+        return view('landing-page', ['categories' => $categories, 'medias' => $medias]);
     }
 
     /*Language Translation*/

@@ -106,6 +106,12 @@ Route::post('/contacts-profile/update', [ProfileController::class, 'update'])->n
 
 Route::get('/media-curation', [MediaController::class, 'voting']);
 Route::get('/media-detail/{id}', [MediaController::class, 'mediaDetail'])->name('media-detail');
+Route::post('/media-download', [MediaController::class, 'mediaDownload'])->name('media-download');
+Route::post('/media-setLike', [MediaController::class, 'mediaSetLike'])->name('media-setLike');
+Route::post('/media-addcomment', [MediaController::class, 'mediaAddComment'])->name('media-addcomment');
+
+
+
 
 Route::get('/upload',           [MediaController::class, 'upload']);
 Route::post('/upload/store',    [MediaController::class, 'store'])->name('upload/store');

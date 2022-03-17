@@ -47,10 +47,34 @@
 
                                     <div class="mb-3">
                                         <label class="form-label" for="username">Username</label>
-                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                            name="name" value="{{ old('name') }}" id="username"
+                                        <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                            name="username" value="{{ old('username') }}" id="username"
                                             placeholder="Enter username">
-                                        @error('name')
+                                        @error('username')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="firstname">Firstname</label>
+                                        <input type="text" class="form-control @error('firstname') is-invalid @enderror"
+                                            name="firstname" value="{{ old('firstname') }}" id="firstname"
+                                            placeholder="Enter firstname">
+                                        @error('firstname')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="lastname">Lastname</label>
+                                        <input type="text" class="form-control @error('lastname') is-invalid @enderror"
+                                            name="lastname" value="{{ old('lastname') }}" id="lastname"
+                                            placeholder="Enter lastname">
+                                        @error('lastname')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

@@ -28,51 +28,39 @@
                                 <img src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" class="img-fluid w-100" alt="Responsive image">
                             </div>
                             
+                            @Auth
                             <div class="comment-section d-none d-md-block">
+                                <form action="{{route('media-addcomment')}}" method="POST">
+                                @csrf
                                 <div class="d-flex pb-3 pt-4 add_comment">
-                                    <img src="{{ asset($media->user->avatar) }}" alt="" class="rounded-circle avatar-sm">
-                                    <textarea class="form-control comment_text ms-4 w-100" placeholder="Add your comment ..."></textarea>
+                                    <input name="mediaId" value="{{$media->id}}" hidden/>
+                                    <img src="{{ asset(Auth::user()->avatar) }}" alt="" class="rounded-circle avatar-sm">
+                                    <textarea class="form-control comment_text ms-4 w-100" name="comment" placeholder="Add your comment ..."></textarea>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-2 fw-bold"><i class="fas fa-thumbs-up me-2"></i>Submit</button>    
+                                    <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-2 fw-bold"><i class="fas fa-thumbs-up me-2"></i>Submit</button>    
                                 </div>  
-                                <div class="comment-list d-flex py-2">
-                                    <img src="{{ asset('public/assets/images/users/avatar-1.jpg') }}" alt="" class="rounded-circle avatar-sm">
-                                    <div class="ms-4">
-                                        <p class="text-info mb-1">Elesemargrit <span class="comment-time">11 hours ago</span></p>
-                                        <p>Van harte gefelicited met de EC!</p>
+                                </form>
+                                <?php $index = 0; foreach($comments as $comment) {?>
+                                    <div class="comment-list py-2 {{$index > 4 ? 'additional_comment d-none' : 'd-flex'}}">
+                                        <img src="{{ asset($comment->user->avatar) }}" alt="" class="rounded-circle avatar-sm">
+                                        <div class="ms-4 w-100">
+                                            <p class="text-info mb-1">{{ $comment->user->lastname. ' '. $comment->user->firstname }} <span class="font-size-13 ms-2 text-secondary">{{$comment->created_at}}</span></p>
+                                            <textarea class="bio-area w-100" disabled>{{$comment->comment}}</textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="comment-list d-flex py-2">
-                                    <img src="{{ asset('public/assets/images/users/avatar-3.jpg') }}" alt="" class="rounded-circle avatar-sm">
-                                    <div class="ms-4">
-                                        <p class="text-info mb-1">rumanujannosdnow <span class="comment-time">13 hours ago</span></p>
-                                        <p>I like this picture very much.</p>
-                                    </div>
-                                </div>
-                                <div class="comment-list d-flex py-2">
-                                    <img src="{{ asset('public/assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle avatar-sm">
-                                    <div class="ms-4">
-                                        <p class="text-info mb-1">Longman <span class="comment-time">13 hours ago</span></p>
-                                        <p>How beautiful it is. 👏👏👏</p>
-                                    </div>
-                                </div>
-                                <div class="comment-list d-flex py-2">
-                                    <img src="{{ asset('public/assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-sm">
-                                    <div class="ms-4">
-                                        <p class="text-info mb-1">Singungung <span class="comment-time">1 day ago</span></p>
-                                        <p>How slow am I?</p>
-                                    </div>
-                                </div>
-                                <div class="comment-list d-flex py-2">
-                                    <img src="{{ asset('public/assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-sm">
-                                    <div class="ms-4">
-                                        <p class="text-info mb-1">Leopard <span class="comment-time">3 days ago</span></p>
-                                        <p>I love nature image like this forest, river and sky.</p>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-light btn-rounded waves-effect waves-light px-4 py-1 fw-bold w-100">+97 more</button>
+                                <?php $index ++; } ?>
+                                <button type="button" class="btn btn-light btn-rounded waves-effect waves-light px-4 py-1 fw-bold w-100 show_more_comment {{$index > 5 ? '' : 'd-none'}}">+{{count($comments) - 5}} more</button>
+                                <button type="button" class="btn btn-light btn-rounded waves-effect waves-light px-4 py-1 fw-bold w-100 show_less_comment d-none">show less</button>
                             </div>
+                            @endAuth
+
+                            @Guest
+                            <div class="mt-4  font-size-16 ">
+                                <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold">{{$media->commented}} comments </button>
+                                <a href="{{Route('login')}}" class="ms-2 text-info" style="cursor: pointer;">Sign in</a> to leave a comment  
+                            </div>
+                            @endGuest
                         </div>
                         <div class="col-md-4">
                             <div class="py-2 font-size-20"><a href="https://polymesa.com/{{$media->user->username}}">https://polymesa.com/{{$media->user->username}}</a></div>
@@ -85,9 +73,18 @@
                             </div>
 
                             <div id="rate_section" class="py-4" style="border-bottom: solid 1px #d0d0d0">
-                                <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold"><i class="fas fa-thumbs-up me-2"></i>{{$media->liked}}</button>
-                                <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1"><i class="far fa-bookmark"></i></button>
-                                <button type="button" class="min-width-100 btn btn-soft-dark btn-rounded waves-effect waves-light px-4 py-1"><i class="fas fa-share-alt"></i></button>
+                                @Auth
+                                <form action="{{url('media-setLike')}}" method="POST">
+                                    @csrf
+                                    <input value="{{$media->id}}" name="mediaId" hidden/>
+                                    <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold"><i class="fas fa-thumbs-up me-2"></i>{{$media->liked}}</button>
+                                    <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1"><i class="far fa-bookmark"></i></button>
+                                    <button type="button" class="min-width-100 btn btn-soft-dark btn-rounded waves-effect waves-light px-4 py-1"><i class="fas fa-share-alt"></i></button>
+                                </form>
+                                @endAuth
+                                <i class="fas fa-thumbs-up me-2 text-info font-size-18"> {{$media->liked}}</i>
+                                <a href="{{Route('login')}}" class="ms-2 text-info font-size-18" style="cursor: pointer;">Sign in</a> <span class="font-size-16">to evaluate</span>
+
                             </div>
                             
                             <div id="media_detail_info" class="mt-4 p-4 text-secondary" style="background: #f6f5fa">                                
@@ -96,7 +93,7 @@
                                 <p class="m-0 font-size-16">Free for commercial use</p>
                             </div>
                             <div id="download_section" class="py-4 mb-4" style="border-bottom: solid 1px #d0d0d0">
-                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4 py-2 font-size-20"><i class="fas fa-download me-2"></i>Free Download</button>
+                                <a href="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" download><button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4 py-2 font-size-20 free-download"><i class="fas fa-download me-2"></i>Free Download</button></a>
                             </div>
                             <div id="media_detail_info" class="mt-4 p-4 text-secondary" style="background: #f6f5fa">
                                 @if($final_img_info['make'] != null)
@@ -146,51 +143,44 @@
                                 </div>
                             </div>
 
+                            @Auth
                             <div class="comment-section d-sm-block d-md-none">
+                                <form action="{{route('media-addcomment')}}" method="POST">
+                                @csrf
                                 <div class="d-flex pb-3 pt-4 add_comment">
+                                    <input name="mediaId" value="{{$media->id}}" hidden/>
                                     <img src="{{ asset($media->user->avatar) }}" alt="" class="rounded-circle avatar-sm">
-                                    <textarea class="form-control comment_text ms-4 w-100" placeholder="Add your comment ..."></textarea>
+                                    <textarea class="form-control comment_text ms-4 w-100" name="comment" placeholder="Add your comment ..."></textarea>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-2 fw-bold"><i class="fas fa-thumbs-up me-2"></i>Submit</button>    
+                                    <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-2 fw-bold"><i class="fas fa-thumbs-up me-2"></i>Submit</button>    
                                 </div>  
-                                <div class="comment-list d-flex py-2">
-                                    <img src="{{ asset('public/assets/images/users/avatar-1.jpg') }}" alt="" class="rounded-circle avatar-sm">
-                                    <div class="ms-4">
-                                        <p class="text-info mb-1">Elesemargrit <span class="comment-time">11 hours ago</span></p>
-                                        <p>Van harte gefelicited met de EC!</p>
+                                </form>
+                                <?php $index = 0; foreach($comments as $comment) {?>
+                                    <div class="comment-list py-2 {{$index > 4 ? 'additional_comment d-none' : 'd-flex'}}">
+                                        <img src="{{ asset($comment->user->avatar) }}" alt="" class="rounded-circle avatar-sm">
+                                        <div class="ms-4 w-100">
+                                            <p class="text-info mb-1">{{ $comment->user->lastname. ' '. $comment->user->firstname }} <span class="font-size-13 ms-2 text-secondary">{{$comment->created_at}}</span></p>
+                                            <textarea class="bio-area w-100" disabled>{{$comment->comment}}</textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="comment-list d-flex py-2">
-                                    <img src="{{ asset('public/assets/images/users/avatar-3.jpg') }}" alt="" class="rounded-circle avatar-sm">
-                                    <div class="ms-4">
-                                        <p class="text-info mb-1">rumanujannosdnow <span class="comment-time">13 hours ago</span></p>
-                                        <p>I like this picture very much.</p>
-                                    </div>
-                                </div>
-                                <div class="comment-list d-flex py-2">
-                                    <img src="{{ asset('public/assets/images/users/avatar-4.jpg') }}" alt="" class="rounded-circle avatar-sm">
-                                    <div class="ms-4">
-                                        <p class="text-info mb-1">Longman <span class="comment-time">13 hours ago</span></p>
-                                        <p>How beautiful it is. 👏👏👏</p>
-                                    </div>
-                                </div>
-                                <div class="comment-list d-flex py-2">
-                                    <img src="{{ asset('public/assets/images/users/avatar-5.jpg') }}" alt="" class="rounded-circle avatar-sm">
-                                    <div class="ms-4">
-                                        <p class="text-info mb-1">Singungung <span class="comment-time">1 day ago</span></p>
-                                        <p>How slow am I?</p>
-                                    </div>
-                                </div>
-                                <div class="comment-list d-flex py-2">
-                                    <img src="{{ asset('public/assets/images/users/avatar-6.jpg') }}" alt="" class="rounded-circle avatar-sm">
-                                    <div class="ms-4">
-                                        <p class="text-info mb-1">Leopard <span class="comment-time">3 days ago</span></p>
-                                        <p>I love nature image like this forest, river and sky.</p>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-light btn-rounded waves-effect waves-light px-4 py-1 fw-bold w-100">+97 more</button>
+                                <?php $index ++; } ?>
+                                <button type="button" class="btn btn-light btn-rounded waves-effect waves-light px-4 py-1 fw-bold w-100 show_more_comment {{$index > 5 ? '' : 'd-none'}}">+{{count($comments) - 5}} more</button>
+                                <button type="button" class="btn btn-light btn-rounded waves-effect waves-light px-4 py-1 fw-bold w-100 show_less_comment d-none">show less</button>
                             </div>
+                            @endAuth
+
+                            @Guest
+                            <div class="mt-4  font-size-16 row">
+                                <div class="col-md-3 col-sm-12">
+                                    <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold">{{$media->commented}} comments </button>
+                                </div>
+                                <div class="col-md-9 col-sm-12 mt-2">
+                                    <a href="{{Route('login')}}" class="ms-2 text-info" style="cursor: pointer;">Sign in</a> to leave a comment
+                                </div>
+                            </div>
+                            @endGuest
+                                    
                         </div>
                     </div>
                 </div>
@@ -199,4 +189,46 @@
     </div>
     <!-- end row -->
 
+@endsection
+
+@section('script')
+    <script>
+        var mediaId = <?php echo $media->id?>;
+
+        $(".free-download").click(function(){
+            var param = {
+                id : mediaId,
+            };
+            console.log(mediaId);
+            $.ajax({
+                url: "{{URL::to('/media-download')}}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(param),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (result) {
+                    // console.log('Result:', result);                    
+                },
+            });
+        });
+
+        $('.show_more_comment').click(function(){
+            $('.additional_comment').addClass('d-flex');
+            $('.additional_comment').removeClass('d-none');
+
+            $('.show_more_comment').addClass('d-none');
+            $('.show_less_comment').removeClass('d-none');
+        })
+
+        $('.show_less_comment').click(function(){
+            $('.additional_comment').removeClass('d-flex');
+            $('.additional_comment').addClass('d-none');
+
+            $('.show_less_comment').addClass('d-none');
+            $('.show_more_comment').removeClass('d-none');
+        })
+    </script>
 @endsection

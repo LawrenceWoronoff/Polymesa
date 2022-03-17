@@ -13,6 +13,9 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Media;
+use App\Models\Mediarate;
+use App\Models\Mediacomment;
+
 
 use File;
 
@@ -22,18 +25,22 @@ class MediaController extends Controller
     protected $category;
     protected $media;
     protected $subcategory;
+    protected $media_rate;
+    protected $media_comment;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(User $user, Category $category, Media $media, Subcategory $subcategory)
+    public function __construct(User $user, Category $category, Media $media, Subcategory $subcategory, Mediarate $media_rate, Mediacomment $media_comment)
     {
         $this->user = $user;
         $this->category = $category;
         $this->media = $media;
         $this->subcategory = $subcategory;
+        $this->media_rate = $media_rate;
+        $this->media_comment = $media_comment;
 
         // $this->middleware('auth');
     }
@@ -90,14 +97,62 @@ class MediaController extends Controller
         return view('community-voting');
     }
 
+    public function mediaSetLike(Request $request)
+    {
+        $mediaId = $request->mediaId;
+        $media_rate = $this->media_rate->query()->where('userId', Auth::user()->id)->where('mediaId', $mediaId)->first();
+        
+        if($media_rate == NULL)
+        {
+            $data = array(
+                'mediaId' => $mediaId,
+                'userId' => Auth::user()->id,
+                'liked' => 1,
+            );
+            $this->media_rate->create($data);
+        } else {
+            $data = array(
+                'liked' => ($media_rate->liked == 0 ? 1 : 0),
+            );
+            $this->media_rate->where('userId', Auth::user()->id)->where('mediaId', $mediaId)->update($data);
+        }
+        
+        return redirect()->back();
+    }
+
+    public function mediaAddComment(Request $request)
+    {
+        $mediaId = $request->mediaId;
+        $comment = $request->comment;
+        $data = array(
+            'userId' => Auth::user()->id,
+            'mediaId' => $mediaId,
+            'comment' => $comment,
+        );
+
+        $this->media_comment->create($data);
+        return redirect()->back()->with('Your comment successfully submitted');
+    }
+
+    public function mediaDownload(Request $request)
+    {
+        $mediaID = $request->id;
+     
+        $media = $this->media->query()->where('id', $mediaID)->first();
+        $media->downloads = $media->downloads + 1;
+        $media->save();
+    }
+
     public function mediaDetail(Request $request, $id)
     {
         $media = $this->media->query()->where('id', $id)->first();
+        $media->views = $media->views + 1;
+        $media->save();
+
         $categories = $this->category->query()->get();
         
         // Media Detail Info
 
-        // $path =$imag
         $image = 'public/assets/medias/'. $media->path;
         $fileExtension = substr($media->path, strripos($media->path, '.') + 1);
         
@@ -124,8 +179,11 @@ class MediaController extends Controller
         $final_img_info['width'] = $width;
         $final_img_info['height'] = $height;
         $final_img_info['fileExtension'] = $fileExtension;
+
+        // Media Comments
+        $comments = $this->media_comment->query()->where('mediaId', $id)->orderBy('created_at', 'DESC')->get();
         
-        return view('media-detail', ['media' => $media, 'categories' => $categories, 'final_img_info' => $final_img_info]);
+        return view('media-detail', ['media' => $media, 'categories' => $categories, 'final_img_info' => $final_img_info, 'comments' => $comments]);
     }
 
     public function store(Request $request)
