@@ -110,10 +110,10 @@
                     </a>
                 </div>
             </div>
-            <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#495057"><span class="d-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
+            <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#495057"><span class="d-inline-block mx-2 fw-bold font-size-16"> Donate </span></a>
             
             <div class="d-flex align-items-center">
-                <a href="{{url('upload')}}" <button type="button" class="d-none d-lg-inline-block btn btn-success btn-rounded waves-effect waves-light px-4 mx-2"><i class="fas fa-upload me-2"></i>Upload</button> </a>
+                <a href="{{url('upload')}}" <button type="button" class="d-inline-block btn btn-success btn-rounded waves-effect waves-light px-4 mx-2"><i class="d-none d-lg-inline-block fas fa-upload me-2"></i>Upload</button> </a>
             </div>
 
             @Auth            
