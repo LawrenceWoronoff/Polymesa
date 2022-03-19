@@ -62,6 +62,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/upload/store',    [MediaController::class, 'store'])->name('upload/store');   // Auth role
     Route::post('/upload/delete',   [MediaController::class, 'fileDestroy'])->name('upload/delete');    // Auth role
     Route::post('/upload/addMedia', [MediaController::class, 'addMedia'])->name('upload/addMedia'); // Auth role    
+
+    Route::post('/categories/getInfo',   [CategoryController::class, 'getInfo'])->name('categories/getInfo');   // Auth Role
+    Route::post('/subcategories/getFromCategory',    [CategoryController::class, 'getFromCategory'])->name('subcategories/getFromCategory');    // Admin Role
+
 });
 
 // ============= Admin Role Routes ============= //
@@ -78,13 +82,11 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::get('/categories',   [CategoryController::class, 'index']);  // Admin Role
     Route::post('/categories/add',   [CategoryController::class, 'create'])->name('categories/add');    // Admin Role
-    Route::post('/categories/getInfo',   [CategoryController::class, 'getInfo'])->name('categories/getInfo');   // Admin Role
     Route::post('/categories/destroy',   [CategoryController::class, 'destroy'])->name('categories/destroy');   // Admin Role
 
     Route::get('/subcategories/{id}',    [CategoryController::class, 'subcategoryIndex'])->name('subcategories');   // Admin Role
     Route::post('/subcategories/destroy',    [CategoryController::class, 'destroy_subcategory'])->name('subcategories/destroy');    // Admin Role
     Route::post('/subcategories/add',    [CategoryController::class, 'subcategory_add'])->name('subcategories/add');    // Admin Role
-    Route::post('/subcategories/getFromCategory',    [CategoryController::class, 'getFromCategory'])->name('subcategories/getFromCategory');    // Admin Role
 
 
     Route::get('/cryptos',                 [CryptoController::class, 'index']); // Admin Role
