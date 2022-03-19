@@ -50,6 +50,11 @@
                             <div class="gallery-content">
                                 <a href="{{route('media-detail', $media->id)}}">
                                     <div class="content-overlay"></div>
+                                    @if($media->accepted >= Setting('minimumLikes'))
+                                    <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
+                                        <i class="fas fa-award font-size-20 text-white"></i>
+                                    </div>  
+                                    @endif
                                     <img class="content-image" src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}">
                                     <div class="content-details fadeIn-bottom">
                                     <div class="" style="float:right;">

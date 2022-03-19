@@ -15,7 +15,9 @@
                                 <div class="media-detail-overlay text-white font-size-18 p-3">
                                     <div class="d-flex justify-content-between">
                                         <div>
+                                            @if($media->accepted >= Setting('minimumLikes'))
                                             <i class="fas fa-award me-2 hand-cursor" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Featured Media"></i>
+                                            @endif
                                             @foreach(json_decode($media->taglist) as $tag)
                                             <span class="me-2 hand-cursor">{{$tag}}</span>
                                             @endforeach

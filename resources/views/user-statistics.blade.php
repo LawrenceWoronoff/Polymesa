@@ -35,9 +35,12 @@
                                         <div class="mb-2 px-1 col-lg-3 d-flex flex-row">
                                             <div>
                                                 <a href="{{route('media-detail', $media->id)}}"><img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid" alt="Responsive image"></a>
-                                                
-                                                <p class="text-center font-size-16 mt-3">Published</p>
-                                                <!-- <p class="text-center font-size-16 mt-3"><i class="fas fa-award me-2" style="color: gray"> </i>Featured</p> -->
+
+                                                @if($media->accepted >= Setting('minimumLikes'))
+                                                    <p class="text-center font-size-16 mt-3"><i class="fas fa-award me-2" style="color: gray"> </i>Featured</p>
+                                                @else
+                                                    <p class="text-center font-size-16 mt-3">Published</p>
+                                                @endif
                                             </div>
                                             <div class="static">
                                                 <i class="fas fa-eye static-fa-icon"> {{$media->views}}</i>
