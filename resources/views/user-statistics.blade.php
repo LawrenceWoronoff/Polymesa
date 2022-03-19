@@ -34,7 +34,7 @@
                                         @foreach($category->my_media as $media)
                                         <div class="mb-2 px-1 col-lg-3 d-flex flex-row">
                                             <div>
-                                                <a href="{{route('media-detail', $media->id)}}"><img src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" class="img-fluid" alt="Responsive image"></a>
+                                                <a href="{{route('media-detail', $media->id)}}"><img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid" alt="Responsive image"></a>
                                                 
                                                 <p class="text-center font-size-16 mt-3">Published</p>
                                                 <!-- <p class="text-center font-size-16 mt-3"><i class="fas fa-award me-2" style="color: gray"> </i>Featured</p> -->
