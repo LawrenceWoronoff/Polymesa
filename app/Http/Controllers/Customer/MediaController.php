@@ -76,7 +76,7 @@ class MediaController extends Controller
         $media = NULL;
         foreach($vote_medias as $vote_media)
         {
-            if($vote_media->voted_by_me == false)
+            if($vote_media->voted_by_me == false && $vote_media->declined < Setting('minimumLikes'))
             {
                 $media = $vote_media;
                 break;

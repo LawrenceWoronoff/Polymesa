@@ -8,6 +8,7 @@
             <div class="">
                 <ul class="image-gallery">
                     @foreach($medias as $media)
+                        @if($media->declined < Setting('minimumLikes'))
                         <li>
                             <div class="gallery-content">
                                 <a href="{{route('media-detail', $media->id)}}">
@@ -29,6 +30,7 @@
                                 </a>
                             </div>
                         </li>
+                        @endforeach
                     @endforeach
                 </ul>
             </div>

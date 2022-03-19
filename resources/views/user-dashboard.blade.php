@@ -32,6 +32,7 @@
                                 <?php if($category->mediaType == "Image") {?>
                                     <div class="row m-0">
                                         @foreach($category->my_media as $media)
+                                            @if($media->declined < Setting('minimumLikes'))
                                             <div class="mb-2 px-1 col-lg-3">
                                                 @if($media->accepted >= Setting('minimumLikes'))
                                                 <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
@@ -40,6 +41,7 @@
                                                 @endif
                                                 <a href="{{route('media-detail', $media->id)}}"><img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid" alt="Responsive image"></a>
                                             </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                 <?php } else if($category->mediaType == "Video") { ?>
