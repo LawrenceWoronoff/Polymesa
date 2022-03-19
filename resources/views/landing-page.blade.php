@@ -50,7 +50,7 @@
                             <div class="gallery-content">
                                 <a href="{{route('media-detail', $media->id)}}">
                                     <div class="content-overlay"></div>
-                                    <img class="content-image" src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}">
+                                    <img class="content-image" src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}">
                                     <div class="content-details fadeIn-bottom">
                                     <div class="" style="float:right;">
                                         <p class="content-text"><i class="fas fa-heart"></i> {{$media->liked}} &nbsp; <i class="fas fa-comment"></i> {{$media->commented}} &nbsp; <i class="fas fa-bookmark"></i> </p>
