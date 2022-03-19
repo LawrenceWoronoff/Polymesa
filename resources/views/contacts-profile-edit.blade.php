@@ -443,7 +443,7 @@
                         status : (status == 'active' ? 'deactive' : 'active'),
                     };
                     $.ajax({
-                        url: "{{URL::to('/users/changeStatus')}}",
+                        url: "{{URL::to('/contacts-profile/changeStatus')}}",
                         type: 'POST',
                         dataType: 'json',
                         contentType: 'application/json',

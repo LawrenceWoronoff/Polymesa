@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Models\Media;
 use Auth;
 use DB;
 
@@ -22,7 +23,7 @@ class Category extends Authenticatable
      * @var array
      */
     protected $table  = 'categories';
-
+    
     protected $fillable = [
         'id', 'name', 'className', 'mediaType', 'description', 'delete_flag'
     ];
@@ -46,6 +47,6 @@ class Category extends Authenticatable
 
     public function getMyMediaAttribute($value)
     {
-        return DB::table('medias')->where('userId', Auth::user()->id)->get();
+        return Media::query()->where('userId', Auth::user()->id)->get();
     }
 }

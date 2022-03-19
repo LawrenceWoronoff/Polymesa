@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use DB;
+use Auth;
 
 class Media extends Authenticatable
 {
@@ -66,5 +67,31 @@ class Media extends Authenticatable
     public function getCommentedAttribute($value) {
         $media_id = $this->attributes['id'];
         return DB::table('media_comments')->where('mediaId', $media_id)->get()->count();
+    }
+
+    public function getSharedAttribute($value) {
+        $media_id = $this->attributes['id'];
+        return DB::table('media_rates')->where('mediaId', $media_id)->sum('shared');
+    }
+
+    public function getVotedByMeAttribute($value) {
+        $media_id = $this->attributes['id'];
+        $result = DB::table('media_rates')->where('mediaId', $media_id)->where('userId', Auth::user()->id)->first();
+
+        if($result == NULL)
+            return false;
+        if($result->voted == 0)
+            return false;
+        return true;
+    }
+
+    public function getAcceptedAttribute($value) {
+        $media_id = $this->attributes['id'];
+        return DB::table('media_rates')->where('mediaId', $media_id)->where('voted', 1)->get()->count();
+    }
+
+    public function getDeclinedAttribute($value) {
+        $media_id = $this->attributes['id'];
+        return DB::table('media_rates')->where('mediaId', $media_id)->where('voted', 0)->get()->count();
     }
 }

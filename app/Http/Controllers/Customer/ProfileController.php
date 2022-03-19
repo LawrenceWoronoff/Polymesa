@@ -109,4 +109,12 @@ class ProfileController extends Controller
         $this->user->find(Auth::user()->id)->update($data);
         return redirect()->route('contacts-profile')->with('success', 'Profile is updated.');
     }
+
+    public function changeStatus(Request $request)
+    {
+        $this->user->find(Auth::user()->id)->update([
+            'status' => $request->status,
+        ]);
+        return json_encode("success");
+    }
 }

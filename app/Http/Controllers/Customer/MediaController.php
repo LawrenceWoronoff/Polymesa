@@ -16,6 +16,7 @@ use App\Models\Media;
 use App\Models\Mediarate;
 use App\Models\Mediacomment;
 
+use Image;
 
 use File;
 
@@ -41,8 +42,6 @@ class MediaController extends Controller
         $this->subcategory = $subcategory;
         $this->media_rate = $media_rate;
         $this->media_comment = $media_comment;
-
-        // $this->middleware('auth');
     }
 
     /**
@@ -56,33 +55,6 @@ class MediaController extends Controller
 
     public function upload(Request $request)
     {
-        // $image = 'public/assets/medias/1647494055_1647494055142DSC_0492.JPG';
-        
-        // $width = getimagesize($image)[0];
-        // $height = getimagesize($image)[1];
-        
-        // $exif = @exif_read_data($image, 0, true); 
-        // $final_img_info['make'] = @$exif['IFD0']['Make'];         
-        // $final_img_info['model'] = @$exif['IFD0']['Model'];         
-        // $final_img_info['ApertureFNumber'] = @$exif['COMPUTED']['ApertureFNumber']; 
-        // $final_img_info['ISO'] = @$exif['EXIF']['ISOSpeedRatings'];  
-        // $shutterSpeedValue = explode('/', @$exif['EXIF']['ShutterSpeedValue']);
-        // if(count($shutterSpeedValue) == 2)
-        //     $final_img_info['ShutterSpeedValue'] = intval($shutterSpeedValue[0]) / intval($shutterSpeedValue[1]);
-        // $focalLength = explode('/', @$exif['EXIF']['FocalLength']);
-        // if(count($focalLength) == 2)
-        //     $final_img_info['FocalLength'] = intval($focalLength[0]) / intval($focalLength[1]);
-
-        // $final_img_info['width'] = $width;
-        // $final_img_info['height'] = $height;
-        // // $final_img_info['mega_size'] = number_format($image->getSize() / 1024 / 1024, 2);
-        // // $final_img_info['size'] = $image->getSize() / 1024 / 1024;
-        // // $final_img_info['extension'] = $image->extension();
-
-        // var_dump($final_img_info);
-        // exit(0);
-        
-
         $categories = $this->category->query()->get();
         $subcategories = [];
         if(count($categories) > 0)
@@ -92,9 +64,52 @@ class MediaController extends Controller
         return view('upload', ['categories' => $categories, 'subcategories' => $subcategories]);
     }
 
-    public function voting(Request $request)
+    public function curation(Request $request)
     {
-        return view('community-voting');
+        $accepted_me =  $this->media_rate->query()->where('userId', Auth::user()->id)->where('voted', 1)->get()->count();
+        $accepted = $this->media_rate->query()->where('voted', 1)->get()->count();
+
+        $declined_me =  $this->media_rate->query()->where('userId', Auth::user()->id)->where('voted', -1)->get()->count();
+        $declined = $this->media_rate->query()->where('voted', -1)->get()->count();
+
+        $vote_medias = $this->media->query()->get();
+        $media = NULL;
+        foreach($vote_medias as $vote_media)
+        {
+            if($vote_media->voted_by_me == false)
+            {
+                $media = $vote_media;
+                break;
+            }
+        }
+        
+        return view('community-voting', ['media' => $media, 'media_cnt' => count($vote_medias), 'accepted' => $accepted, 'declined' => $declined,  'accepted_me' => $accepted_me, 'declined_me' => $declined_me]);
+    }
+
+    public function vote(Request $request)
+    {
+        $mode = $request->action;
+        $mediaId = $request->mediaId;
+
+        $media_rate = $this->media_rate->query()->where('userId', Auth::user()->id)->where('mediaId', $mediaId)->first();        
+        if($media_rate == NULL)
+        {
+            $data = array(
+                'userId' => Auth::user()->id,
+                'mediaId' => $mediaId,
+                'voted' => $mode == 'accept' ? 1 : -1,
+            );
+            $this->media_rate->create($data);
+        } else {
+            $data = array(
+                'voted' => $mode == 'accept' ? 1 : -1,
+            );
+            $this->media_rate->where('userId', Auth::user()->id)->where('mediaId', $mediaId)->update($data);
+        }
+        if($mode == 'accept')
+            return redirect()->back()->with('success','You have approved the media');
+        else
+            return redirect()->back()->with('success', 'You have declined the media');
     }
 
     public function mediaSetLike(Request $request)
@@ -229,6 +244,22 @@ class MediaController extends Controller
         if($image && $final_img_info['resolution_error'] == false && $final_img_info['resolution_error'] == false)
         {
             $fileName = time().'_'.$image->getClientOriginalName();
+
+            $image_640 = Image::make($image->getRealPath());
+            $image_640->resize(640, 640, function ($const) {
+                $const->aspectRatio();
+            })->save('public/assets/medias'. '/640_'. $fileName);
+
+            $image_1280 = Image::make($image->getRealPath());
+            $image_1280->resize(1280, 1280, function ($const) {
+                $const->aspectRatio();
+            })->save('public/assets/medias'. '/1280_'. $fileName);
+
+            $image_1920 = Image::make($image->getRealPath());
+            $image_1920->resize(1920, 1920, function ($const) {
+                $const->aspectRatio();
+            })->save('public/assets/medias'. '/1920_'. $fileName);
+
             $final_img_info['fileName'] = $fileName;
             $image->move('public/assets/medias/', $fileName);
         }
@@ -238,9 +269,23 @@ class MediaController extends Controller
     public function fileDestroy(Request $request)
     {
         $fileName = $request->fileName;
-        $path='public/assets/medias/'. $fileName;
+        $path = 'public/assets/medias/'. $fileName;
+        $path_640 = 'public/assets/medias/640_'. $fileName;
+        $path_1280 = 'public/assets/medias/1280_'. $fileName;
+        $path_1920 = 'public/assets/medias/1920_'. $fileName;
+
         if (file_exists($path)) {
             unlink($path);
+        }
+
+        if (file_exists($path_640)) {
+            unlink($path_640);
+        }
+        if (file_exists($path_1280)) {
+            unlink($path_1280);
+        }
+        if (file_exists($path_1920)) {
+            unlink($path_1920);
         }
     }
 
@@ -263,6 +308,17 @@ class MediaController extends Controller
         $this->media->create($data);
         return json_encode("success");
         // return redirect()->route('user-dashboard')->with('success', 'New media uploaded.');
+    }
 
+    public function mediaSearch(Request $request, $id)
+    {
+        $searchKey = $request->key == NULL ? '%%' : ('%"'. $request->key. '"%');
+        
+        $medias = $this->media->query()->where('categoryId', $id)->where('taglist', 'LIKE', $searchKey)->get();
+        $categories = $this->category->query()->get();
+        
+        
+
+        return view('media-search', ['medias' => $medias, 'categories' => $categories, 'search' => true, 'key' => $request->key]);
     }
 }

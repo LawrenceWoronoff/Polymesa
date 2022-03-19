@@ -82,8 +82,10 @@
                                     <button type="button" class="min-width-100 btn btn-soft-dark btn-rounded waves-effect waves-light px-4 py-1"><i class="fas fa-share-alt"></i></button>
                                 </form>
                                 @endAuth
+                                @Guest
                                 <i class="fas fa-thumbs-up me-2 text-info font-size-18"> {{$media->liked}}</i>
                                 <a href="{{Route('login')}}" class="ms-2 text-info font-size-18" style="cursor: pointer;">Sign in</a> <span class="font-size-16">to evaluate</span>
+                                @endGuest
 
                             </div>
                             

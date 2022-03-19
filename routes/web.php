@@ -13,8 +13,6 @@ use App\Http\Controllers\Admin\DictionaryController;
 use App\Http\Controllers\Admin\CryptoController;
 
 
-
-
 use App\Http\Controllers\Customer\DashboardController;
 use App\Http\Controllers\Customer\StatisticController;
 use App\Http\Controllers\Customer\MediaController;
@@ -37,83 +35,79 @@ use App\Http\Controllers\Customer\ProfileController;
 
 Auth::routes();
 
-// Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);
-
-// Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index']);
-//Language Translation
-
-// Route::get('index/{locale}', [App\Http\Controllers\HomeController::class, 'lang']);
-
-// Route::post('/formsubmit', [App\Http\Controllers\HomeController::class, 'FormSubmit'])->name('FormSubmit');
-
 
 
 // ============= Guest Mode Routes ============= //
-Route::get('/', [HomeController::class, 'root']);
-Route::get('/donate', [HomeController::class, 'donate']);
+Route::get('/', [HomeController::class, 'root']);           // Guest Mode
+Route::get('/donate', [HomeController::class, 'donate']);   // Guest Mode
+Route::get('/media-detail/{id}', [MediaController::class, 'mediaDetail'])->name('media-detail');        // Guest Mode
+Route::post('/media-download', [MediaController::class, 'mediaDownload'])->name('media-download');      // Guest Mode
+Route::get('/media-search/{id}', [MediaController::class, 'mediaSearch'])->name('media-search');
+
+// =========== Auth Mode Routes =========== // (Means )
+
+Route::group(['middleware' => ['auth']], function () {
+    // APIs for tags search 
+    Route::post('/tags/search',           [TagController::class, 'search'])->name('tags/search');   // Auth Role
+
+    Route::post('/media-setLike', [MediaController::class, 'mediaSetLike'])->name('media-setLike');         // Auth role
+    Route::post('/media-addcomment', [MediaController::class, 'mediaAddComment'])->name('media-addcomment');    // Auth role
+
+    Route::get('/contacts-profile', [ProfileController::class, 'index'])->name('contacts-profile'); // Auth role
+    Route::get('/contacts-profile-edit', [ProfileController::class, 'edit'])->name('contacts-profile-edit'); // Auth role
+    Route::post('/contacts-profile/update', [ProfileController::class, 'update'])->name('contacts-profile/update'); // Auth role
+    Route::post('/contacts-profile/changeStatus',     [ProfileController::class, 'changeStatus'])->name('contacts-profile/changeStatus');   // Auth role
+
+    Route::get('/upload',           [MediaController::class, 'upload'])->middleware('auth');    // Auth role
+    Route::post('/upload/store',    [MediaController::class, 'store'])->name('upload/store');   // Auth role
+    Route::post('/upload/delete',   [MediaController::class, 'fileDestroy'])->name('upload/delete');    // Auth role
+    Route::post('/upload/addMedia', [MediaController::class, 'addMedia'])->name('upload/addMedia'); // Auth role    
+});
 
 // ============= Admin Role Routes ============= //
-Route::get('/users',   [UserController::class, 'index'])->name('user-list');
-Route::get('/users/add',     [UserController::class, 'create'])->name('users/add');
-Route::post('/users/store',     [UserController::class, 'store'])->name('users/store');
-Route::get('/users/edit/{id}',     [UserController::class, 'edit'])->name('users/edit');
-Route::post('/users/update/{id}',     [UserController::class, 'update'])->name('users/update');
-Route::post('/users/changeStatus',     [UserController::class, 'changeStatus'])->name('users/changeStatus');
-Route::post('/users/destroy/{id}',    [UserController::class, 'destroy'])->name('users/destroy');
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('/users',   [UserController::class, 'index'])->name('user-list');                        // Admin Role
+    Route::get('/users/add',     [UserController::class, 'create'])->name('users/add');                 // Admin Role
+    Route::post('/users/store',     [UserController::class, 'store'])->name('users/store');             // Admin Role
+    Route::get('/users/edit/{id}',     [UserController::class, 'edit'])->name('users/edit');            // Admin Role
+    Route::post('/users/update/{id}',     [UserController::class, 'update'])->name('users/update');     // Admin Role
+    Route::post('/users/changeStatus',     [UserController::class, 'changeStatus'])->name('users/changeStatus');    // Admin Role
+    Route::post('/users/destroy/{id}',    [UserController::class, 'destroy'])->name('users/destroy');               // Admin Role
 
 
-Route::get('/categories',   [CategoryController::class, 'index']);
-Route::post('/categories/add',   [CategoryController::class, 'create'])->name('categories/add');
-Route::post('/categories/getInfo',   [CategoryController::class, 'getInfo'])->name('categories/getInfo');
-Route::post('/categories/destroy',   [CategoryController::class, 'destroy'])->name('categories/destroy');
+    Route::get('/categories',   [CategoryController::class, 'index']);  // Admin Role
+    Route::post('/categories/add',   [CategoryController::class, 'create'])->name('categories/add');    // Admin Role
+    Route::post('/categories/getInfo',   [CategoryController::class, 'getInfo'])->name('categories/getInfo');   // Admin Role
+    Route::post('/categories/destroy',   [CategoryController::class, 'destroy'])->name('categories/destroy');   // Admin Role
 
-Route::get('/subcategories/{id}',    [CategoryController::class, 'subcategoryIndex'])->name('subcategories');
-Route::post('/subcategories/destroy',    [CategoryController::class, 'destroy_subcategory'])->name('subcategories/destroy');
-Route::post('/subcategories/add',    [CategoryController::class, 'subcategory_add'])->name('subcategories/add');
-Route::post('/subcategories/getFromCategory',    [CategoryController::class, 'getFromCategory'])->name('subcategories/getFromCategory');
+    Route::get('/subcategories/{id}',    [CategoryController::class, 'subcategoryIndex'])->name('subcategories');   // Admin Role
+    Route::post('/subcategories/destroy',    [CategoryController::class, 'destroy_subcategory'])->name('subcategories/destroy');    // Admin Role
+    Route::post('/subcategories/add',    [CategoryController::class, 'subcategory_add'])->name('subcategories/add');    // Admin Role
+    Route::post('/subcategories/getFromCategory',    [CategoryController::class, 'getFromCategory'])->name('subcategories/getFromCategory');    // Admin Role
 
 
-Route::get('/cryptos',                 [CryptoController::class, 'index']);
-Route::post('/cryptos-add',            [CryptoController::class, 'addCrypto'])->name('cryptos/add');
-Route::post('/cryptos/destroy/{id}',   [CryptoController::class, 'destroy'])->name('cryptos/destroy');
+    Route::get('/cryptos',                 [CryptoController::class, 'index']); // Admin Role
+    Route::post('/cryptos-add',            [CryptoController::class, 'addCrypto'])->name('cryptos/add');    // Admin Role
+    Route::post('/cryptos/destroy/{id}',   [CryptoController::class, 'destroy'])->name('cryptos/destroy');  // Admin Role
 
-Route::get('/tags',                 [TagController::class, 'index']);
-Route::post('/tags-add',            [TagController::class, 'addFeaturedTag'])->name('tags/add');
-Route::post('/tags/destroy/{id}',   [TagController::class, 'destroy'])->name('tags/destroy');
-// APIs for tags search 
-Route::post('/tags/search',           [TagController::class, 'search'])->name('tags/search');
+    Route::get('/tags',                 [TagController::class, 'index']);   // Admin Role
+    Route::post('/tags-add',            [TagController::class, 'addFeaturedTag'])->name('tags/add');    // Admin Role
+    Route::post('/tags/destroy/{id}',   [TagController::class, 'destroy'])->name('tags/destroy');   // Admin Role
 
-// =======================
+    Route::get('/settings',             [SettingController::class, 'index']);      // Admin Role
+    Route::post('/settings/update',     [SettingController::class, 'update'])->name('settings/update');   // Admin Role
 
-Route::get('/settings',             [SettingController::class, 'index']);
-Route::post('/settings/update',     [SettingController::class, 'update'])->name('settings/update');
-
-Route::get('/tags/english-dictionary',   [DictionaryController::class, 'english'])->name('english-dictionary');
-Route::get('/tags/serbian-dictionary',   [DictionaryController::class, 'serbian'])->name('serbian-dictionary');
-Route::get('/tags/spanish-dictionary',   [DictionaryController::class, 'spanish'])->name('spanish-dictionary');
-Route::get('/tags/french-dictionary',   [DictionaryController::class, 'french'])->name('french-dictionary');
-
-Route::get('/admin-fonts',  [FontController::class, 'index']);
+    Route::get('/admin-fonts',  [FontController::class, 'index']);      // Admin Role
+});
 
 // ============= Customer Role Routes ============= //
-Route::get('/user-dashboard',   [DashboardController::class, 'index']);
-Route::get('/user-statistics',  [StatisticController::class, 'index']);
+Route::group(['middleware' => ['customer']], function () {
+    Route::get('/user-dashboard',   [DashboardController::class, 'index']); // Customer role
+    Route::get('/user-statistics',  [StatisticController::class, 'index']); // Cusotmer role
 
-Route::get('/contacts-profile', [ProfileController::class, 'index'])->name('contacts-profile');
-Route::get('/contacts-profile-edit', [ProfileController::class, 'edit'])->name('contacts-profile-edit');
-Route::post('/contacts-profile/update', [ProfileController::class, 'update'])->name('contacts-profile/update');
-
-
-Route::get('/media-curation', [MediaController::class, 'voting']);
-Route::get('/media-detail/{id}', [MediaController::class, 'mediaDetail'])->name('media-detail');
-Route::post('/media-download', [MediaController::class, 'mediaDownload'])->name('media-download');
-Route::post('/media-setLike', [MediaController::class, 'mediaSetLike'])->name('media-setLike');
-Route::post('/media-addcomment', [MediaController::class, 'mediaAddComment'])->name('media-addcomment');
+    Route::get('/media-curation', [MediaController::class, 'curation']); // Customer role
+    Route::post('/media/vote',     [MediaController::class, 'vote'])->name('media/vote'); // Customer role
+});
 
 
-
-
-Route::get('/upload',           [MediaController::class, 'upload']);
-Route::post('/upload/store',    [MediaController::class, 'store'])->name('upload/store');
-Route::post('/upload/delete',   [MediaController::class, 'fileDestroy'])->name('upload/delete');
-Route::post('/upload/addMedia', [MediaController::class, 'addMedia'])->name('upload/addMedia');
