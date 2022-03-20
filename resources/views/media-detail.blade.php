@@ -270,8 +270,6 @@
 
         $(".free-download").click(function(){
             $('.drop-down-download').show();
-
-           
         });
 
         $(".sub-download").click(function(){
@@ -294,14 +292,6 @@
             });
 
             $('.drop-down-download').hide();
-
-            // console.log($('input[name="download_option"]:checked').val());
-            // var download_path = $('input[name="download_option"]:checked').val();
-            // var anchor = document.createElement('a');
-            // anchor.href = download_path;
-            // anchor.target = '_blank';
-            // anchor.download = new Date().getTime();
-            // anchor.click();
         })
 
         $('input[type=radio][name=download_option]').change(function() {

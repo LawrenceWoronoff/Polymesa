@@ -30,6 +30,9 @@
         </div>
 
         <div class="d-flex">
+            <div class="d-flex align-items-center">
+                <a href="{{url('upload')}}" <button type="button" class="d-inline-block btn btn-success btn-rounded waves-effect waves-light px-4 mx-2"><i class="d-none d-lg-inline-block fas fa-upload me-2"></i>Upload</button> </a>
+            </div>
 
             <div class="dropdown d-inline-block language-switch">
                 <button type="button" class="btn header-item waves-effect"
@@ -79,7 +82,6 @@
                     </a>
                 </div>
             </div>
-
 
             <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#e9ecef"><span class="d-none d-md-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
 
