@@ -235,6 +235,9 @@ class MediaController extends Controller
         $height = getimagesize($image)[1];
         
         $exif = @exif_read_data($image, 0, true); 
+
+        $orientation = @$exif['IFD0']['Orientation'];
+
         $final_img_info['make'] = @$exif['IFD0']['Make'];         
         $final_img_info['model'] = @$exif['IFD0']['Model'];         
         $final_img_info['ApertureFNumber'] = @$exif['COMPUTED']['ApertureFNumber']; 
@@ -258,6 +261,27 @@ class MediaController extends Controller
         $final_img_info['size'] = $image->getSize() / 1024 / 1024;
         $final_img_info['extension'] = $image->extension();
 
+        if(!empty($orientation))
+        {
+            $imageResource = imagecreatefromjpeg($image->getRealpath());
+            switch($orientation) {
+                case 3:
+                    $image1 = imagerotate($imageResource, 180, 0);
+                    break;
+                case 6:
+                    $image1 = imagerotate($imageResource, -90, 0);
+                    break;
+                case 8:
+                    $image1 = imagerotate($imageResource, 90, 0);
+                    break;
+                default:
+                    $image1 = $imageResource;
+                    break;
+            }
+        }
+
+        imagejpeg($image1, "abc", 90);
+
         $final_img_info['resolution_error'] = false;
         $final_img_info['size_error'] = false;
 
@@ -267,28 +291,36 @@ class MediaController extends Controller
         if($final_img_info['size'] > 20)
             $final_img_info['size_error'] = true;
 
+        
+
         if($image && $final_img_info['resolution_error'] == false && $final_img_info['resolution_error'] == false)
         {
             $fileName = time().'_'.$image->getClientOriginalName();
 
             $image_640 = Image::make($image->getRealPath());
-            $image_640->resize(640, 640, function ($const) {
+            $image_640->orientate()
+                ->resize(640, 640, function ($const) {
                 $const->aspectRatio();
             })->save('public/assets/medias'. '/640_'. $fileName);
 
             $image_1280 = Image::make($image->getRealPath());
-            $image_1280->resize(1280, 1280, function ($const) {
+            $image_1280->orientate()
+                ->resize(1280, 1280, function ($const) {
                 $const->aspectRatio();
             })->save('public/assets/medias'. '/1280_'. $fileName);
 
             $image_1920 = Image::make($image->getRealPath());
-            $image_1920->resize(1920, 1920, function ($const) {
+            $image_1920->orientate()
+                ->resize(1920, 1920, function ($const) {
                 $const->aspectRatio();
             })->save('public/assets/medias'. '/1920_'. $fileName);
 
             $final_img_info['fileName'] = $fileName;
             $image->move('public/assets/medias/', $fileName);
         }
+
+
+
         return json_encode($final_img_info);
     }
 
