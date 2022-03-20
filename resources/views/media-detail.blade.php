@@ -271,26 +271,28 @@
         $(".free-download").click(function(){
             $('.drop-down-download').show();
 
-            // var param = {
-            //     id : mediaId,
-            // };
-            // console.log(mediaId);
-            // $.ajax({
-            //     url: "{{URL::to('/media-download')}}",
-            //     type: 'POST',
-            //     dataType: 'json',
-            //     contentType: 'application/json',
-            //     data: JSON.stringify(param),
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     success: function (result) {
-            //         // console.log('Result:', result);                    
-            //     },
-            // });
+           
         });
 
         $(".sub-download").click(function(){
+             var param = {
+                id : mediaId,
+            };
+            console.log(mediaId);
+            $.ajax({
+                url: "{{URL::to('/media-download')}}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(param),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (result) {
+                    // console.log('Result:', result);                    
+                },
+            });
+
             $('.drop-down-download').hide();
 
             // console.log($('input[name="download_option"]:checked').val());
