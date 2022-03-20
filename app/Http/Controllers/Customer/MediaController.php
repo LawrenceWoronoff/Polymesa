@@ -195,10 +195,36 @@ class MediaController extends Controller
         $final_img_info['height'] = $height;
         $final_img_info['fileExtension'] = $fileExtension;
 
+        // Get Thumbnail Images Size
+        $image_640 = 'public/assets/medias/640_'. $media->path;
+        $image_1280 = 'public/assets/medias/1280_'. $media->path;
+        $image_1920 = 'public/assets/medias/1920_'. $media->path;
+        $image_original = 'public/assets/medias/'. $media->path;
+
+
+        $height_640 = getimagesize($image_640)[1];
+        $height_1280 = getimagesize($image_1280)[1];
+        $height_1920 = getimagesize($image_1920)[1];
+
+        // Get Thumbnail File Size
+        $fileSize = \File::size($image_640);
+        $size_640 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+        
+        $fileSize = \File::size($image_1280);
+        $size_1280 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+
+        $fileSize = \File::size($image_1920);
+        $size_1920 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+
+        $fileSize = \File::size($image_original);
+        $size_original = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+
         // Media Comments
         $comments = $this->media_comment->query()->where('mediaId', $id)->orderBy('created_at', 'DESC')->get();
         
-        return view('media-detail', ['media' => $media, 'categories' => $categories, 'final_img_info' => $final_img_info, 'comments' => $comments]);
+        return view('media-detail', ['media' => $media, 'categories' => $categories, 'final_img_info' => $final_img_info, 'comments' => $comments, 
+                                    'height_640' => $height_640, 'height_1280' => $height_1280, 'height_1920' => $height_1920, 
+                                    'size_640' => $size_640, 'size_1280' => $size_1280, 'size_1920' => $size_1920, 'size_original' => $size_original]);
     }
 
     public function store(Request $request)

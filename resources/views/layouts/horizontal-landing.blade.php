@@ -2,7 +2,7 @@
     <div class="navbar-header">
         <div class="d-flex">
             <!-- LOGO -->
-            <div class="navbar-brand-box">
+            <div class="navbar-brand-box pe-0">
                 <a href="{{url('')}}" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{{ URL::asset('public/assets/images/logo-sm.png') }}" alt="" height="22">
@@ -22,13 +22,13 @@
                 </a>
             </div>
 
-            <button type="button" class="btn btn-sm px-3 font-size-16 d-lg-none header-item waves-effect waves-light" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content" style="color:#555b6d;">
+            <button type="button" class="btn btn-sm ps-3 pe-1 font-size-16 d-lg-none header-item waves-effect waves-light" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content" style="color:#555b6d;">
                 <i class="fa fa-fw fa-bars"></i>
             </button>
 
             <!-- App Search-->
             @if(isset($search) && $search == true)
-            <form class="app-search d-none d-lg-block">
+            <form class="app-search d-none d-lg-block ps-4">
                 <div class="position-relative">
                     <input type="text" class="form-control" name="key" value="{{$key}}" placeholder="@lang('translation.Search')...">
                     <span class="uil-search"></span>
@@ -46,7 +46,7 @@
                     <form class="p-3">
                         <div class="form-group m-0">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="@lang('translation.Search')..." aria-label="Recipient's username">
+                                <input type="text" class="form-control" name="key" value="{{$key}}" placeholder="@lang('translation.Search')..." aria-label="Recipient's username">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
                                 </div>
@@ -59,9 +59,6 @@
         </div>
 
         <div class="d-flex">
-
-            
-
             <div class="dropdown d-none d-lg-inline-block language-switch">
                 <button type="button" class="btn header-item waves-effect"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:black;">
@@ -110,7 +107,9 @@
                     </a>
                 </div>
             </div>
+            @if(isset($search) && $search != true)
             <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#495057"><span class="d-inline-block mx-2 fw-bold font-size-16"> Donate </span></a>
+            @endif
             
             <div class="d-flex align-items-center">
                 <a href="{{url('upload')}}" <button type="button" class="d-inline-block btn btn-success btn-rounded waves-effect waves-light px-4 mx-2"><i class="d-none d-lg-inline-block fas fa-upload me-2"></i>Upload</button> </a>

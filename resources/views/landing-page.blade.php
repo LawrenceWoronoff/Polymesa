@@ -9,9 +9,9 @@
                 <div class="d-flex justify-content-center align-items-center text-center">
                     <h1 class="search-header" >Stunning free images & royalty free stock</h1>
                 </div>
-                <div class="d-flex justify-content-center align-items-center text-center">
+                <!-- <div class="d-flex justify-content-center align-items-center text-center">
                     <h4 class="search-subheader d-sm-hide">Over 2.5 million+ high quality stock images, videos and music shared by our talented community</h4>
-                </div>
+                </div> -->
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="position-relative" id="searchbox">
                         

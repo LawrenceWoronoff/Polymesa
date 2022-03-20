@@ -97,7 +97,76 @@
                                 <p class="m-0 font-size-16">Free for commercial use</p>
                             </div>
                             <div id="download_section" class="py-4 mb-4" style="border-bottom: solid 1px #d0d0d0">
-                                <a href="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" download><button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4 py-2 font-size-20 free-download"><i class="fas fa-download me-2"></i>Free Download</button></a>
+                                <!-- <a href="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" download><button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4 py-2 font-size-20 free-download"><i class="fas fa-download me-2"></i>Free Download</button></a> -->
+
+                                <button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4 py-2 font-size-20 free-download"><i class="fas fa-download me-2"></i>Free Download</button>
+                                   
+                                <div class="position-relative drop-down-download" style="display:none;">
+                                    <div class="popover__menu mt-3">
+                                    </div>
+                                </div>
+                                <div class="rounded-3 p-4 font-size-16 drop-down-download" style="display:none; background: rgb(30, 30, 30); color: #b5b5b5; max-width: 350px;">
+                                    <!-- <div class="tooltip-arrow"></div> -->
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-check mb-2">
+                                                <input type="radio" id="radio1" name="download_option" class="form-check-input" value="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" checked>
+                                                <label class="form-check-label" for="radio1">640 x {{$height_640}}</label>
+                                            </div>
+
+                                            <div class="form-check mb-2">
+                                                <input type="radio" id="radio2" name="download_option" class="form-check-input" value="{{ URL::asset('public/assets/medias'). '/1280_'. $media->path }}">
+                                                <label class="form-check-label" for="radio2">1280 x {{$height_1280}}</label>
+                                            </div>
+
+                                            <div class="form-check mb-2">
+                                                <input type="radio" id="radio3" name="download_option" class="form-check-input" value="{{ URL::asset('public/assets/medias'). '/1920_'. $media->path }}">
+                                                <label class="form-check-label" for="radio3">1920 x {{$height_1920}}</label>
+                                            </div>
+
+                                            <div class="form-check mb-2">
+                                                <input type="radio" id="radio4" name="download_option" class="form-check-input" value="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" checked>
+                                                <label class="form-check-label" for="radio4">{{$final_img_info['width']}} x {{$final_img_info['height']}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div class="mb-2">
+                                                {{$final_img_info['fileExtension']}}
+                                            </div>
+                                            <div class="mb-2">
+                                                {{$final_img_info['fileExtension']}}
+                                            </div>
+                                            <div class="mb-2">
+                                                {{$final_img_info['fileExtension']}}
+                                            </div>
+                                            <div class="mb-2">
+                                                {{$final_img_info['fileExtension']}}
+                                            </div>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <div class="mb-2">
+                                                {{ $size_640 }}
+                                            </div>
+                                            <div class="mb-2">
+                                                {{ $size_1280}}
+                                            </div>
+                                            <div class="mb-2">
+                                                {{ $size_1920 }}
+                                            </div>
+                                            <div class="mb-2">
+                                                {{ $size_original }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 d-flex justify-content-between">
+                                        <a class="sub-download" href="{{ URL::asset('public/assets/medias'). '/'. $media->path }}"  style="width:45%;" download>
+                                            <button type="button" class="btn btn-success btn-rounded waves-effect waves-light py-1 font-size-16 w-100">Download</button>
+                                        </a>
+                                        <a class="sub-download" href="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" target="_blank"  style="width:45%;">
+                                            <button type="button" class="btn btn-light btn-rounded waves-effect waves-light py-1 font-size-16 sub-view w-100">View</button>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                             <div id="media_detail_info" class="mt-4 p-4 text-secondary" style="background: #f6f5fa">
                                 @if($final_img_info['make'] != null)
@@ -200,23 +269,41 @@
         var mediaId = <?php echo $media->id?>;
 
         $(".free-download").click(function(){
-            var param = {
-                id : mediaId,
-            };
-            console.log(mediaId);
-            $.ajax({
-                url: "{{URL::to('/media-download')}}",
-                type: 'POST',
-                dataType: 'json',
-                contentType: 'application/json',
-                data: JSON.stringify(param),
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (result) {
-                    // console.log('Result:', result);                    
-                },
-            });
+            $('.drop-down-download').show();
+
+            // var param = {
+            //     id : mediaId,
+            // };
+            // console.log(mediaId);
+            // $.ajax({
+            //     url: "{{URL::to('/media-download')}}",
+            //     type: 'POST',
+            //     dataType: 'json',
+            //     contentType: 'application/json',
+            //     data: JSON.stringify(param),
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     },
+            //     success: function (result) {
+            //         // console.log('Result:', result);                    
+            //     },
+            // });
+        });
+
+        $(".sub-download").click(function(){
+            $('.drop-down-download').hide();
+
+            // console.log($('input[name="download_option"]:checked').val());
+            // var download_path = $('input[name="download_option"]:checked').val();
+            // var anchor = document.createElement('a');
+            // anchor.href = download_path;
+            // anchor.target = '_blank';
+            // anchor.download = new Date().getTime();
+            // anchor.click();
+        })
+
+        $('input[type=radio][name=download_option]').change(function() {
+            $(".sub-download").attr("href", this.value);
         });
 
         $('.show_more_comment').click(function(){

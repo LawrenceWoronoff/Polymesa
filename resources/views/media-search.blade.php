@@ -7,6 +7,28 @@
         <div class="pd-top-10">
             <div class="">
                 <ul class="image-gallery">
+                    @if(count($medias) == 0)
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-sm-4">
+                                            <div class="error-img">
+                                                <img src="{{ URL::asset('public/assets/images/404-error.png') }}" alt=""
+                                                    class="img-fluid mx-auto d-block">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4 class="text-uppercase mt-4">Sorry, no matching media found</h4>
+                                <p class="text-muted">You should try to find with other keyword please.</p>
+                                <div class="mt-5">
+                                    <a class="btn btn-primary waves-effect waves-light" href="{{ url('/') }}">Back to Home</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    @endif
                     @foreach($medias as $media)
                         @if($media->declined < Setting('minimumLikes'))
                         <li>

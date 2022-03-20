@@ -20,7 +20,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-4 col-md-12 px-4">
+                        <div class="col-lg-4 col-md-12 px-4  d-none d-md-block">
                             <h4 class="font-size-18 mb-2 fw-bold">Supported file types</h4>
 
                             <h5 class="font-size-16 mt-4 fw-bold">Photos/Vetors</h5>
@@ -112,14 +112,19 @@
                                     <div class="mb-3 row">
                                         <label for="tag_filter" class="col-md-4 col-form-label">Enter Tag</label>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" value="" id="tag_filter" placeholder="Please input over 3 characters.">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="key" value="abc" id="tag_filter" placeholder="Please input over 3 characters" aria-label="Recipient's username">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" id="search_btn" type="button"><i class="mdi mdi-magnify"></i></button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12">
                                     <div class="mb-3 row">
                                         <p class="pt-2 text-info">
-                                            Once you enter the word, the app displays word related to it below
+                                            Once you input the word and hit enter, the app displays word related to it below
                                         </p>
                                     </div>
                                 </div>
@@ -143,6 +148,27 @@
                             <div class="text-center mt-4">
                                 <button id="upload_submit" type="button" class="btn btn-primary waves-effect waves-light px-4">Upload</button>
                             </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 px-2 pt-4 mt-4 d-sm-block d-md-none">
+                            <h4 class="font-size-18 mb-2 fw-bold">Supported file types</h4>
+
+                            <h5 class="font-size-16 mt-4 fw-bold">Photos/Vetors</h5>
+                            <p class="border-bottom border-2 mt-2 pb-4">
+                                PNG, JPEG, JPG, PSD and AI images up to 10 MB with at least 3000 pixels along one side.
+                                <a><span class="text-info" style="cursor: pointer;">Image Quality Guidelines...</span></a>
+                            </p>
+
+                            <h5 class="font-size-16 mt-4 fw-bold">Videos</h5>
+                            <p class="border-bottom border-2 mt-2 pb-4">
+                                MP4, AVI and MK videos up to 10 MB and a minimum resolution of 1920x800 pixels. Clips should but no longer than 60 seconds.
+                                <a><span class="text-info" style="cursor: pointer;">Video Quality Guidelines...</span></a>
+                            </p>
+
+                            <h5 class="font-size-16 mt-4 fw-bold">Music/Audios</h5>
+                            <p class="border-bottom border-2 mt-2 pb-4">
+                                MP3, FLAC, WAV, WMA and AAC music up to 10 MB file size limit. Duration should be no longer than 15 minutes.
+                                <a><span class="text-info" style="cursor: pointer;">Music Quality Guidelines...</span></a>
+                            </p>
                         </div>
                     </div>
 
@@ -245,7 +271,34 @@
                return false;
             }
         };
+        $("#search_btn").click(function(){
+            var keyword = $("#tag_filter").val();
+            if(keyword.length < 3)
+                return;
 
+            var param = {
+                keyword : keyword,
+            };
+            $.ajax({
+                url: "{{URL::to('/tags/search')}}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(param),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (result) {
+                    var html = "";
+                    for(i = 0; i < result.length; i++)
+                        html += '<button type="button" class="btn btn-outline-secondary m-1 select-tag" onclick="selectTag(this)">' + result[i] + '</button>';
+                    
+                    $("#available_tags_list").html(html);
+                },
+            });
+
+            $("#available_tags").show();
+        })
         $("#tag_filter").change(function(){     // When user type value in filter tag input
             var keyword = $(this).val();
             if(keyword.length < 3)

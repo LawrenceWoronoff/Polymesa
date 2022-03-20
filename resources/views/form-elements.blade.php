@@ -407,6 +407,11 @@
                                         <label class="form-check-label" for="formRadiosRight2">
                                             Form Radio Right checked
                                         </label>
+                                        <input class="form-check-input" type="radio" name="formRadiosRight"
+                                            id="formRadiosRight3">
+                                        <label class="form-check-label" for="formRadiosRight3">
+                                            Form Radio Right checked
+                                        </label>
                                     </div>
                                 </div>
                             </div>
