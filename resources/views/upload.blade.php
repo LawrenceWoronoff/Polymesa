@@ -113,7 +113,7 @@
                                         <label for="tag_filter" class="col-md-4 col-form-label">Enter Tag</label>
                                         <div class="col-md-8">
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="key" value="abc" id="tag_filter" placeholder="Please input over 3 characters" aria-label="Recipient's username">
+                                                <input type="text" class="form-control" name="key" value="" id="tag_filter" placeholder="Please input over 3 characters" aria-label="Recipient's username">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-primary" id="search_btn" type="button"><i class="mdi mdi-magnify"></i></button>
                                                 </div>
