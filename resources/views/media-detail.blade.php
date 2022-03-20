@@ -124,10 +124,12 @@
                                                 <label class="form-check-label" for="radio3">1920 x {{$height_1920}}</label>
                                             </div>
 
+                                            @Auth
                                             <div class="form-check mb-2">
                                                 <input type="radio" id="radio4" name="download_option" class="form-check-input" value="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" checked>
                                                 <label class="form-check-label" for="radio4">{{$final_img_info['width']}} x {{$final_img_info['height']}}</label>
                                             </div>
+                                            @endAuth
                                         </div>
                                         <div class="col-2">
                                             <div class="mb-2">
@@ -139,9 +141,11 @@
                                             <div class="mb-2">
                                                 {{$final_img_info['fileExtension']}}
                                             </div>
+                                            @Auth
                                             <div class="mb-2">
                                                 {{$final_img_info['fileExtension']}}
                                             </div>
+                                            @endAuth
                                         </div>
                                         <div class="col-4 text-end">
                                             <div class="mb-2">
@@ -153,11 +157,18 @@
                                             <div class="mb-2">
                                                 {{ $size_1920 }}
                                             </div>
+                                            @Auth
                                             <div class="mb-2">
                                                 {{ $size_original }}
                                             </div>
+                                            @endAuth
                                         </div>
                                     </div>
+                                    @Guest
+                                    <div>
+                                        <p class="font-size-18"><a class="text-info" href="{{Route('login')}}">Sign in</a> to download original high resolution media.</p>
+                                    </div>
+                                    @endGuest
                                     <div class="mt-2 d-flex justify-content-between">
                                         <a class="sub-download" href="{{ URL::asset('public/assets/medias'). '/'. $media->path }}"  style="width:45%;" download>
                                             <button type="button" class="btn btn-success btn-rounded waves-effect waves-light py-1 font-size-16 w-100">Download</button>
