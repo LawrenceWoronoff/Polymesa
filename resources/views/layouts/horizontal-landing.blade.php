@@ -107,7 +107,7 @@
                     </a>
                 </div>
             </div>
-            @if(isset($search) && $search != true)
+            @if(!isset($search) ||  $search != true)
             <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#495057"><span class="d-inline-block mx-2 fw-bold font-size-16"> Donate </span></a>
             @endif
             

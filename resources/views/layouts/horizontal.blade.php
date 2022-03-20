@@ -34,7 +34,7 @@
                 <a href="{{url('upload')}}" <button type="button" class="d-inline-block btn btn-success btn-rounded waves-effect waves-light px-4 mx-2"><i class="d-none d-lg-inline-block fas fa-upload me-2"></i>Upload</button> </a>
             </div>
 
-            <div class="dropdown d-inline-block language-switch">
+            <div class="dropdown d-none d-md-inline-block language-switch">
                 <button type="button" class="btn header-item waves-effect"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @switch(Session::get('lang'))
@@ -83,7 +83,7 @@
                 </div>
             </div>
 
-            <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#e9ecef"><span class="d-none d-md-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
+            <a class="d-flex align-items-center" href="{{url('donate')}}" style="color:#e9ecef"><span class="d-inline-block mx-4 fw-bold font-size-16"> Donate </span></a>
 
             <div class="dropdown d-none d-lg-inline-block ms-1">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
