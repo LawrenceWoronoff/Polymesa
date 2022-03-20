@@ -12,9 +12,9 @@
                 <div class="col-lg-12">
                     <div class="text-center">
                         <a href="{{ url('') }}" class="mb-5 d-block auth-logo">
-                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="22"
+                            <img src="{{ URL::asset('public/assets/images/logo-dark.png') }}" alt="" height="22"
                                 class="logo logo-dark">
-                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="22"
+                            <img src="{{ URL::asset('public/assets/images/logo-light.png') }}" alt="" height="22"
                                 class="logo logo-light">
                         </a>
                     </div>
