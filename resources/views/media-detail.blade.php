@@ -124,12 +124,12 @@
                                                 <label class="form-check-label" for="radio3">1920 x {{$height_1920}}</label>
                                             </div>
 
-                                            @Auth
-                                            <div class="form-check mb-2">
-                                                <input type="radio" id="radio4" name="download_option" class="form-check-input" value="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" checked>
+                                            <div class="form-check mb-2">                                                
+                                                <input type="radio" id="radio4" name="download_option" class="form-check-input" value="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" @Guest disabled @Endguest>
+                                                
                                                 <label class="form-check-label" for="radio4">{{$final_img_info['width']}} x {{$final_img_info['height']}}</label>
                                             </div>
-                                            @endAuth
+                                            
                                         </div>
                                         <div class="col-2">
                                             <div class="mb-2">
@@ -141,11 +141,11 @@
                                             <div class="mb-2">
                                                 {{$final_img_info['fileExtension']}}
                                             </div>
-                                            @Auth
-                                            <div class="mb-2">
+                                            
+                                            <div class="mb-2" @Guest style="color: rgb(105 105 105)" @endGuest>
                                                 {{$final_img_info['fileExtension']}}
                                             </div>
-                                            @endAuth
+                                            
                                         </div>
                                         <div class="col-4 text-end">
                                             <div class="mb-2">
@@ -157,11 +157,9 @@
                                             <div class="mb-2">
                                                 {{ $size_1920 }}
                                             </div>
-                                            @Auth
-                                            <div class="mb-2">
+                                            <div class="mb-2" @Guest style="color: rgb(105 105 105)" @endGuest>
                                                 {{ $size_original }}
-                                            </div>
-                                            @endAuth
+                                            </div>                                            
                                         </div>
                                     </div>
                                     @Guest
@@ -170,10 +168,10 @@
                                     </div>
                                     @endGuest
                                     <div class="mt-2 d-flex justify-content-between">
-                                        <a class="sub-download" href="{{ URL::asset('public/assets/medias'). '/'. $media->path }}"  style="width:45%;" download>
+                                        <a class="sub-download" href="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}"  style="width:45%;" download>
                                             <button type="button" class="btn btn-success btn-rounded waves-effect waves-light py-1 font-size-16 w-100">Download</button>
                                         </a>
-                                        <a class="sub-download" href="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" target="_blank"  style="width:45%;">
+                                        <a class="sub-download" href="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" target="_blank"  style="width:45%;">
                                             <button type="button" class="btn btn-light btn-rounded waves-effect waves-light py-1 font-size-16 sub-view w-100">View</button>
                                         </a>
                                     </div>
