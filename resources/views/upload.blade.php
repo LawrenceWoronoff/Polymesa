@@ -42,6 +42,9 @@
                             </p>
                         </div>
                         <div class="col-lg-8 col-md-12">
+                            @if($remaining_week <= 0)
+                                <p class="font-size-20 text-danger"> You have exceeded the amount you can upload this week. </p>
+                            @else
                             <form method="post" action="{{url('upload/store')}}" enctype="multipart/form-data" 
                                     class="dropzone" id="dropzone">
                                     @csrf
@@ -54,7 +57,7 @@
                                     </div>
 
                                     <h4 class="font-size-18">Drag and drop media file anywhere on the form</h4>
-                                    <p class="font-size-16">7 uploads remaining this week</p>
+                                    <p class="font-size-16">{{$remaining_week}} uploads remaining this week</p>
                                 </div>
                             </form>
                             <div class="row border-bottom border-2">
@@ -67,21 +70,8 @@
 
                                 </div>
                             </div>
+                            @endif
                             
-                                
-                            <!-- <form action="#" class="dropzone">
-                                <div class="fallback">
-                                    <input name="file" type="file">
-                                </div>
-                                <div class="dz-message needsclick">
-                                    <div class="mb-3">
-                                        <i class="display-4 text-muted uil uil-cloud-upload"></i>
-                                    </div>
-
-                                    <h4 class="font-size-18">Drag and drop media file anywhere on the form</h4>
-                                    <p class="font-size-16">7 uploads remaining this week</p>
-                                </div>
-                            </form> -->
 
                             <div class="row  mt-4">
                                 <div class="col-lg-6 col-md-12">

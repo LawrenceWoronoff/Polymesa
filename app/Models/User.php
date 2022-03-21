@@ -58,4 +58,10 @@ class User extends Authenticatable
     {
         return Carbon::parse($value)->diffForHumans();
     }
+
+    public function getLimitAttribute($value)
+    {
+        $userType = $this->attributes['userType'];
+        return Setting($userType);
+    }
 }

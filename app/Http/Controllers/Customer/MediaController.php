@@ -55,13 +55,26 @@ class MediaController extends Controller
 
     public function upload(Request $request)
     {
+        $now = date('Y-m-d');
+
+        if(date('w', strtotime($now)) == '1')
+            $start_date = $now;
+        else
+            $start_date = date('Y-m-d', strtotime("previous monday", strtotime($now)));
+
+        $end_date = date('Y-m-d', strtotime($start_date. ' +6 day'));
+
+        $uploaded_week = $this->media->query()->whereBetween('created_at', [$start_date. ' 00:00:00', $end_date. ' 23:59:59'])->get()->count();
+
+        $remaining_week = Auth::user()->limit - $uploaded_week;
+
         $categories = $this->category->query()->get();
         $subcategories = [];
         if(count($categories) > 0)
         {
             $subcategories = $this->subcategory->query()->where('parentID', $categories[0]->id)->get();
         }
-        return view('upload', ['categories' => $categories, 'subcategories' => $subcategories]);
+        return view('upload', ['categories' => $categories, 'subcategories' => $subcategories, 'remaining_week' => $remaining_week]);
     }
 
     public function curation(Request $request)

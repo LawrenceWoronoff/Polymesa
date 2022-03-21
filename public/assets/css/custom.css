@@ -737,4 +737,8 @@
   .grid-image{
     max-height: none !important;
   }
+
+  .footer {
+    height: 90px !important;
+  }
 }
