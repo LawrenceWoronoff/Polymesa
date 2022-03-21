@@ -728,3 +728,13 @@
   border-bottom-color: rgb(30, 30, 30);
   border-width: 10px;
 }
+
+.grid-image{
+  max-height: 170px;
+}
+
+@media (max-width:500px) {
+  .grid-image{
+    max-height: none !important;
+  }
+}
