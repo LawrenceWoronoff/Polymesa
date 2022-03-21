@@ -278,9 +278,10 @@ class MediaController extends Controller
                     $image1 = $imageResource;
                     break;
             }
+            imagejpeg($image1, "abc", 90);
+
         }
 
-        imagejpeg($image1, "abc", 90);
 
         $final_img_info['resolution_error'] = false;
         $final_img_info['size_error'] = false;
