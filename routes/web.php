@@ -40,6 +40,7 @@ Auth::routes();
 // ============= Guest Mode Routes ============= //
 Route::get('/', [HomeController::class, 'root']);           // Guest Mode
 Route::get('/donate', [HomeController::class, 'donate']);   // Guest Mode
+Route::get('/faqs', [HomeController::class, 'faqs']);   // Guest Mode
 Route::get('/media-detail/{id}', [MediaController::class, 'mediaDetail'])->name('media-detail');        // Guest Mode
 Route::post('/media-download', [MediaController::class, 'mediaDownload'])->name('media-download');      // Guest Mode
 Route::get('/media-search/{id}', [MediaController::class, 'mediaSearch'])->name('media-search');

@@ -66,6 +66,12 @@ class HomeController extends Controller
         return view('landing-page', ['categories' => $categories, 'medias' => $medias]);
     }
 
+    public function faqs()
+    {
+        $categories = $this->category->query()->get();
+        return view('faqs', ['categories' => $categories]);
+    }
+
     /*Language Translation*/
     public function lang($locale)
     {
