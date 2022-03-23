@@ -65,15 +65,9 @@ class MediaController extends Controller
 
         $end_date = date('Y-m-d', strtotime($start_date. ' +6 day'));
 
-        $uploaded_week = $this->media->query()->whereBetween('created_at', [$start_date. ' 00:00:00', $end_date. ' 23:59:59'])->get()->count();
+        $uploaded_week = $this->media->query()->where('userId', Auth::user()->id)->whereBetween('created_at', [$start_date. ' 00:00:00', $end_date. ' 23:59:59'])->get()->count();
 
         $remaining_week = Auth::user()->limit - $uploaded_week;
-
-        var_dump(Auth::user()->limit);
-        var_dump($uploaded_week);
-        var_dump(Auth::user()->limit - $uploaded_week);
-        exit(0);
-        
 
         $categories = $this->category->query()->get();
         $subcategories = [];
