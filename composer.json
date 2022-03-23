@@ -17,7 +17,8 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
-        "uxweb/sweet-alert": "^2.0"
+        "uxweb/sweet-alert": "^2.0",
+        "wapmorgan/mp3info": "^0.0.7"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -47,6 +47,7 @@ class Category extends Authenticatable
 
     public function getMyMediaAttribute($value)
     {
-        return Media::query()->where('userId', Auth::user()->id)->get();
+        $category_id = $this->attributes['id'];
+        return Media::query()->where('userId', Auth::user()->id)->where('categoryId', $category_id)->get();
     }
 }

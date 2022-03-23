@@ -45,6 +45,9 @@ Route::get('/media-detail/{id}', [MediaController::class, 'mediaDetail'])->name(
 Route::post('/media-download', [MediaController::class, 'mediaDownload'])->name('media-download');      // Guest Mode
 Route::get('/media-search/{id}', [MediaController::class, 'mediaSearch'])->name('media-search');
 
+Route::post('/medias/mediasByCategory',       [MediaController::class, 'mediasByCategory'])->name('medias/mediasByCategory');
+
+
 // =========== Auth Mode Routes =========== // (Means )
 
 Route::group(['middleware' => ['auth']], function () {
@@ -66,7 +69,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/categories/getInfo',   [CategoryController::class, 'getInfo'])->name('categories/getInfo');   // Auth Role
     Route::post('/subcategories/getFromCategory',    [CategoryController::class, 'getFromCategory'])->name('subcategories/getFromCategory');    // Admin Role
-
 });
 
 // ============= Admin Role Routes ============= //

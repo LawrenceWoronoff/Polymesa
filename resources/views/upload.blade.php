@@ -25,19 +25,19 @@
 
                             <h5 class="font-size-16 mt-4 fw-bold">Photos/Vetors</h5>
                             <p class="border-bottom border-2 mt-2 pb-4">
-                                PNG, JPEG, JPG, PSD and AI images up to 10 MB with at least 3000 pixels along one side.
+                                PNG, JPEG, JPG, PSD and AI images up to 20 MB with at least 3000 pixels along one side.
                                 <a><span class="text-info" style="cursor: pointer;">Image Quality Guidelines...</span></a>
                             </p>
 
                             <h5 class="font-size-16 mt-4 fw-bold">Videos</h5>
                             <p class="border-bottom border-2 mt-2 pb-4">
-                                MP4, AVI and MK videos up to 10 MB and a minimum resolution of 1920x800 pixels. Clips should but no longer than 60 seconds.
+                                MP4, AVI and MK videos up to 20 MB and a minimum resolution of 1920x800 pixels. Clips should but no longer than 60 seconds.
                                 <a><span class="text-info" style="cursor: pointer;">Video Quality Guidelines...</span></a>
                             </p>
 
                             <h5 class="font-size-16 mt-4 fw-bold">Music/Audios</h5>
                             <p class="border-bottom border-2 mt-2 pb-4">
-                                MP3, FLAC, WAV, WMA and AAC music up to 10 MB file size limit. Duration should be no longer than 15 minutes.
+                                MP3, FLAC, WAV, WMA and AAC music up to 20 MB file size limit. Duration should be no longer than 15 minutes.
                                 <a><span class="text-info" style="cursor: pointer;">Music Quality Guidelines...</span></a>
                             </p>
                         </div>
@@ -66,13 +66,14 @@
                                 <div class="col-12 col-md-6  py-4 font-size-16" id="media_confirm" style="display:none;">
                                     <p id="media_success"><i class="fas fa-check-circle text-success me-2"></i><span>You are available to upload this media.</span></p>
                                     <p id="media_resolution_error"><i class="fas fa-exclamation-circle text-danger me-2"><span></i>The resolution is not enough.</span></p>
-                                    <p id="media_size_error"><i class="fas fa-exclamation-circle text-danger me-2"><span></i>The file size is over 10MB.</span></p>
+                                    <p id="media_size_error"><i class="fas fa-exclamation-circle text-danger me-2"><span></i>The image size is over 20MB.</span></p>
 
+                                    <p id="audio_size_error"><i class="fas fa-exclamation-circle text-danger me-2"><span></i>The audio size is over 20MB.</span></p>
+                                    <p id="audio_length_error"><i class="fas fa-exclamation-circle text-danger me-2"><span></i>The audio duration is over 15min.</span></p>
                                 </div>
                             </div>
                             @endif
                             
-
                             <div class="row  mt-4">
                                 <div class="col-lg-6 col-md-12">
                                     <div class="mb-3 row">
@@ -98,6 +99,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div>
+                                    <div id="title_form" class="col-lg-6 col-md-12" style="{{ $categories[0]['mediaType'] == 'Audio' ? '' : 'display: none' }}">
+                                        <div class="mb-3 row">
+                                            <label for="audio_title" class="col-md-4 col-form-label">Audio Title</label>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" name="key" value="" id="audio_title" aria-label="Recipient's username">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="col-lg-6 col-md-12">
                                     <div class="mb-3 row">
                                         <label for="tag_filter" class="col-md-4 col-form-label">Enter Tag</label>
@@ -144,19 +157,19 @@
 
                             <h5 class="font-size-16 mt-4 fw-bold">Photos/Vetors</h5>
                             <p class="border-bottom border-2 mt-2 pb-4">
-                                PNG, JPEG, JPG, PSD and AI images up to 10 MB with at least 3000 pixels along one side.
+                                PNG, JPEG, JPG, PSD and AI images up to 20 MB with at least 3000 pixels along one side.
                                 <a><span class="text-info" style="cursor: pointer;">Image Quality Guidelines...</span></a>
                             </p>
 
                             <h5 class="font-size-16 mt-4 fw-bold">Videos</h5>
                             <p class="border-bottom border-2 mt-2 pb-4">
-                                MP4, AVI and MK videos up to 10 MB and a minimum resolution of 1920x800 pixels. Clips should but no longer than 60 seconds.
+                                MP4, AVI and MK videos up to 20 MB and a minimum resolution of 1920x800 pixels. Clips should but no longer than 60 seconds.
                                 <a><span class="text-info" style="cursor: pointer;">Video Quality Guidelines...</span></a>
                             </p>
 
                             <h5 class="font-size-16 mt-4 fw-bold">Music/Audios</h5>
                             <p class="border-bottom border-2 mt-2 pb-4">
-                                MP3, FLAC, WAV, WMA and AAC music up to 10 MB file size limit. Duration should be no longer than 15 minutes.
+                                MP3, FLAC, WAV, WMA and AAC music up to 20 MB file size limit. Duration should be no longer than 15 minutes.
                                 <a><span class="text-info" style="cursor: pointer;">Music Quality Guidelines...</span></a>
                             </p>
                         </div>
@@ -179,6 +192,7 @@
 
         var extension = "";
         var fileName = "";
+        var audio_duration = "";
 
         Dropzone.options.dropzone =
          {
@@ -188,7 +202,7 @@
                 var time = dt.getTime();
                return time+file.name;
             },
-            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            acceptedFiles: ".jpeg,.jpg,.png,.mp3,.flac,.wav,.wma,.aac",
             addRemoveLinks: true,
             timeout: 50000,
             removedfile: function(file) 
@@ -196,7 +210,6 @@
                 $("#media_detail").hide();
                 $("#media_confirm").hide();
 
-                
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -217,43 +230,89 @@
        
             success: function(file, response) 
             {
+                initializeMediaConfirm();
+
                 var detail = JSON.parse(response);
+                fileType = detail['fileType'];
                 extension = detail['extension'];
 
-                var html = "";
-                html += (detail['make'] != null ? ("<p class='mb-0 text-info'>Camera Name: " + detail['make'] + "</p>") : "");
-                html += (detail['model'] != null ? ("<p class='mb-0 text-info'>Model: " + detail['model'] + "</p>") : "");
-                html += "<p class='mb-0'>Resolution: " + detail['width'] + " x " + detail['height']  + "</p>";
-                html += (detail['FocalLength'] != null ? ("<p class='mb-0'>FocalLength: " + detail['FocalLength'] + "mm</p>") : "");
-                html += (detail['ApertureFNumber'] != null ? ("<p class='mb-0'>ApertureFNumber: " + detail['ApertureFNumber'] + "</p>") : "");
-                html += (detail['ShutterSpeedValue'] != null ? ("<p class='mb-0'>ShutterSpeedValue: 1/" + detail['ShutterSpeedValue'] + "s</p>") : "");
-                html += (detail['ISO'] != null ? ("<p class='mb-0'>ISO: " + "ISO" + " " + detail['ISO'] + "</p>") : "");
-                html += "<p class='mb-0'>Size: " + detail['mega_size'] + " MB" + "</p>";
-                html += "<p class='mb-0'>File Type: " + detail['extension'] + "</p>";
-                
-                $("#media_detail").html(html);
-                $("#media_detail").show();
-                fileName = detail['fileName'];
+                if(fileType == "image") {
+                    var html = "";
+                    html += (detail['make'] != null ? ("<p class='mb-0 text-info'>Camera Name: " + detail['make'] + "</p>") : "");
+                    html += (detail['model'] != null ? ("<p class='mb-0 text-info'>Model: " + detail['model'] + "</p>") : "");
+                    html += "<p class='mb-0'>Resolution: " + detail['width'] + " x " + detail['height']  + "</p>";
+                    html += (detail['FocalLength'] != null ? ("<p class='mb-0'>FocalLength: " + detail['FocalLength'] + "mm</p>") : "");
+                    html += (detail['ApertureFNumber'] != null ? ("<p class='mb-0'>ApertureFNumber: " + detail['ApertureFNumber'] + "</p>") : "");
+                    html += (detail['ShutterSpeedValue'] != null ? ("<p class='mb-0'>ShutterSpeedValue: 1/" + detail['ShutterSpeedValue'] + "s</p>") : "");
+                    html += (detail['ISO'] != null ? ("<p class='mb-0'>ISO: " + "ISO" + " " + detail['ISO'] + "</p>") : "");
+                    html += "<p class='mb-0'>Size: " + detail['mega_size'] + " MB" + "</p>";
+                    html += "<p class='mb-0'>File Type: " + detail['extension'] + "</p>";
+                    
+                    $("#media_detail").html(html);
+                    $("#media_detail").show();
+                    fileName = detail['fileName'];
 
-                if(detail['resolution_error'])
-                    $("#media_resolution_error").show();
-                else
-                    $("#media_resolution_error").hide();
+                    if(detail['resolution_error'])
+                        $("#media_resolution_error").show();
+                    else
+                        $("#media_resolution_error").hide();
 
-                if(detail['size_error'])
-                    $("#media_size_error").show();
-                else
-                    $("#media_size_error").hide();
+                    if(detail['size_error'])
+                        $("#media_size_error").show();
+                    else
+                        $("#media_size_error").hide();
 
-                if(!detail['resolution_error'] && !detail['size_error'])
-                {
-                    upload_confirm = true;
-                    $("#media_success").show();
+                    if(!detail['resolution_error'] && !detail['size_error'])
+                    {
+                        upload_confirm = true;
+                        $("#media_success").show();
+                    }
+                    else{
+                        upload_confirm = false;
+                        $("#media_success").hide();
+                    }
+
+                    $("#media_confirm").show();
+                } else if(fileType == "audio") {
+                    
+                    fileName = detail['fileName'];
+                    audio_duration = detail['duration_time_format'];
+                    
+                    console.log("Audio Type");
+
+                    var html = "";
+                    html += "<p class='mb-0'>Size: " + detail['size'] + "</p>";
+                    html += "<p class='mb-0'>Duration: " + detail['duration'] + "</p>";
+
+                    $("#media_detail").html(html);
+                    $("#media_detail").show();
+
+                    
+                    if(detail['length_error'])
+                        $("#audio_length_error").show();
+                    else
+                        $("#audio_length_error").hide();
+
+                    if(detail['size_error'])
+                        $("#audio_size_error").show();
+                    else
+                        $("#audio_size_error").hide();
+
+                    if(!detail['length_error'] && !detail['size_error'])
+                    {
+                        upload_confirm = true;
+                        $("#media_success").show();
+                    }
+                    else{
+                        upload_confirm = false;
+                        $("#media_success").hide();                        
+                    }
+                    $("#media_confirm").show();
+                } else if(fileType == "video") {
+
                 }
-                else
-                    $("#media_success").hide();
 
-                $("#media_confirm").show();
+                
                 
             },
             error: function(file, response)
@@ -261,6 +320,19 @@
                return false;
             }
         };
+
+        function initializeMediaConfirm() {
+        
+            $("#media_resolution_error").hide();
+            $("#media_size_error").hide();
+            $("#media_success").hide();
+
+            $("#audio_size_error").hide();
+            $("#audio_length_error").hide();
+
+            $("#media_confirm").hide();
+        }
+
         $("#search_btn").click(function(){
             var keyword = $("#tag_filter").val();
             if(keyword.length < 3)
@@ -354,6 +426,28 @@
 
         $("#category").change(function(){
             console.log('category changed');
+            
+            var param = {
+                id : $(this).val(),
+            };
+            $.ajax({
+                url: "{{URL::to('/categories/getInfo')}}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(param),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (result) {
+                    console.log(result);
+                    if(result['mediaType'] == "Audio")
+                        $("#title_form").show();
+                    else
+                        $("#title_form").hide();
+                },
+            });
+            
             var param = {
                 category_id : $(this).val(),
             };
@@ -409,6 +503,15 @@
                     if(result['mediaType'] == "Image" && imageExtensions.includes(extension) ||
                        result['mediaType'] == "Video" && videoExtensions.includes(extension) ||
                        result['mediaType'] == "Audio" && audioExtensions.includes(extension)){  // ====== When the category file type and uploaded file type is matched.
+
+                        // Check if the title field is put
+                        if(result['mediaType'] == "Audio" && $("#audio_title").val() == "")
+                        {
+                            Swal.fire("Warning", "Please input audio title", "warning");
+                            return;
+                        }
+                        //////////////////////////////
+
                         var taglist = [];
                         $('#tag_list').children().each(function(){
                             taglist.push($(this).children()[0].innerHTML);
@@ -419,6 +522,9 @@
                             subcategoryId : $("#subcategory").val(),
                             path : fileName,
                             taglist : JSON.stringify(taglist),
+                            title: $("#audio_title").val(),
+                            mediaType: result['mediaType'],
+                            duration: audio_duration,
                         };
                         $.ajax({
                             url: "{{URL::to('/upload/addMedia')}}",

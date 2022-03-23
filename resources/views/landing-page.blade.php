@@ -46,7 +46,7 @@
             <div class="">
                 <ul class="image-gallery">
                     @foreach($medias as $media)
-                        @if($media->declined < Setting('minimumLikes'))
+                        @if($media->declined < Setting('minimumLikes') && $media->category->mediaType != "Audio")
                         <li>
                             <div class="gallery-content">
                                 <a href="{{route('media-detail', $media->id)}}">
@@ -56,19 +56,22 @@
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>  
                                     @endif
-                                    <img class="content-image" src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}">
-                                    <div class="content-details fadeIn-bottom">
-                                    <div class="" style="float:right;">
-                                        <p class="content-text"><i class="fas fa-heart"></i> {{$media->liked}} &nbsp; <i class="fas fa-comment"></i> {{$media->commented}} &nbsp; <i class="fas fa-bookmark"></i> </p>
-                                    </div>
-                                    <div class="" style="float:left;">
-                                        <h2 class="content-title ">
-                                            @foreach(json_decode($media->taglist) as $tag)
-                                                <a type='button' href="" class="overlay-text">{{$tag}}</a>
-                                            @endforeach
-                                        </h2>
-                                    </div>
                                     
+                                    @if($media->category->mediaType == "Image")
+                                        <img class="content-image" src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}">
+                                    @endif
+
+                                    <div class="content-details fadeIn-bottom">
+                                        <div class="" style="float:right;">
+                                            <p class="content-text"><i class="fas fa-heart"></i> {{$media->liked}} &nbsp; <i class="fas fa-comment"></i> {{$media->commented}} &nbsp; <i class="fas fa-bookmark"></i> </p>
+                                        </div>
+                                        <div class="" style="float:left;">
+                                            <h2 class="content-title ">
+                                                @foreach(json_decode($media->taglist) as $tag)
+                                                    <a type='button' href="" class="overlay-text">{{$tag}}</a>
+                                                @endforeach
+                                            </h2>
+                                        </div>
                                     </div>
                                 </a>
                             </div>

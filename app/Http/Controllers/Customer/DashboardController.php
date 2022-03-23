@@ -35,8 +35,15 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+        $audio_category_list = array();
         $categories = $this->category->query()->get();
-        
-        return view('user-dashboard', ['categories' => $categories]);
+        foreach($categories as $category)
+        {
+            if($category->mediaType == "Audio"){
+                array_push($audio_category_list, $category->id);
+            }
+        }
+
+        return view('user-dashboard', ['categories' => $categories, 'audio_category_list' => json_encode($audio_category_list)]);
     }
 }

@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use DB;
 use Auth;
+use App\Models\category;
+
 
 class Media extends Authenticatable
 {
@@ -24,7 +26,7 @@ class Media extends Authenticatable
     protected $table  = 'medias';
 
     protected $fillable = [
-        'userId', 'title', 'categoryId', 'subcategoryId', 'path', 'taglist', 'views', 'downloads', 
+        'userId', 'title', 'categoryId', 'subcategoryId', 'path', 'taglist', 'views', 'downloads', 'duration',
     ];
 
     /**
