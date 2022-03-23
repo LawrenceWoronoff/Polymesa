@@ -55,6 +55,7 @@ class MediaController extends Controller
 
     public function upload(Request $request)
     {
+        
         $now = date('Y-m-d');
 
         if(date('w', strtotime($now)) == '1')
@@ -67,6 +68,12 @@ class MediaController extends Controller
         $uploaded_week = $this->media->query()->whereBetween('created_at', [$start_date. ' 00:00:00', $end_date. ' 23:59:59'])->get()->count();
 
         $remaining_week = Auth::user()->limit - $uploaded_week;
+
+        var_dump(Auth::user()->limit);
+        var_dump($uploaded_week);
+        var_dump(Auth::user()->limit - $uploaded_week);
+        exit(0);
+        
 
         $categories = $this->category->query()->get();
         $subcategories = [];
