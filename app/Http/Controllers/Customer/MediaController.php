@@ -19,6 +19,7 @@ use App\Models\Mediacomment;
 use Image;
 
 use File;
+use VideoThumbnail;
 
 class MediaController extends Controller
 {
@@ -247,7 +248,8 @@ class MediaController extends Controller
         // Check Uploaded file type
         $media = $request->file('file');
         $extension = $media->extension();
-        
+        // var_dump($extension);
+        // exit(0);
         
         switch(strtolower($extension)) {
             case 'jpg': case 'png': case 'jpeg':       // When uploaded file is image
@@ -335,7 +337,7 @@ class MediaController extends Controller
                     $image->move('public/assets/medias/', $fileName);
                 }
                 break;
-            case 'mp3': case 'flac': case 'wav': case 'wma': case 'aac': case 'ogg': case 'oga':      // When uploaded file is audio
+            case 'mp3': case 'flac': case 'wav': case 'wma': case 'aac': case 'ogg': case 'oga': case 'm4a':      // When uploaded file is audio
             case 'mp4': case 'avi': case 'mk':
                 $final_img_info['length_error'] = false;
                 $final_img_info['size_error'] = false;
@@ -366,16 +368,22 @@ class MediaController extends Controller
                 $final_img_info['extension'] = $extension;
                 $final_img_info['fileType'] = "audio";
 
-                if(strtolower($extension) == "avi" || strtolower($extension) == "mk")   //Doesn't need but..
-                $final_img_info['fileType'] = "video";
+                if(strtolower($extension) == "mp4" || strtolower($extension) == "avi" || strtolower($extension) == "mk")   //Doesn't need but..
+                    $final_img_info['fileType'] = "video";
 
 
                 if($audio && $final_img_info['length_error'] == false && $final_img_info['size_error'] == false)
                 {   
+                    // if($final_img_info['fileType'] == "video"){
+                    //     VideoThumbnail::createThumbnail('public/assets/medias/1648131282_1648131282488star.mp4', 'thumbnails', 'movie.jpg', 2, 1920, 1080);
+                    // }
+
                     $fileName = time().'_'.$audio->getClientOriginalName();
+
 
                     $final_img_info['fileName'] = $fileName;
                     $audio->move('public/assets/medias/', $fileName);
+                    
                 }
                 break;
         }

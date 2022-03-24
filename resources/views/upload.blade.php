@@ -188,7 +188,7 @@
         var upload_confirm = false;
         var imageExtensions = ['jpg', 'JPG', 'jpeg'];
         var videoExtensions = ['mp4', 'avi', 'mk'];
-        var audioExtensions = ['mp3', 'mp4', 'flac', 'wav', 'wma', 'aac', 'ogg', 'oga'];
+        var audioExtensions = ['mp3', 'mp4', 'flac', 'wav', 'wma', 'aac', 'ogg', 'oga', 'm4a'];
 
         var extension = "";
         var fileName = "";
