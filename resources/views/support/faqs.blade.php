@@ -21,7 +21,13 @@
                     <div class="row mt-5">
                         <div class="col-xl-3 col-sm-5 mx-auto">
                             <div>
-                                <img src="{{ URL::asset('public/assets/images/faqs-img.png') }}" alt="" class="img-fluid mx-auto d-block">
+                                <p><a href="{{url('faqs')}}" class="my-2 font-size-16">FAQ</a></p>
+                                <p><a href="{{url('license')}}" class="my-2 font-size-16 inactive-sidebar">License</a></p>
+                                <p><a href="{{url('termsOfService')}}" class="my-2 font-size-16 inactive-sidebar">Terms of Service</a></p>
+                                <p><a href="{{url('privacyPolicy')}}" class="my-2 font-size-16 inactive-sidebar">Privacy Policy</a></p>
+                                <p><a href="{{url('cookiesPolicy')}}" class="my-2 font-size-16 inactive-sidebar">Cookies Policy</a></p>
+                                <p><a href="{{url('aboutUs')}}" class="my-2 font-size-16 inactive-sidebar">About Us</a></p>
+                                <p><a href="{{url('forum')}}" class="my-2 font-size-16 inactive-sidebar">Forum</a></p>
                             </div>
                         </div>
 

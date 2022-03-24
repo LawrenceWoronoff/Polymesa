@@ -69,7 +69,43 @@ class HomeController extends Controller
     public function faqs()
     {
         $categories = $this->category->query()->get();
-        return view('faqs', ['categories' => $categories]);
+        return view('support/faqs', ['categories' => $categories]);
+    }
+
+    public function license()
+    {
+        $categories = $this->category->query()->get();
+        return view('support/license', ['categories' => $categories]);
+    }
+
+    public function termsOfService()
+    {
+        $categories = $this->category->query()->get();
+        return view('support/termsOfService', ['categories' => $categories]);
+    }
+
+    public function privacyPolicy()
+    {
+        $categories = $this->category->query()->get();
+        return view('support/privacyPolicy', ['categories' => $categories]);
+    }
+
+    public function cookiesPolicy()
+    {
+        $categories = $this->category->query()->get();
+        return view('support/cookiesPolicy', ['categories' => $categories]);
+    }
+
+    public function aboutUs()
+    {
+        $categories = $this->category->query()->get();
+        return view('support/aboutUs', ['categories' => $categories]);
+    }
+
+    public function forum()
+    {
+        $categories = $this->category->query()->get();
+        return view('support/forum', ['categories' => $categories]);
     }
 
     /*Language Translation*/

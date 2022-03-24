@@ -111,7 +111,7 @@
                     var track = {
                         "track" : i + 1,
                         "name" : result[i]['title'],
-                        "duration" : result[i]['duration'],
+                        "duration" : result[i]['duration'] == null ? '' : result[i]['duration'],
                         "file" : result[i]['path']
                     };
 

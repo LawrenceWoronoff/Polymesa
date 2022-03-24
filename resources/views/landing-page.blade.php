@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <div class="text-center container" style="padding-top: 30px; padding-bottom: 100px;">
+        <div class="text-center container" style="padding-top: 30px; padding-bottom: 180px;">
             <button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4">Discover more</button>
 
             <h1 class="search-header" style="margin-top: 100px;">Free Images, videos and music you can use anywhere</h1>

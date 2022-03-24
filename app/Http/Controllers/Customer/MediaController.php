@@ -248,8 +248,9 @@ class MediaController extends Controller
         $media = $request->file('file');
         $extension = $media->extension();
         
-        switch($extension) {
-            case 'jpg': case 'png': case 'jpeg': case 'JPG': case 'PNG': case 'JPEG':       // When uploaded file is image
+        
+        switch(strtolower($extension)) {
+            case 'jpg': case 'png': case 'jpeg':       // When uploaded file is image
                 $image = $request->file('file');
                 $width = getimagesize($image)[0];
                 $height = getimagesize($image)[1];
@@ -334,7 +335,8 @@ class MediaController extends Controller
                     $image->move('public/assets/medias/', $fileName);
                 }
                 break;
-            case 'mp3': case 'flac': case 'wav': case 'wma': case 'aac': case 'MP3': case 'FLAC': case 'WAV': case 'WMA': case 'AAC':      // When uploaded file is audio
+            case 'mp3': case 'flac': case 'wav': case 'wma': case 'aac': case 'ogg': case 'oga':      // When uploaded file is audio
+            case 'mp4': case 'avi': case 'mk':
                 $final_img_info['length_error'] = false;
                 $final_img_info['size_error'] = false;
 
@@ -343,20 +345,30 @@ class MediaController extends Controller
 
                 $final_img_info['size'] = ($fileSize / 1024 / 1024) < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
                 
-                $audio_obj = new \wapmorgan\Mp3Info\Mp3Info($audio->getRealpath(), true);
-                $duration = $audio_obj->duration;
-
-                $final_img_info['duration_time_format'] = floor($audio_obj->duration / 60). ':'. floor($audio_obj->duration % 60);
-                $final_img_info['duration'] = (floor($audio_obj->duration / 60) != 0 ? floor($audio_obj->duration / 60).' min ' : '') .floor($audio_obj->duration % 60).' sec';
-
-                if(($duration / 60) > 15)
-                    $final_img_info['length_error'] = true;
-
+                if(strtolower($extension) == "mp3")
+                {
+                    $audio_obj = new \wapmorgan\Mp3Info\Mp3Info($audio->getRealpath(), true);
+                    $duration = $audio_obj->duration;
+    
+                    $final_img_info['duration_time_format'] = floor($audio_obj->duration / 60). ':'. floor($audio_obj->duration % 60);
+                    $final_img_info['duration'] = (floor($audio_obj->duration / 60) != 0 ? floor($audio_obj->duration / 60).' min ' : '') .floor($audio_obj->duration % 60).' sec';
+                    if(($duration / 60) > 15)
+                        $final_img_info['length_error'] = true;
+                } else {
+                    $final_img_info['duration_time_format'] = "";
+                    $final_img_info['duration'] = "";
+                    $final_img_info['length_error'] = false;
+                }
+                
                 if(($fileSize / 1024 / 1024) > 20)
                     $final_img_info['size_error'] = true;
 
                 $final_img_info['extension'] = $extension;
                 $final_img_info['fileType'] = "audio";
+
+                if(strtolower($extension) == "avi" || strtolower($extension) == "mk")   //Doesn't need but..
+                $final_img_info['fileType'] = "video";
+
 
                 if($audio && $final_img_info['length_error'] == false && $final_img_info['size_error'] == false)
                 {   
@@ -365,10 +377,6 @@ class MediaController extends Controller
                     $final_img_info['fileName'] = $fileName;
                     $audio->move('public/assets/medias/', $fileName);
                 }
-                break;
-            case 'mp4': case 'avi': case 'mk': case 'MP4': case 'AVI': case 'MK':      // When uploaded file is video
-                $final_img_info['fileType'] = "video";
-
                 break;
         }
         return json_encode($final_img_info);

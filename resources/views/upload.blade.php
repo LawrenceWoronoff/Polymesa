@@ -37,7 +37,7 @@
 
                             <h5 class="font-size-16 mt-4 fw-bold">Music/Audios</h5>
                             <p class="border-bottom border-2 mt-2 pb-4">
-                                MP3, FLAC, WAV, WMA and AAC music up to 20 MB file size limit. Duration should be no longer than 15 minutes.
+                                MP3, MP4, FLAC, WAV, WMA and AAC music up to 20 MB file size limit. Duration should be no longer than 15 minutes.
                                 <a><span class="text-info" style="cursor: pointer;">Music Quality Guidelines...</span></a>
                             </p>
                         </div>
@@ -169,7 +169,7 @@
 
                             <h5 class="font-size-16 mt-4 fw-bold">Music/Audios</h5>
                             <p class="border-bottom border-2 mt-2 pb-4">
-                                MP3, FLAC, WAV, WMA and AAC music up to 20 MB file size limit. Duration should be no longer than 15 minutes.
+                                MP3, MP4, FLAC, WAV, WMA and AAC music up to 20 MB file size limit. Duration should be no longer than 15 minutes.
                                 <a><span class="text-info" style="cursor: pointer;">Music Quality Guidelines...</span></a>
                             </p>
                         </div>
@@ -186,9 +186,9 @@
     <script src="{{ URL::asset('public/assets/libs/dropzone/dropzone.min.js') }}"></script>
     <script>
         var upload_confirm = false;
-        var imageExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png'];
-        var videoExtensions = ['mp4', 'avi', 'mk', 'MP4', 'AVI', 'MK'];
-        var audioExtensions = ['mp3', 'flac', 'wav', 'wma', 'aac', 'MP3', 'FLAC', 'WAV', 'WMA', 'AAC'];
+        var imageExtensions = ['jpg', 'JPG', 'jpeg'];
+        var videoExtensions = ['mp4', 'avi', 'mk'];
+        var audioExtensions = ['mp3', 'mp4', 'flac', 'wav', 'wma', 'aac', 'ogg', 'oga'];
 
         var extension = "";
         var fileName = "";
@@ -202,7 +202,7 @@
                 var time = dt.getTime();
                return time+file.name;
             },
-            acceptedFiles: ".jpeg,.jpg,.png,.mp3,.flac,.wav,.wma,.aac",
+            acceptedFiles: ".jpeg,.jpg,.png,.mp3,.flac,.wav,.wma,.aac,.ogg,.mp4,.avi,.mk",
             addRemoveLinks: true,
             timeout: 50000,
             removedfile: function(file) 
@@ -273,12 +273,10 @@
                     }
 
                     $("#media_confirm").show();
-                } else if(fileType == "audio") {
+                } else if(fileType == "audio" || fileType == "video") {
                     
                     fileName = detail['fileName'];
                     audio_duration = detail['duration_time_format'];
-                    
-                    console.log("Audio Type");
 
                     var html = "";
                     html += "<p class='mb-0'>Size: " + detail['size'] + "</p>";
@@ -308,8 +306,6 @@
                         $("#media_success").hide();                        
                     }
                     $("#media_confirm").show();
-                } else if(fileType == "video") {
-
                 }
 
                 
@@ -500,9 +496,9 @@
                 },
                 success: function (result) {
                     console.log(result);
-                    if(result['mediaType'] == "Image" && imageExtensions.includes(extension) ||
-                       result['mediaType'] == "Video" && videoExtensions.includes(extension) ||
-                       result['mediaType'] == "Audio" && audioExtensions.includes(extension)){  // ====== When the category file type and uploaded file type is matched.
+                    if(result['mediaType'] == "Image" && imageExtensions.includes(extension.toLowerCase()) ||
+                       result['mediaType'] == "Video" && videoExtensions.includes(extension.toLowerCase()) ||
+                       result['mediaType'] == "Audio" && audioExtensions.includes(extension.toLowerCase())){  // ====== When the category file type and uploaded file type is matched.
 
                         // Check if the title field is put
                         if(result['mediaType'] == "Audio" && $("#audio_title").val() == "")

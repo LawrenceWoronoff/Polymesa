@@ -762,6 +762,11 @@
   }
 
   .footer {
-    height: 90px !important;
+    height: 160px !important;
   }
+}
+
+
+.inactive-sidebar {
+  color: gray;
 }
