@@ -302,8 +302,8 @@ class MediaController extends Controller
                 $final_img_info['resolution_error'] = false;
                 $final_img_info['size_error'] = false;
 
-                if($width <= 3000 || $height <= 3000)
-                    $final_img_info['resolution_error'] = true;
+                // if($width <= 3000 || $height <= 3000)
+                //     $final_img_info['resolution_error'] = true;
 
                 if($final_img_info['size'] > 20)
                     $final_img_info['size_error'] = true;

@@ -53,6 +53,8 @@ class CategoryController extends Controller
                 'className' => $request->icon_classname,
                 'mediaType' => $request->mediaType,
                 'description' => $request->description,
+                'width' => $request->resolution_width,
+                'height' => $request->resolution_height,
             ]);
     
             return redirect()->back()->with('success', 'New category is added');
@@ -61,6 +63,8 @@ class CategoryController extends Controller
             $category->className = $request->icon_classname;
             $category->mediaType = $request->mediaType;
             $category->description = $request->description;
+            $category->width = $request->resolution_width;
+            $category->height = $request->resolution_height;
             $category->save();
 
             return redirect()->back()->with('success', 'Category is updated');

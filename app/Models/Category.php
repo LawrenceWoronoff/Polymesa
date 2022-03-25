@@ -25,7 +25,7 @@ class Category extends Authenticatable
     protected $table  = 'categories';
     
     protected $fillable = [
-        'id', 'name', 'className', 'mediaType', 'description', 'delete_flag'
+        'id', 'name', 'className', 'mediaType', 'width', 'height', 'description', 'delete_flag'
     ];
 
     /**

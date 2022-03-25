@@ -64,7 +64,7 @@
                                 <div class="font-size-16 col-12 col-md-6  py-4" id="media_detail">
                                 </div>
                                 <div class="col-12 col-md-6  py-4 font-size-16" id="media_confirm" style="display:none;">
-                                    <p id="media_success"><i class="fas fa-check-circle text-success me-2"></i><span>You are available to upload this media.</span></p>
+                                    <p id="media_success"><i class="fas fa-check-circle text-success me-2"></i><span>You are available to upload this media. Resolution will be considered by category.</span></p>
                                     <p id="media_resolution_error"><i class="fas fa-exclamation-circle text-danger me-2"><span></i>The resolution is not enough.</span></p>
                                     <p id="media_size_error"><i class="fas fa-exclamation-circle text-danger me-2"><span></i>The image size is over 20MB.</span></p>
 
@@ -194,6 +194,9 @@
         var fileName = "";
         var audio_duration = "";
 
+        var resolution_width = 0;
+        var resolution_height = 0;
+
         Dropzone.options.dropzone =
          {
             maxFilesize: 20,
@@ -235,6 +238,8 @@
                 var detail = JSON.parse(response);
                 fileType = detail['fileType'];
                 extension = detail['extension'];
+                resolution_width = detail['width'];
+                resolution_height = detail['height'];
 
                 if(fileType == "image") {
                     var html = "";
@@ -504,6 +509,12 @@
                         if(result['mediaType'] == "Audio" && $("#audio_title").val() == "")
                         {
                             Swal.fire("Warning", "Please input audio title", "warning");
+                            return;
+                        }
+
+                        if(result['mediaType'] == "Image" && (resolution_width < result['width'] || resolution_height < result['height']))
+                        {
+                            Swal.fire("Warning", "The minimum resolution should be " + result['width'] + ' x ' + result['height'] + ".", "warning");
                             return;
                         }
                         //////////////////////////////

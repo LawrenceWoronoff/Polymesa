@@ -75,13 +75,13 @@
                     <div class="mb-2 row">
                         <label for="icon_classname" class="col-md-3 col-form-label">Name</label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text" value="" id="name" name="name" placeholder="Sound Effect">
+                            <input class="form-control" type="text" value="" id="name" name="name" placeholder="Sound Effect" required>
                         </div>
                     </div>
                     <div class="mb-2 row">
                         <label for="icon_classname" class="col-md-3 col-form-label">Icon Class</label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text" value="" id="icon_classname" name="icon_classname" placeholder="fas fa-image">
+                            <input class="form-control" type="text" value="" id="icon_classname" name="icon_classname" placeholder="fas fa-image" required>
                         </div>
                         <p class="m-1 text-info text-end small">Note: You can find class name in <a target="_blank" href="{{url('admin-fonts')}}"  class="text-danger" style="cursor:pointer;">Admin fonts</a> page.</p>
                     </div>
@@ -93,6 +93,16 @@
                                 <option>Image</option>
                                 <option>Audio</option>
                             </select>
+                        </div>
+                    </div>
+                    <div id="resolution_section" class="mb-2 row" style="display:none">
+                        <label for="icon_classname" class="col-md-3 col-form-label">Resolution</label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" value="" id="resolution_width" name="resolution_width" placeholder="3000" required>
+                        </div>
+                        <label for="resolution" class="col-md-1 col-form-label"> X </label>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" value="" id="resolution_height" name="resolution_height" placeholder="3000" required>
                         </div>
                     </div>
                     <div class="mb-2 row">
@@ -155,6 +165,20 @@
                     $("#icon_classname").val(result['className']);
                     $("#mediaType").val(result['mediaType']);
                     $("#name").val(result['name']);
+                    $("#resolution_width").val(result['width'] == 0 ? '' : result['width']);
+                    $("#resolution_height").val(result['height'] == 0 ? '' : result['height']);
+
+                    if(result['mediaType'] == "Image")
+                    {
+                        $("#resolution_section").show();
+                        $("#resolution_width").prop("required", true);
+                        $("#resolution_height").prop("required", true);
+                    }
+                    else{
+                        $("#resolution_section").hide();
+                        $("#resolution_width").prop("required", false);
+                        $("#resolution_height").prop("required", false);
+                    }
 
                     $("#name").prop("disabled", true);
                     $("#description").val(result['description']);
@@ -180,10 +204,33 @@
             $("#name").prop("disabled", false);
 
             $("#description").val('');
+
+            if($("#mediaType").val() == "Image")
+            {
+                $("#resolution_section").show();
+                $("#resolution_width").prop("required", true);
+                $("#resolution_height").prop("required", true);
+            }
+            else{
+                $("#resolution_section").hide();
+                $("#resolution_width").prop("required", false);
+                $("#resolution_height").prop("required", false);
+            }
+
             $("#category_edit_modal").modal('show');
             console.log('Edit Category');
         })
         
-        
+        $("#mediaType").click(function(){
+            if($(this).val() == "Image") {
+                $("#resolution_section").show();
+                $("#resolution_width").prop("required", true);
+                $("#resolution_height").prop("required", true);
+            } else {
+                $("#resolution_section").hide();
+                $("#resolution_width").prop("required", false);
+                $("#resolution_height").prop("required", false);
+            }
+        })
     </script>
 @endsection
