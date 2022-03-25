@@ -59,6 +59,12 @@
                                     
                                     @if($media->category->mediaType == "Image")
                                         <img class="content-image" src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}">
+                                    @elseif($media->category->mediaType == "Video")
+                                    <div>
+                                        <video width="400" controls>
+                                            <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                        </video>
+                                    </div>
                                     @endif
 
                                     <div class="content-details fadeIn-bottom">

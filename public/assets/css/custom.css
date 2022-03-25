@@ -440,6 +440,15 @@
      -o-transition: all 0.4s ease-In;
      transition: all 0.4s ease-In;
   }
+  .image-gallery  li video {
+    height: 28vh;
+    min-width: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
+    -webkit-transition: all 0.4s ease-In;
+    -o-transition: all 0.4s ease-In;
+    transition: all 0.4s ease-In;
+ }
   .image-gallery  li:last-child {
      flex-grow: 10;
   }
