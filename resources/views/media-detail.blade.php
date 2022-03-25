@@ -213,7 +213,7 @@
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <p class="m-0 font-size-18">Category</p>
-                                    <p class="m-0 text-info font-size-18">{{$media->category->name}}{{$media->subcategory? '/'. $media->subcategory : ''}}</p>
+                                    <p class="m-0 text-info font-size-18">{{$media->category->name}}{{$media->subcategory? '/'. $media->subcategory->name : ''}}</p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <p class="m-0 font-size-18">Views</p>
