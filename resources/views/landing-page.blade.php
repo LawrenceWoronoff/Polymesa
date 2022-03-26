@@ -56,15 +56,16 @@
                                         <i class="fas fa-award font-size-20 text-white"></i>
                                     </div>  
                                     @endif
-                                    
+
+                                    @if($media->category->mediaType == "Video")
+                                    <i class="fas fa-play-circle text-white video-play-icon"></i>
+                                    @endif
                                     @if($media->category->mediaType == "Image")
                                         <img class="content-image" src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}">
                                     @elseif($media->category->mediaType == "Video")
-                                    <div>
-                                        <video width="400" controls>
+                                        <video>
                                             <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
                                         </video>
-                                    </div>
                                     @endif
 
                                     <div class="content-details fadeIn-bottom">

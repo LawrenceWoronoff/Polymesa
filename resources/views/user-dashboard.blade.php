@@ -47,7 +47,23 @@
                                         @endforeach
                                     </div>
                                 <?php } else if($category->mediaType == "Video") { ?>
-
+                                    <div class="row m-0">
+                                    @foreach($category->my_media as $media)
+                                    <div class="px-2 py-2  col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                        <div class="audio-card px-2 py-2">
+                                            <h4>{{$media->title}}</h4>
+                                            <video controls preload="metadata" class="d-block w-100">
+                                                <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                            </video>
+                                            <div class="px-2 py-2">
+                                            @foreach(json_decode($media->taglist) as $tag)
+                                            <span class="font-size-16 mx-2">{{$tag}}</span>
+                                            @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    </div>
                                 <?php } else if($category->mediaType == "Audio") { ?>
                                     <div class="row m-0">
                                     @foreach($category->my_media as $media)

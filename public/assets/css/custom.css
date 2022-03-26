@@ -779,3 +779,20 @@
 .inactive-sidebar {
   color: gray;
 }
+
+.video-play-icon {
+  position: absolute;
+  font-size: 50px; 
+  top: calc(50% - 25px); 
+  left: calc(50% - 25px);
+  z-index: 9999;
+}
+
+.video-play-icon:hover {
+  font-size: 70px; 
+  top: calc(50% - 35px); 
+  left: calc(50% - 35px);
+  -webkit-transition: all 0.1s ease-in-out 0s;
+  -moz-transition: all 0.1s ease-in-out 0s;
+  transition: all 0.1s ease-in-in 0s;
+}

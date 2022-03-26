@@ -175,6 +175,8 @@ class MediaController extends Controller
 
     public function mediaDetail(Request $request, $id)
     {
+        // Add View Count when click this link.
+
         $media = $this->media->query()->where('id', $id)->first();
         $media->views = $media->views + 1;
         $media->save();
@@ -182,57 +184,80 @@ class MediaController extends Controller
         $categories = $this->category->query()->get();
         
         // Media Detail Info
+        if($media->category->mediaType == "Image")
+        {
+            $image = 'public/assets/medias/'. $media->path;
+            $fileExtension = substr($media->path, strripos($media->path, '.') + 1);
+            
+            $width = getimagesize($image)[0];
+            $height = getimagesize($image)[1];
+            
+            $exif = @exif_read_data($image, 0, true); 
+            $final_img_info['make'] = @$exif['IFD0']['Make'];         
+            $final_img_info['model'] = @$exif['IFD0']['Model'];         
+            $final_img_info['ApertureFNumber'] = @$exif['COMPUTED']['ApertureFNumber']; 
+            $final_img_info['ISO'] = @$exif['EXIF']['ISOSpeedRatings'];  
+            $shutterSpeedValue = explode('/', @$exif['EXIF']['ShutterSpeedValue']);
+            if(count($shutterSpeedValue) == 2)
+                $final_img_info['ShutterSpeedValue'] = intval($shutterSpeedValue[0]) / intval($shutterSpeedValue[1]);
+            else
+                $final_img_info['ShutterSpeedValue'] = null;
 
-        $image = 'public/assets/medias/'. $media->path;
-        $fileExtension = substr($media->path, strripos($media->path, '.') + 1);
+            $focalLength = explode('/', @$exif['EXIF']['FocalLength']);
+            if(count($focalLength) == 2)
+                $final_img_info['FocalLength'] = intval($focalLength[0]) / intval($focalLength[1]);
+            else
+                $final_img_info['FocalLength'] = null;
+
+            $final_img_info['width'] = $width;
+            $final_img_info['height'] = $height;
+            $final_img_info['fileExtension'] = $fileExtension;
+
+            // Get Thumbnail Images Size
+            $image_640 = 'public/assets/medias/640_'. $media->path;
+            $image_1280 = 'public/assets/medias/1280_'. $media->path;
+            $image_1920 = 'public/assets/medias/1920_'. $media->path;
+            $image_original = 'public/assets/medias/'. $media->path;
+
+
+            $height_640 = getimagesize($image_640)[1];
+            $height_1280 = getimagesize($image_1280)[1];
+            $height_1920 = getimagesize($image_1920)[1];
+
+            // Get Thumbnail File Size
+            $fileSize = \File::size($image_640);
+            $size_640 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+            
+            $fileSize = \File::size($image_1280);
+            $size_1280 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+
+            $fileSize = \File::size($image_1920);
+            $size_1920 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+
+            $fileSize = \File::size($image_original);
+            $size_original = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+        } else if($media->category->mediaType == "Video") {
+            $video = 'public/assets/medias/'. $media->path;
+            $fileExtension = substr($media->path, strripos($media->path, '.') + 1);
+            
+            $height_640 = 0;
+            $height_1280 = 0;
+            $height_1920 = 0;
+            $size_640 = 0;
+            $size_1280 = 0;
+            $size_1920 = 0;
+            $size_original = 0;
+            $final_img_info['fileExtension'] = $fileExtension;
+            $final_img_info['width'] = 0;
+            $final_img_info['height'] = 0;
+            $final_img_info['make'] = 0;
+            $final_img_info['model'] = 0;
+            $final_img_info['FocalLength'] = 0;
+            $final_img_info['ApertureFNumber'] = 0;
+            $final_img_info['ShutterSpeedValue'] = 0;
+            $final_img_info['ISO'] = 0;
+        }
         
-        $width = getimagesize($image)[0];
-        $height = getimagesize($image)[1];
-        
-        $exif = @exif_read_data($image, 0, true); 
-        $final_img_info['make'] = @$exif['IFD0']['Make'];         
-        $final_img_info['model'] = @$exif['IFD0']['Model'];         
-        $final_img_info['ApertureFNumber'] = @$exif['COMPUTED']['ApertureFNumber']; 
-        $final_img_info['ISO'] = @$exif['EXIF']['ISOSpeedRatings'];  
-        $shutterSpeedValue = explode('/', @$exif['EXIF']['ShutterSpeedValue']);
-        if(count($shutterSpeedValue) == 2)
-            $final_img_info['ShutterSpeedValue'] = intval($shutterSpeedValue[0]) / intval($shutterSpeedValue[1]);
-        else
-            $final_img_info['ShutterSpeedValue'] = null;
-
-        $focalLength = explode('/', @$exif['EXIF']['FocalLength']);
-        if(count($focalLength) == 2)
-            $final_img_info['FocalLength'] = intval($focalLength[0]) / intval($focalLength[1]);
-        else
-            $final_img_info['FocalLength'] = null;
-
-        $final_img_info['width'] = $width;
-        $final_img_info['height'] = $height;
-        $final_img_info['fileExtension'] = $fileExtension;
-
-        // Get Thumbnail Images Size
-        $image_640 = 'public/assets/medias/640_'. $media->path;
-        $image_1280 = 'public/assets/medias/1280_'. $media->path;
-        $image_1920 = 'public/assets/medias/1920_'. $media->path;
-        $image_original = 'public/assets/medias/'. $media->path;
-
-
-        $height_640 = getimagesize($image_640)[1];
-        $height_1280 = getimagesize($image_1280)[1];
-        $height_1920 = getimagesize($image_1920)[1];
-
-        // Get Thumbnail File Size
-        $fileSize = \File::size($image_640);
-        $size_640 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
-        
-        $fileSize = \File::size($image_1280);
-        $size_1280 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
-
-        $fileSize = \File::size($image_1920);
-        $size_1920 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
-
-        $fileSize = \File::size($image_original);
-        $size_original = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
 
         // Media Comments
         $comments = $this->media_comment->query()->where('mediaId', $id)->orderBy('created_at', 'DESC')->get();

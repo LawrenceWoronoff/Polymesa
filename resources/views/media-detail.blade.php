@@ -27,7 +27,14 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                @if($media->category->mediaType == "Image")
                                 <img src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" class="img-fluid w-100" alt="Responsive image">
+                                @elseif($media->category->mediaType == "Video")
+                                <video class="w-100" controls>
+                                    <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                </video>
+                                @endif
                             </div>
                             
                             @Auth
@@ -99,12 +106,17 @@
                             <div id="download_section" class="py-4 mb-4" style="border-bottom: solid 1px #d0d0d0">
                                 <!-- <a href="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" download><button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4 py-2 font-size-20 free-download"><i class="fas fa-download me-2"></i>Free Download</button></a> -->
 
+                                @if($media->category->mediaType == "Image")
                                 <button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4 py-2 font-size-20 free-download"><i class="fas fa-download me-2"></i>Free Download</button>
                                    
                                 <div class="position-relative drop-down-download" style="display:none;">
                                     <div class="popover__menu mt-3">
                                     </div>
                                 </div>
+                                @else
+                                <a href="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" download><button type="button" class="btn btn-success btn-rounded waves-effect waves-light px-4 py-2 font-size-20 sub-download"><i class="fas fa-download me-2"></i>Free Download</button></a>
+
+                                @endif
                                 <div class="rounded-3 p-4 font-size-16 drop-down-download" style="display:none; background: rgb(30, 30, 30); color: #b5b5b5; max-width: 350px;">
                                     <!-- <div class="tooltip-arrow"></div> -->
                                     <div class="row">
@@ -200,13 +212,16 @@
                                 </p>
                                 <p class="mb-4" style="border-bottom: solid 1px #d0d0d0"></p>
                                 <div class="d-flex justify-content-between">
-                                    <p class="m-0 font-size-18">Image type</p>
+
+                                    <p class="m-0 font-size-18">{{ $media->category->mediaType == "Image" ? "Image type" : "Video type" }}</p>
                                     <p class="m-0 font-size-18">{{$final_img_info['fileExtension']}}</p>
                                 </div>
-                                <div class="d-flex justify-content-between">
-                                    <p class="m-0 font-size-18">Resolution</p>
-                                    <p class="m-0 font-size-18">{{$final_img_info['width']}} x {{$final_img_info['height']}}</p>
-                                </div>
+                                @if($media->category->mediaType == "Image")
+                                    <div class="d-flex justify-content-between">
+                                        <p class="m-0 font-size-18">Resolution</p>
+                                        <p class="m-0 font-size-18">{{$final_img_info['width']}} x {{$final_img_info['height']}}</p>
+                                    </div>
+                                @endif
                                 <div class="d-flex justify-content-between">
                                     <p class="m-0 font-size-18">Published</p>
                                     <p class="m-0 font-size-18">{{date('M.d, Y', strtotime($media->created_at))}}</p>
@@ -280,7 +295,6 @@
         $(".free-download").click(function(){
             $('.drop-down-download').show();
         });
-
         $(".sub-download").click(function(){
              var param = {
                 id : mediaId,
