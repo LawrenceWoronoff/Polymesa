@@ -5,7 +5,7 @@
 @section('content')
     <div>
         <div class="pd-top-10">
-            <div class="">
+            <div style="padding-top: 30px; padding-bottom:180px;">
                 @if(count($medias) == 0)
                     <div class="col-md-12">
                         <div class="text-center">
@@ -73,6 +73,38 @@
                                 <ul id="plList"></ul>
                             </div>
                         </div>
+                    @elseif($mediaType == "Video")
+                    <ul class="image-gallery">
+                        @foreach($medias as $media)
+                            @if($media->declined < Setting('minimumLikes'))
+                            <li>
+                                <div class="gallery-content">
+                                    <a href="{{route('media-detail', $media->id)}}">
+                                        <div class="content-overlay"></div>
+                                        <i class="fas fa-play-circle text-white video-play-icon"></i>
+
+                                        <video>
+                                            <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                        </video>
+                                        <div class="content-details fadeIn-bottom">
+                                        <div class="" style="float:right;">
+                                            <p class="content-text"><i class="fas fa-heart"></i> {{$media->liked}} &nbsp; <i class="fas fa-comment"></i> {{$media->commented}} &nbsp; <i class="fas fa-bookmark"></i> </p>
+                                        </div>
+                                        <div class="" style="float:left;">
+                                            <h2 class="content-title ">
+                                                @foreach(json_decode($media->taglist) as $tag)
+                                                    <a type='button' href="" class="overlay-text">{{$tag}}</a>
+                                                @endforeach
+                                            </h2>
+                                        </div>
+                                        
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                            @endif
+                        @endforeach
+                    </ul>
                     @endif
 
                 @endif
