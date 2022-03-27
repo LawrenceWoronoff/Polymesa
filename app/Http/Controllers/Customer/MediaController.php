@@ -387,7 +387,7 @@ class MediaController extends Controller
                     $final_img_info['length_error'] = false;
                 }
                 
-                if(($fileSize / 1024 / 1024) > 60)
+                if(($fileSize / 1024 / 1024) > 200)
                     $final_img_info['size_error'] = true;
 
                 $final_img_info['extension'] = $extension;

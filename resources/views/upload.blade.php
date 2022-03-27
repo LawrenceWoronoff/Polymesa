@@ -199,7 +199,7 @@
 
         Dropzone.options.dropzone =
          {
-            maxFilesize: 60,
+            maxFilesize: 200,
             renameFile: function(file) {
                 var dt = new Date();
                 var time = dt.getTime();
