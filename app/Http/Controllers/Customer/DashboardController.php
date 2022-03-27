@@ -35,6 +35,8 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
+        $categories = $this->category->query()->get();
+
         return view('user-dashboard', ['categories' => $categories]);
     }
 }
