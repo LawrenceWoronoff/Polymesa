@@ -269,12 +269,12 @@ class MediaController extends Controller
 
     public function store(Request $request)
     {
-
         // Check Uploaded file type
         $media = $request->file('file');
         $extension = $media->extension();
-        // var_dump($extension);
-        // exit(0);
+
+        ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+
         
         switch(strtolower($extension)) {
             case 'jpg': case 'png': case 'jpeg':       // When uploaded file is image
