@@ -205,7 +205,7 @@
                 var time = dt.getTime();
                return time+file.name;
             },
-            acceptedFiles: ".jpeg,.jpg,.png,.mp3,.flac,.wav,.wma,.aac,.ogg,.mp4,.avi,.mk",
+            acceptedFiles: ".jpeg,.jpg,.png,.mp3,.flac,.wav,.wma,.aac,.ogg,.m4a,.mp4,.avi,.mk",
             addRemoveLinks: true,
             timeout: 50000,
             removedfile: function(file) 

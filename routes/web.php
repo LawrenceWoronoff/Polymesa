@@ -54,6 +54,8 @@ Route::get('/media-detail/{id}', [MediaController::class, 'mediaDetail'])->name(
 Route::post('/media-download', [MediaController::class, 'mediaDownload'])->name('media-download');      // Guest Mode
 Route::get('/media-search/{id}', [MediaController::class, 'mediaSearch'])->name('media-search');
 
+Route::get('/donation/{id}', [HomeController::class, 'donation'])->name('donation');
+
 Route::post('/medias/mediasByCategory',       [MediaController::class, 'mediasByCategory'])->name('medias/mediasByCategory');
 
 

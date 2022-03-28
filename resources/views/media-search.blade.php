@@ -5,7 +5,7 @@
 @section('content')
     <div>
         <div class="pd-top-10">
-            <div style="padding-top: 30px; padding-bottom:180px;">
+            <div>
                 @if(count($medias) == 0)
                     <div class="col-md-12">
                         <div class="text-center">

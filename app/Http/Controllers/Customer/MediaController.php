@@ -262,7 +262,7 @@ class MediaController extends Controller
         // Media Comments
         $comments = $this->media_comment->query()->where('mediaId', $id)->orderBy('created_at', 'DESC')->get();
         
-        return view('media-detail', ['media' => $media, 'categories' => $categories, 'final_img_info' => $final_img_info, 'comments' => $comments, 
+        return view('media-detail', ['id' => $id, 'media' => $media, 'categories' => $categories, 'final_img_info' => $final_img_info, 'comments' => $comments, 
                                     'height_640' => $height_640, 'height_1280' => $height_1280, 'height_1920' => $height_1920, 
                                     'size_640' => $size_640, 'size_1280' => $size_1280, 'size_1920' => $size_1920, 'size_original' => $size_original]);
     }

@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-body my-100-md">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="media-content">
@@ -65,7 +65,7 @@
                             @endAuth
 
                             @Guest
-                            <div class="mt-4  font-size-16 ">
+                            <div class="mt-4  font-size-16 d-none d-md-block">
                                 <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold">{{$media->commented}} comments </button>
                                 <a href="{{Route('login')}}" class="ms-2 text-info" style="cursor: pointer;">Sign in</a> to leave a comment  
                             </div>
@@ -76,8 +76,8 @@
                             <div id="ownder_section" class="d-flex py-2" style="border-bottom: solid 1px #d0d0d0">
                                 <img src="{{ asset($media->user->avatar) }}" alt="" class="rounded-circle avatar-md">
                                 <div class="ms-4">
-                                    <p class="mb-2 mt-2 font-size-18">{{$media->user->lastname. ' '. $media->user->firstname}} / {{$media->user->uploaded}} images</p>
-                                    <button type="button" class="min-width-100 btn btn-success btn-rounded waves-effect waves-light px-4 py-1">Coffee</button>
+                                    <p class="mb-2 mt-2 font-size-18">{{$media->user->lastname. ' '. $media->user->firstname}} / {{$media->user->uploaded}} medias</p>
+                                    <a href="{{route('donation', $media->user->id)}}"><button type="button" class="min-width-100 btn btn-success btn-rounded waves-effect waves-light px-4 py-1">Coffee</button></a>
                                     <!-- <button type="button" class="min-width-100 btn btn-soft-dark btn-rounded waves-effect waves-light px-4 py-1">Follow</button> -->
                                 </div>
                             </div>
@@ -86,10 +86,48 @@
                                 @Auth
                                 <form action="{{url('media-setLike')}}" method="POST">
                                     @csrf
-                                    <input value="{{$media->id}}" name="mediaId" hidden/>
-                                    <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold"><i class="fas fa-thumbs-up me-2"></i>{{$media->liked}}</button>
-                                    <!-- <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1"><i class="far fa-bookmark"></i></button> -->
-                                    <button type="button" class="min-width-100 btn btn-soft-dark btn-rounded waves-effect waves-light px-4 py-1"><i class="fas fa-share-alt"></i></button>
+                                    <div class="position-relative">
+                                        <input value="{{$media->id}}" name="mediaId" hidden/>
+                                        <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold"><i class="fas fa-thumbs-up me-2"></i>{{$media->liked}}</button>
+                                        <!-- <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1"><i class="far fa-bookmark"></i></button> -->
+                                        <button type="button" id="share_link" class="min-width-100 btn btn-soft-dark btn-rounded waves-effect waves-light px-4 py-1"><i class="fas fa-share-alt"></i></button>
+
+                                        <div class="share-modal position-absolute w-100 p-3" style="display:none">
+                                            <div class="d-flex flex-wrap">
+                                                <div class="share-social mx-1 my-2" style="background: #3c529e; cursor:pointer;" onclick="window.open('https://facebook.com','name','width=800,height=600')">
+                                                    <i class="fab fa-facebook-f" style="color:white;"></i>
+                                                </div>
+                                                <div class="share-social mx-1 my-2" style="background: #304a6c; cursor:pointer;" onclick="window.open('https://www.tumblr.com','name','width=800,height=600')">
+                                                    <i class="fab fa-tumblr" style="color:white;"></i>
+                                                </div>
+                                                <div class="share-social mx-1 my-2" style="background: #cc1e28; cursor:pointer;" onclick="window.open('https://www.pinterest.com','name','width=800,height=600')">
+                                                    <i class="fab fa-pinterest-p" style="color:white;"></i>
+                                                </div>
+                                                <div class="share-social mx-1 my-2" style="background: #52aae4; cursor:pointer;" onclick="window.open('https://twitter.com','name','width=800,height=600')">
+                                                    <i class="fab fa-twitter" style="color:white;"></i>
+                                                </div>
+                                                <div class="share-social mx-1 my-2" style="background: #ea523a; cursor:pointer;" onclick="window.open('https://www.reddit.com','name','width=800,height=600')">
+                                                    <i class="fab fa-reddit-alien" style="color:white;"></i>
+                                                </div>
+                                                <div class="share-social mx-1 my-2" style="background: #3478bc; cursor:pointer;" onclick="window.open('https://www.linkedin.com','name','width=800,height=600')">
+                                                    <i class="fab fa-linkedin-in" style="color:white;"></i>
+                                                </div>
+                                                <div class="share-social mx-1 my-2" style="background: #42668e; cursor:pointer;" onclick="window.open('https://weibo.com','name','width=800,height=600')">
+                                                    <i class="fab fa-weibo" style="color:white;"></i>
+                                                </div>
+                                                <div class="share-social mx-1 my-2" style="background: #f6881e; cursor:pointer;" onclick="window.open('https://ok.ru','name','width=800,height=600')">
+                                                    <i class="fab fa-odnoklassniki" style="color:white;"></i>
+                                                </div>
+                                            </div>
+                                            
+                                            <input class="form-control mt-3" type="text" value="{{route('media-detail', $id)}}" id="share_link_input">
+                                            <button type="button" id="copyShareLink" class="min-width-100 btn btn-success btn-rounded px-4 py-1 mt-2 float-end myTooltip"  onclick="copyClipboard(this)" onmouseout="outButton()">
+                                                <i class="fas fa-copy me-2"></i>Copy
+                                                <span class="tooltiptext">Copy to clipboard</span>
+                                            </button>
+                                            
+                                        </div>
+                                    </div>
                                 </form>
                                 @endAuth
                                 @Guest
@@ -269,7 +307,7 @@
                             @endAuth
 
                             @Guest
-                            <div class="mt-4  font-size-16 row">
+                            <div class="mt-4  font-size-16 row d-sm-block d-md-none">
                                 <div class="col-md-3 col-sm-12">
                                     <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold">{{$media->commented}} comments </button>
                                 </div>
@@ -294,7 +332,8 @@
         var mediaId = <?php echo $media->id?>;
 
         $(".free-download").click(function(){
-            $('.drop-down-download').show();
+            var displayStyle = $('.drop-down-download').css('display') == 'none' ? 'block' : 'none';
+            $('.drop-down-download').css('display', displayStyle);
         });
         $(".sub-download").click(function(){
              var param = {
@@ -337,5 +376,23 @@
             $('.show_less_comment').addClass('d-none');
             $('.show_more_comment').removeClass('d-none');
         })
+
+        $('#share_link').click(function(){
+            var displayStyle = $('.share-modal').css('display') == 'none' ? 'block' : 'none';
+            console.log(displayStyle);
+            $('.share-modal').css('display', displayStyle);
+        })
+
+        function copyClipboard(obj) {
+            var jObj = $(obj);
+            var share_link = document.getElementById('share_link_input');
+            share_link.select();
+            share_link.setSelectionRange(0, 99999);
+
+            var clipText = share_link.value;
+            navigator.clipboard.writeText(clipText);
+
+            $('.tooltiptext').html("Copied: " + clipText);
+        }
     </script>
 @endsection

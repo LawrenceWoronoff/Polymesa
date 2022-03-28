@@ -9,22 +9,29 @@ use Illuminate\Support\Facades\Session;
 
 use App\Models\Category;
 use App\Models\Media;
+use App\Models\User;
+use App\Models\Crypto;
+
 
 class HomeController extends Controller
 {
     protected $category;
     protected $media;
+    protected $user;
+    protected $crypto;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(Category $category, Media $media)
+    public function __construct(Category $category, Media $media, User $user, Crypto $crypto)
     {
         // $this->middleware('auth');
         $this->category = $category;
         $this->media = $media;
+        $this->user = $user;
+        $this->crypto = $crypto;
     }
 
     /**
@@ -124,5 +131,17 @@ class HomeController extends Controller
     public function FormSubmit(Request $request)
     {
         return view('form-repeater');
+    }
+
+    public function donation(Request $request, $user_id)
+    {
+        $categories = $this->category->query()->get();
+        $cryptos = $this->crypto->query()->get();
+
+        $user = $this->user->query()->where('id', $user_id)->first();
+        $user->cryptos = (array)(json_decode($user->cryptoSet));
+        
+        
+        return view('coffee', ['categories' => $categories, 'user' => $user, 'cryptos' => $cryptos]);
     }
 }

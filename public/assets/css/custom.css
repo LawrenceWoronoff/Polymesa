@@ -796,3 +796,68 @@
   -moz-transition: all 0.1s ease-in-out 0s;
   transition: all 0.1s ease-in-in 0s;
 }
+
+.status-lamp {
+  width: 16px;
+  height: 16px;
+  border-radius: 50% !important;
+}
+
+/* Copy Coffee link style */
+.myTooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.myTooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 16px;
+}
+
+.myTooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.myTooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.share-modal {
+  background-color: #181a26;
+  top: 40px;
+  max-width: 360px;
+  z-index: 9999;
+
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.share-social {
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
+  text-align: center;
+  vertical-align: center;
+}

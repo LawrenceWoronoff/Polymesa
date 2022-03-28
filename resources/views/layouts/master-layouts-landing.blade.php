@@ -19,7 +19,7 @@
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="main-content">
-            <div class="page-content landing-page-content">
+            <div class="page-content landing-page-content" style="margin-bottom: 180px;">
                 <!-- Start content -->
                 <div class="container-fluid landg-page-container-fluid">
                     @yield('content')
