@@ -475,7 +475,7 @@ class MediaController extends Controller
         $medias = $this->media->query()->where('categoryId', $id)->where(function($query) use($searchKey, $tagKey){
             $query->where('taglist', 'LIKE', $tagKey)
                   ->orWhere('title', 'LIKE', $searchKey);
-        })->get();
+        })->orderBy('created_at', 'DESC')->get();
         
         $mediaType = $this->category->query()->where('id', $id)->first()->mediaType;
         $categories = $this->category->query()->get();
@@ -494,7 +494,7 @@ class MediaController extends Controller
         $medias = $this->media->query()->where('categoryId', $categoryId)->where(function($query) use($searchKey, $tagKey){
             $query->where('taglist', 'LIKE', $tagKey)
                   ->orWhere('title', 'LIKE', $searchKey);
-        })->get();
+        })->orderBy('created_at', 'DESC')->get();
 
         // $medias = $this->media->query()->where('categoryId', $categoryId)->get();
 
