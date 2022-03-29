@@ -68,7 +68,7 @@ class HomeController extends Controller
 
     public function root()
     {
-        $medias = $this->media->query()->get();
+        $medias = $this->media->query()->orderBy('created_at', 'DESC')->get();
         $categories = $this->category->query()->get();
         return view('landing-page', ['categories' => $categories, 'medias' => $medias]);
     }
