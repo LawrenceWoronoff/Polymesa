@@ -496,8 +496,6 @@ class MediaController extends Controller
                   ->orWhere('title', 'LIKE', $searchKey);
         })->orderBy('created_at', 'DESC')->get();
 
-        // $medias = $this->media->query()->where('categoryId', $categoryId)->get();
-
         return json_encode($medias);
     }
 }
