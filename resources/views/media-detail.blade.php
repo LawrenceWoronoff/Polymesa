@@ -29,7 +29,7 @@
                                 </div>
 
                                 @if($media->category->mediaType == "Image")
-                                <img src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" class="img-fluid w-100" alt="Responsive image">
+                                <img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid w-100" alt="Responsive image">
                                 @elseif($media->category->mediaType == "Video")
                                 <video class="w-100" controls>
                                     <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
