@@ -76,11 +76,11 @@ class HomeController extends Controller
         {
             if($media->accepted >= Setting('minimumLikes') && $media->category->mediaType != "Audio")
             {
-                $cnt++;
-                array_push($filteredMedias, $media);
                 if($cnt == 20){
                     break;
                 }
+                $cnt++;
+                array_push($filteredMedias, $media);
             }
         }
         $categories = $this->category->query()->get();
