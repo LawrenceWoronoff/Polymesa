@@ -32,28 +32,30 @@
                                 <?php if($category->mediaType == "Image") {?>
                                     <div class="row m-0">
                                         @foreach($category->my_media as $media)
-                                        @if($media->declined < Setting('minimumLikes'))
-                                        <div class="mb-2 px-1 col-lg-3 d-flex flex-row justify-content-center">
-                                            <div>
-                                                <a href="{{route('media-detail', $media->id)}}">
+                                        <div class="px-2 py-2  col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                                            <div class="audio-card px-2 py-2">
+                                                <a href="{{route('media-detail', $media->id)}}" class="d-flex justify-content-center">
                                                     <img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid grid-image" alt="Responsive image">
                                                 </a>
 
                                                 @if($media->accepted >= Setting('minimumLikes'))
-                                                    <p class="text-center font-size-16 mt-3"><i class="fas fa-award me-2" style="color: gray"> </i>Featured</p>
-                                                @else
-                                                    <p class="text-center font-size-16 mt-3">Published</p>
+                                                    <p class="text-center font-size-16 mt-2 mb-0"><i class="fas fa-award me-2" style="color: gray"> </i>Featured</p>
+                                                @elseif($media->accepted < Setting('minimumLikes'))
+                                                    <p class="text-center font-size-16 mt-2 mb-0">Published</p>
+                                                @elseif($media->declined >= Setting('minimumLikes'))
+                                                    <p class="text-center font-size-16 mt-2 mb-0">Declined</p>
                                                 @endif
-                                            </div>
-                                            <div class="static">
-                                                <i class="fas fa-eye static-fa-icon"> {{$media->views}}</i>
-                                                <i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i>
-                                                <i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i>
-                                                <i class="fas fa-comment static-fa-icon">  {{$media->commented}}</i>
-                                                <i class="fas fa-share-alt static-fa-icon">  {{$media->shared}}</i>
+
+                                                <div class="py-2">
+                                                    <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
+                                                    <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
+                                                    <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
+                                                    <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
+                                                    <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shared}}</i></span>
+
+                                                </div>
                                             </div>
                                         </div>
-                                        @endif
                                         @endforeach
                                     </div>
                                 <?php } else if($category->mediaType == "Video") { ?>

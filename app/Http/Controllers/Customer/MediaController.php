@@ -161,7 +161,7 @@ class MediaController extends Controller
         );
 
         $this->media_comment->create($data);
-        return redirect()->back()->with('Your comment successfully submitted');
+        // return redirect()->back()->with('Your comment successfully submitted');
     }
 
     public function mediaDownload(Request $request)
@@ -171,6 +171,29 @@ class MediaController extends Controller
         $media = $this->media->query()->where('id', $mediaID)->first();
         $media->downloads = $media->downloads + 1;
         $media->save();
+    }
+
+    public function mediaShare(Request $request)
+    {
+        $mediaId = $request->id;
+        $media_rate = $this->media_rate->query()->where('userId', Auth::user()->id)->where('mediaId', $mediaId)->first();
+        
+        if($media_rate == NULL)
+        {
+            $data = array(
+                'mediaId' => $mediaId,
+                'userId' => Auth::user()->id,
+                'shared' => 1,
+            );
+            $this->media_rate->create($data);
+        } else {
+            $data = array(
+                'shared' => 1,
+            );
+            $this->media_rate->where('userId', Auth::user()->id)->where('mediaId', $mediaId)->update($data);
+        }
+        
+        return json_encode("success");
     }
 
     public function mediaDetail(Request $request, $id)
@@ -438,6 +461,40 @@ class MediaController extends Controller
         }
     }
 
+    public function remove(Request $request)
+    {
+        $id = $request->id;
+        $media = $this->media->query()->where('id', $id)->first();
+        if($media->day_difference <= 7)
+            return json_encode("Media is published less than one week ago.");
+        if($media->userId != Auth::user()->id && Auth::user()->role != "admin")
+            return json_encode("It is not your media and unable to remove it");
+        
+        $path = 'public/assets/medias/'. $media->path;
+        $path_640 = 'public/assets/medias/640_'. $media->path;
+        $path_1280 = 'public/assets/medias/1280_'. $media->path;
+        $path_1920 = 'public/assets/medias/1920_'. $media->path;
+
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        if (file_exists($path_640)) {
+            unlink($path_640);
+        }
+        if (file_exists($path_1280)) {
+            unlink($path_1280);
+        }
+        if (file_exists($path_1920)) {
+            unlink($path_1920);
+        }
+
+        $media->delete();
+        $this->media_comment->query()->where('mediaId', $id)->delete();
+        $this->media_rate->query()->where('mediaId', $id)->delete();
+        
+        return json_encode("success");
+    }
+
     public function addMedia(Request $request)
     {
         $userId = Auth::user()->id;
@@ -510,4 +567,6 @@ class MediaController extends Controller
 
         return json_encode($filteredMedias);
     }
+
+
 }

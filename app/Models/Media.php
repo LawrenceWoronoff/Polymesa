@@ -96,4 +96,9 @@ class Media extends Authenticatable
         $media_id = $this->attributes['id'];
         return DB::table('media_rates')->where('mediaId', $media_id)->where('voted', -1)->get()->count();
     }
+
+    public function getDayDifferenceAttribute($value) { // Count the days passed from published for the first time.
+        $created_at = $this->attributes['created_at'];
+        return (strtotime(date('Y-m-d H:i:s')) - strtotime($created_at)) / 24 / 60 / 60;
+    }
 }

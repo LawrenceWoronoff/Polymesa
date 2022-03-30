@@ -338,7 +338,7 @@
             $('.drop-down-download').css('display', displayStyle);
         });
         $(".sub-download").click(function(){
-             var param = {
+            var param = {
                 id : mediaId,
             };
             console.log(mediaId);
@@ -385,6 +385,10 @@
             $('.share-modal').css('display', displayStyle);
         })
 
+        function outButton() {
+            $('.tooltiptext').html('Copy to clipboard');
+        }
+
         function copyClipboard(obj) {
             var jObj = $(obj);
             var share_link = document.getElementById('share_link_input');
@@ -395,6 +399,23 @@
             navigator.clipboard.writeText(clipText);
 
             $('.tooltiptext').html("Copied: " + clipText);
+
+            var param = {
+                id : mediaId,
+            };
+            $.ajax({
+                url: "{{URL::to('/media-share')}}",
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify(param),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (result) {
+                    // console.log('Result:', result);                    
+                },
+            });
         }
     </script>
 @endsection

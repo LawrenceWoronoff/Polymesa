@@ -52,6 +52,9 @@ Route::get('/forum', [HomeController::class, 'forum']);   // Guest Mode
 
 Route::get('/media-detail/{id}', [MediaController::class, 'mediaDetail'])->name('media-detail');        // Guest Mode
 Route::post('/media-download', [MediaController::class, 'mediaDownload'])->name('media-download');      // Guest Mode
+Route::post('/media-share', [MediaController::class, 'mediaShare'])->name('media-share');      // Guest Mode
+
+
 Route::get('/media-search/{id}', [MediaController::class, 'mediaSearch'])->name('media-search');
 
 Route::get('/donation/{id}', [HomeController::class, 'donation'])->name('donation');
@@ -80,6 +83,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/categories/getInfo',   [CategoryController::class, 'getInfo'])->name('categories/getInfo');   // Auth Role
     Route::post('/subcategories/getFromCategory',    [CategoryController::class, 'getFromCategory'])->name('subcategories/getFromCategory');    // Admin Role
+
+    Route::post('/media/remove',     [MediaController::class, 'remove'])->name('media/remove'); // Customer role
+
 });
 
 // ============= Admin Role Routes ============= //
