@@ -49,7 +49,7 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
-                                                @if($media->day_difference > 7)
+                                                @if($media->day_difference <= 7)
                                                     <i class="fas fa-trash ms-2 text-danger font-size-20 position-absolute media-remove" style="top:5px; right: 5px; cursor:pointer;" data-id="{{$media->id}}"></i>
                                                 @endif
                                             </div>
@@ -71,7 +71,7 @@
                                                     @endforeach
                                                     </div>
                                                 </div>
-                                                @if($media->day_difference > 7)
+                                                @if($media->day_difference <= 7)
                                                     <i class="fas fa-trash ms-2 text-danger font-size-20 position-absolute media-remove" style="top:5px; right: 5px; cursor:pointer;" data-id="{{$media->id}}"></i>
                                                 @endif
                                             </div>
@@ -92,7 +92,7 @@
                                                     @endforeach
                                                     </div>
                                                 </div>
-                                                @if($media->day_difference > 7)
+                                                @if($media->day_difference <= 7)
                                                     <i class="fas fa-trash ms-2 text-danger font-size-20 position-absolute media-remove" style="top:5px; right: 5px; cursor:pointer;" data-id="{{$media->id}}"></i>
                                                 @endif
                                             </div>

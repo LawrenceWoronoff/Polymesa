@@ -468,8 +468,8 @@ class MediaController extends Controller
     {
         $id = $request->id;
         $media = $this->media->query()->where('id', $id)->first();
-        if($media->day_difference <= 7)
-            return json_encode("Media is published less than one week ago.");
+        if($media->day_difference > 7)
+            return json_encode("Media is published more than one week ago.");
         if($media->userId != Auth::user()->id && Auth::user()->role != "admin")
             return json_encode("It is not your media and unable to remove it");
         
