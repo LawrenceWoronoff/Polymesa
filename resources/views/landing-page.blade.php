@@ -46,17 +46,17 @@
             <div class="">
                 <ul class="image-gallery">
                     @foreach($medias as $media)
-                        @if($media->declined < Setting('minimumLikes') && $media->category->mediaType != "Audio")
+                        @if($media->accepted >= Setting('minimumLikes') && $media->category->mediaType != "Audio")
                         <li>
                             <div class="gallery-content">
                                 <a href="{{route('media-detail', $media->id)}}">
                                     <div class="content-overlay"></div>
-                                    @if($media->accepted >= Setting('minimumLikes'))
-                                    <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
+                                    
+                                    <!-- This is for featured tag on the left top corner but we don't use it for now. -->
+                                    <!-- <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                         <i class="fas fa-award font-size-20 text-white"></i>
-                                    </div>  
-                                    @endif
-
+                                    </div>   -->
+                                    
                                     @if($media->category->mediaType == "Video")
                                     <i class="fas fa-play-circle text-white video-play-icon"></i>
                                     @endif

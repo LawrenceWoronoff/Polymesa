@@ -91,10 +91,13 @@ class MediaController extends Controller
         $media = NULL;
         foreach($vote_medias as $vote_media)
         {
-            if($vote_media->voted_by_me == false && $vote_media->declined < Setting('minimumLikes'))
+            // if($vote_media->category->mediaType == "Image") // Will be removed soon.
             {
-                $media = $vote_media;
-                break;
+                if($vote_media->voted_by_me == false && $vote_media->declined < Setting('minimumLikes'))
+                {
+                    $media = $vote_media;
+                    break;
+                }
             }
         }
         
@@ -477,10 +480,17 @@ class MediaController extends Controller
                   ->orWhere('title', 'LIKE', $searchKey);
         })->orderBy('created_at', 'DESC')->get();
         
+        $filteredMedias = array();
+        foreach($medias as $media){
+            if($media->accepted >= Setting('minimumLikes')){
+                array_push($filteredMedias, $media);
+            }
+        }
+
         $mediaType = $this->category->query()->where('id', $id)->first()->mediaType;
         $categories = $this->category->query()->get();
 
-        return view('media-search', ['mediaType' => $mediaType, 'medias' => $medias, 'categories' => $categories, 'search' => true, 'key' => $request->key, 'id'=> $id]);
+        return view('media-search', ['mediaType' => $mediaType, 'medias' => $filteredMedias, 'categories' => $categories, 'search' => true, 'key' => $request->key, 'id'=> $id]);
     }
 
     public function mediasByCategory(Request $request)
@@ -489,13 +499,19 @@ class MediaController extends Controller
 
         $tagKey = $request->key == NULL ? '%%' : ('%"'. $request->key. '"%');
         $searchKey = $request->key == NULL ? '%%' : ('%'. $request->key. '%');
-
         
         $medias = $this->media->query()->where('categoryId', $categoryId)->where(function($query) use($searchKey, $tagKey){
             $query->where('taglist', 'LIKE', $tagKey)
                   ->orWhere('title', 'LIKE', $searchKey);
         })->orderBy('created_at', 'DESC')->get();
 
-        return json_encode($medias);
+        $filteredMedias = array();
+        foreach($medias as $media){
+            if($media->accepted >= Setting('minimumLikes')){
+                array_push($filteredMedias, $media);
+            }
+        }
+
+        return json_encode($filteredMedias);
     }
 }

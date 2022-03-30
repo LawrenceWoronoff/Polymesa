@@ -15,9 +15,9 @@
                                 <div class="media-detail-overlay text-white font-size-18 p-3">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            @if($media->accepted >= Setting('minimumLikes'))
-                                            <i class="fas fa-award me-2 hand-cursor" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Featured Media"></i>
-                                            @endif
+                                            <!-- This is for featured tag on the left top corner but we don't use it for now. -->
+                                            <!-- <i class="fas fa-award me-2 hand-cursor" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Featured Media"></i> -->
+                                            
                                             @foreach(json_decode($media->taglist) as $tag)
                                             <span class="me-2 hand-cursor">{{$tag}}</span>
                                             @endforeach
@@ -30,6 +30,8 @@
 
                                 @if($media->category->mediaType == "Image")
                                 <img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid w-100" alt="Responsive image">
+                                @elseif($media->category->mediaType == "Audio")
+                                
                                 @elseif($media->category->mediaType == "Video")
                                 <video class="w-100" controls>
                                     <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">

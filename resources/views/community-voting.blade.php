@@ -55,11 +55,22 @@
                             </div>
                             @endif
                         </div>
-                        <div class="col-lg-10">
+                        <div class="col-lg-10" style="max-width: 700px;">
                             @if($media != NULL)
-                            <figure class="zoom img-fluid" onmousemove="zoom(event)" style="background-image: url({{'public/assets/medias'. '/'. $media->path}})">
-                                <img src="{{ URL::asset('public/assets/medias'. '/'. $media->path) }}" />
-                            </figure>
+                                @if($media->category->mediaType == 'Image')
+                                <figure class="zoom img-fluid" onmousemove="zoom(event)" style="background-image: url({{'public/assets/medias'. '/'. $media->path}})">
+                                    <img src="{{ URL::asset('public/assets/medias'. '/640_'. $media->path) }}" />
+                                </figure>
+                                @elseif($media->category->mediaType == 'Audio')
+                                <h4 class="text-center">{{$media->title}}</h4>
+                                <audio controls preload="metadata" class="d-block w-100">
+                                    <source src="{{asset('public/assets/medias'. '/'. $media->path) }}" type="audio/ogg">
+                                </audio>
+                                @elseif($media->category->mediaType == 'Video')
+                                <video class="w-100" controls>
+                                    <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                </video>
+                                @endif
                             @endif
                         </div>
                     </div>
