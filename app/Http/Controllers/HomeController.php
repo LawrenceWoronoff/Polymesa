@@ -69,8 +69,22 @@ class HomeController extends Controller
     public function root()
     {
         $medias = $this->media->query()->orderBy('created_at', 'DESC')->get();
+
+        $filteredMedias = array();
+        $cnt = 0;
+        foreach($medias as $media)
+        {
+            if($media->accepted >= Setting('minimumLikes') && $media->category->mediaType != "Audio")
+            {
+                $cnt++;
+                array_push($filteredMedias, $media);
+                if($cnt == 20){
+                    break;
+                }
+            }
+        }
         $categories = $this->category->query()->get();
-        return view('landing-page', ['categories' => $categories, 'medias' => $medias]);
+        return view('landing-page', ['categories' => $categories, 'medias' => $filteredMedias]);
     }
 
     public function faqs()
