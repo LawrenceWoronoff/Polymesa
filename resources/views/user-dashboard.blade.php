@@ -32,18 +32,20 @@
                                 <?php if($category->mediaType == "Image") {?>
                                     <div class="row m-0">
                                         @foreach($category->my_media as $media)
-                                            @if($media->declined < Setting('minimumLikes'))
-                                            <div class="mb-2 px-1 col-xl-2 col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
-                                                @if($media->accepted >= Setting('minimumLikes'))
-                                                <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
+                                            
+                                            <div class="mb-4 pt-4 col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center">
+                                                
+                                                <!-- This is for featured tag on the left top corner but we don't use it for now. -->
+                                                <!-- <div class="position-absolute d-flex justify-content-center align-items-center" style="top:10px; left: 10px; width: 35px; height: 35px; background:#e9e8e89c; border-radius:50%;">
                                                     <i class="fas fa-award font-size-20 text-white"></i>
-                                                </div>                                    
-                                                @endif
+                                                </div>-->
+                                                <!--  -->
                                                 <a href="{{route('media-detail', $media->id)}}">
                                                     <img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid grid-image" alt="Responsive image">
                                                 </a>
+                                                <i class="fas fa-trash ms-2 text-danger font-size-20 position-absolute media-remove" style="top:5px; right: 5px; cursor:pointer;"  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove"></i>
                                             </div>
-                                            @endif
+                                            
                                         @endforeach
                                     </div>
                                 <?php } else if($category->mediaType == "Video") { ?>

@@ -91,13 +91,10 @@ class MediaController extends Controller
         $media = NULL;
         foreach($vote_medias as $vote_media)
         {
-            // if($vote_media->category->mediaType == "Image") // Will be removed soon.
+            if($vote_media->voted_by_me == false && $vote_media->declined < Setting('minimumLikes'))
             {
-                if($vote_media->voted_by_me == false && $vote_media->declined < Setting('minimumLikes'))
-                {
-                    $media = $vote_media;
-                    break;
-                }
+                $media = $vote_media;
+                break;
             }
         }
         
@@ -466,7 +463,6 @@ class MediaController extends Controller
 
         $this->media->create($data);
         return json_encode("success");
-        // return redirect()->route('user-dashboard')->with('success', 'New media uploaded.');
     }
 
     public function mediaSearch(Request $request, $id)
