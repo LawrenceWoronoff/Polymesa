@@ -94,6 +94,6 @@ class Media extends Authenticatable
 
     public function getDeclinedAttribute($value) {
         $media_id = $this->attributes['id'];
-        return DB::table('media_rates')->where('mediaId', $media_id)->where('voted', 0)->get()->count();
+        return DB::table('media_rates')->where('mediaId', $media_id)->where('voted', -1)->get()->count();
     }
 }
