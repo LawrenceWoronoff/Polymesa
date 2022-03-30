@@ -76,7 +76,7 @@ class HomeController extends Controller
         {
             if($media->accepted >= Setting('minimumLikes') && $media->category->mediaType != "Audio")
             {
-                if($cnt == 20){
+                if($cnt == 40){
                     break;
                 }
                 $cnt++;
