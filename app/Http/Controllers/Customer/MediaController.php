@@ -161,7 +161,7 @@ class MediaController extends Controller
         );
 
         $this->media_comment->create($data);
-        // return redirect()->back()->with('Your comment successfully submitted');
+        return redirect()->back()->with('Your comment successfully submitted');
     }
 
     public function mediaDownload(Request $request)
@@ -207,6 +207,22 @@ class MediaController extends Controller
         $categories = $this->category->query()->get();
         
         // Media Detail Info
+        $height_640 = 0;
+        $height_1280 = 0;
+        $height_1920 = 0;
+        $size_640 = 0;
+        $size_1280 = 0;
+        $size_1920 = 0;
+        $size_original = 0;
+        $final_img_info['width'] = 0;
+        $final_img_info['height'] = 0;
+        $final_img_info['make'] = 0;
+        $final_img_info['model'] = 0;
+        $final_img_info['FocalLength'] = 0;
+        $final_img_info['ApertureFNumber'] = 0;
+        $final_img_info['ShutterSpeedValue'] = 0;
+        $final_img_info['ISO'] = 0;
+        
         if($media->category->mediaType == "Image")
         {
             $image = 'public/assets/medias/'. $media->path;
@@ -260,27 +276,14 @@ class MediaController extends Controller
             $fileSize = \File::size($image_original);
             $size_original = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
         } else if($media->category->mediaType == "Video") {
-            $video = 'public/assets/medias/'. $media->path;
+            // $video = 'public/assets/medias/'. $media->path;
             $fileExtension = substr($media->path, strripos($media->path, '.') + 1);
-            
-            $height_640 = 0;
-            $height_1280 = 0;
-            $height_1920 = 0;
-            $size_640 = 0;
-            $size_1280 = 0;
-            $size_1920 = 0;
-            $size_original = 0;
             $final_img_info['fileExtension'] = $fileExtension;
-            $final_img_info['width'] = 0;
-            $final_img_info['height'] = 0;
-            $final_img_info['make'] = 0;
-            $final_img_info['model'] = 0;
-            $final_img_info['FocalLength'] = 0;
-            $final_img_info['ApertureFNumber'] = 0;
-            $final_img_info['ShutterSpeedValue'] = 0;
-            $final_img_info['ISO'] = 0;
+
+        } else if($media->category->mediaType == "Audio") {
+            $fileExtension = substr($media->path, strripos($media->path, '.') + 1);
+            $final_img_info['fileExtension'] = $fileExtension;
         }
-        
 
         // Media Comments
         $comments = $this->media_comment->query()->where('mediaId', $id)->orderBy('created_at', 'DESC')->get();

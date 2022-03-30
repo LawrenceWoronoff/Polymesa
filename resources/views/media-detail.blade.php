@@ -12,6 +12,14 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="media-content">
+                                @if($media->category->mediaType == "Audio")
+                                <div class="d-flex justify-content-between px-4">
+                                    <h4>{{$media->title}}</h4>
+                                    <div class="hand-cursor" style = "width: 35px; height: 35px;">
+                                        <i class="fas fa-flag me-2 p-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Report"></i>
+                                    </div>
+                                </div>
+                                @else
                                 <div class="media-detail-overlay text-white font-size-18 p-3">
                                     <div class="d-flex justify-content-between">
                                         <div>
@@ -27,15 +35,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
 
                                 @if($media->category->mediaType == "Image")
                                 <img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid w-100" alt="Responsive image">
                                 @elseif($media->category->mediaType == "Audio")
-                                
+                                <audio controls preload="metadata" class="d-block w-100">
+                                    <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                </audio>
                                 @elseif($media->category->mediaType == "Video")
                                 <video class="w-100" controls>
                                     <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
                                 </video>
+                                @endif
+
+                                @if($media->category->mediaType == "Audio")
+                                <div class="px-2 py-2">
+                                    @foreach(json_decode($media->taglist) as $tag)
+                                    <span class="font-size-16 mx-2">{{$tag}}</span>
+                                    @endforeach
+                                </div>
                                 @endif
                             </div>
                             

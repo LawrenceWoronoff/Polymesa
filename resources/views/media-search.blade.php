@@ -57,22 +57,27 @@
                         @endforeach
                     </ul>
                     @elseif($mediaType == "Audio")
-                        <div id="mainwrap">
-                            <div id="nowPlay">
-                                <span id="npAction">Paused...</span><span id="npTitle"></span>
+                    <div id="mainwrap">
+                        <div class="d-flex justify-content-end pt-4 pe-4">
+                            <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-2 fw-bold" id="audioDetail" data-id="1"><i class="fas fa-eye me-2"></i>Detail</button>    
+                        </div>
+                        
+                        <div id="nowPlay">
+                            <span id="npAction">Paused...</span>
+                            <span id="npTitle"></span>
+                        </div>
+                        <div id="audiowrap">
+                            <div>
+                                <audio id="audio1" preload controls>Your browser does not support HTML5 Audio! 😢</audio>
                             </div>
-                            <div id="audiowrap">
-                                <div>
-                                    <audio id="audio1" preload controls>Your browser does not support HTML5 Audio! 😢</audio>
-                                </div>
-                                <div class="mt-2" id="tracks">
-                                    <a id="btnPrev">&larr;</a><a id="btnNext">&rarr;</a>
-                                </div>
-                            </div>
-                            <div id="plwrap">
-                                <ul id="plList"></ul>
+                            <div class="mt-2" id="tracks">
+                                <a id="btnPrev">&larr;</a><a id="btnNext">&rarr;</a>
                             </div>
                         </div>
+                        <div id="plwrap">
+                            <ul id="plList"></ul>
+                        </div>
+                    </div>
                     @elseif($mediaType == "Video")
                     <ul class="image-gallery">
                         @foreach($medias as $media)
@@ -138,10 +143,12 @@
             },
             success: function (result) {
                 console.log(result);
+                $("#audioDetail").attr('data-id', result[0]['id']);
                 for(i = 0; i < result.length; i++)
                 {
                     var track = {
                         "track" : i + 1,
+                        "id"    : result[i]['id'],
                         "name" : result[i]['title'],
                         "duration" : result[i]['duration'] == null ? '' : result[i]['duration'],
                         "file" : result[i]['path']
@@ -166,7 +173,7 @@
                     'duration',
                     'mute',
                     'volume',
-                    'download'
+                    // 'download'
                 ]
             });
             // initialize playlist and controls
@@ -249,6 +256,7 @@
                 $('.plSel').removeClass('plSel');
                 $('#plList li:eq(' + id + ')').addClass('plSel');
                 npTitle.text(tracks[id].name);
+                $("#audioDetail").attr('data-id', tracks[id].id);
                 index = id;
                 audio.src = mediaPath + tracks[id].file;
                 updateDownload(id, audio.src);
@@ -271,5 +279,10 @@
             $('.container').append('<p class="no-support">' + noSupport + '</p>');
         }
     });
+
+    $("#audioDetail").click(function(){
+        var mediaId = $(this).attr('data-id');
+        window.location.href = "{{url('media-detail')}}" + '/' + mediaId;
+    })
 </script>
 @endsection

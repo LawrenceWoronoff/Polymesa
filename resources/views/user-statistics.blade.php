@@ -67,6 +67,13 @@
                                             <video controls preload="metadata" class="d-block w-100">
                                                 <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
                                             </video>
+                                            @if($media->accepted >= Setting('minimumLikes'))
+                                                <p class="text-center font-size-16 mt-2 mb-0"><i class="fas fa-award me-2" style="color: gray"> </i>Featured</p>
+                                            @elseif($media->accepted < Setting('minimumLikes'))
+                                                <p class="text-center font-size-16 mt-2 mb-0">Published</p>
+                                            @elseif($media->declined >= Setting('minimumLikes'))
+                                                <p class="text-center font-size-16 mt-2 mb-0">Declined</p>
+                                            @endif
                                             <div class="py-2">
                                                 <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
                                                 <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
@@ -88,6 +95,13 @@
                                             <audio controls preload="metadata" class="d-block w-100">
                                                 <source src="{{asset('public/assets/medias'. '/'. $media->path) }}" type="audio/ogg">
                                             </audio>
+                                            @if($media->accepted >= Setting('minimumLikes'))
+                                                <p class="text-center font-size-16 mt-2 mb-0"><i class="fas fa-award me-2" style="color: gray"> </i>Featured</p>
+                                            @elseif($media->accepted < Setting('minimumLikes'))
+                                                <p class="text-center font-size-16 mt-2 mb-0">Published</p>
+                                            @elseif($media->declined >= Setting('minimumLikes'))
+                                                <p class="text-center font-size-16 mt-2 mb-0">Declined</p>
+                                            @endif
                                             <div class="py-2">
                                                 <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
                                                 <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
