@@ -530,12 +530,12 @@
   }
 
   #nowPlay span#npAction {
-  padding:21px;
-  width:30%;
+  padding:10px;
+  width:100%;
   }
 
   #nowPlay span#npTitle {
-  padding:21px;
+  padding:10px;
   text-align:right;
   width:70%;
   }
@@ -614,12 +614,16 @@
   padding:0;
   }
 
+  .plyr--full-ui {
+    width: 100%;
+    padding-right: 10px;
+  }
 
   /* Plyr Overrides
   ================================================== */
 
   .plyr--audio .plyr__controls {
-  background-color:transparent;
+  background-color:transparent !important;
   border:none;
   color:#fff;
   font-family:"Source Sans Pro", arial, sans-serif;
@@ -681,15 +685,19 @@
   ================================================== */
 
   @media only screen and (max-width:600px) {
-      #nowPlay span#npAction { display:none; }
+      /* #nowPlay span#npAction { display:none; } */
       #nowPlay span#npTitle { display:block; text-align:center; width:100%; }
   }
-
+  #audioDetail{
+    width: 120px;
+  }
   @media (max-width:600px) {
-    .plyr__progress {
+/*     .plyr__progress {
       display: none;
+    } */
+    #audioDetail{
+      width: 80px;
     }
-
     .user-dashboard.card-body {
       padding: 0.25rem;
     }
