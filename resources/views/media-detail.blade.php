@@ -98,21 +98,10 @@
                                 <img src="{{ asset($media->user->avatar) }}" alt="" class="rounded-circle avatar-md">
                                 <div class="ms-4">
                                     <p class="mb-2 mt-2 font-size-18">{{$media->user->lastname. ' '. $media->user->firstname}} / {{$media->user->uploaded}} medias</p>
-                                    <a href="{{route('donation', $media->user->id)}}"><button type="button" class="min-width-100 btn btn-success btn-rounded waves-effect waves-light px-4 py-1">Coffee</button></a>
-                                    <!-- <button type="button" class="min-width-100 btn btn-soft-dark btn-rounded waves-effect waves-light px-4 py-1">Follow</button> -->
-                                </div>
-                            </div>
-
-                            <div id="rate_section" class="py-4" style="border-bottom: solid 1px #d0d0d0">
-                                @Auth
-                                <form action="{{url('media-setLike')}}" method="POST">
-                                    @csrf
-                                    <div class="position-relative">
-                                        <input value="{{$media->id}}" name="mediaId" hidden/>
-                                        <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold"><i class="fas fa-thumbs-up me-2"></i>{{$media->liked}}</button>
-                                        <!-- <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1"><i class="far fa-bookmark"></i></button> -->
+                                    <div class="d-flex position-relative">
+                                        <a href="{{route('donation', $media->user->id)}}"><button type="button" class="me-2 min-width-100 btn btn-success btn-rounded waves-effect waves-light px-4 py-1">Coffee</button></a>
+                                        
                                         <button type="button" id="share_link" class="min-width-100 btn btn-soft-dark btn-rounded waves-effect waves-light px-4 py-1"><i class="fas fa-share-alt"></i></button>
-
                                         <div class="share-modal position-absolute w-100 p-3" style="display:none">
                                             <div class="d-flex flex-wrap">
                                                 <div class="share-social mx-1 my-2" style="background: #3c529e; cursor:pointer;" onclick="window.open('https://facebook.com','name','width=800,height=600')">
@@ -148,6 +137,20 @@
                                             </button>
                                             
                                         </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <div id="rate_section" class="py-4" style="border-bottom: solid 1px #d0d0d0">
+                                @Auth
+                                <form action="{{url('media-setLike')}}" method="POST">
+                                    @csrf
+                                    <div>
+                                        <input value="{{$media->id}}" name="mediaId" hidden/>
+                                        <button type="submit" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1 fw-bold"><i class="fas fa-thumbs-up me-2"></i>{{$media->liked}}</button>
+                                        <!-- <button type="button" class="min-width-100 btn btn-info btn-rounded waves-effect waves-light px-4 py-1"><i class="far fa-bookmark"></i></button> -->
                                     </div>
                                 </form>
                                 @endAuth

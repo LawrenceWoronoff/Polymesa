@@ -176,22 +176,9 @@ class MediaController extends Controller
     public function mediaShare(Request $request)
     {
         $mediaId = $request->id;
-        $media_rate = $this->media_rate->query()->where('userId', Auth::user()->id)->where('mediaId', $mediaId)->first();
-        
-        if($media_rate == NULL)
-        {
-            $data = array(
-                'mediaId' => $mediaId,
-                'userId' => Auth::user()->id,
-                'shared' => 1,
-            );
-            $this->media_rate->create($data);
-        } else {
-            $data = array(
-                'shared' => 1,
-            );
-            $this->media_rate->where('userId', Auth::user()->id)->where('mediaId', $mediaId)->update($data);
-        }
+        $media = $this->media->query()->where('id', $mediaId)->first();
+        $media->shares = $media->shares + 1;
+        $media->save();
         
         return json_encode("success");
     }

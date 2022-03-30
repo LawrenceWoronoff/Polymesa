@@ -26,7 +26,7 @@ class Media extends Authenticatable
     protected $table  = 'medias';
 
     protected $fillable = [
-        'userId', 'title', 'categoryId', 'subcategoryId', 'path', 'taglist', 'views', 'downloads', 'duration',
+        'userId', 'title', 'categoryId', 'subcategoryId', 'path', 'taglist', 'views', 'downloads', 'shares', 'duration',
     ];
 
     /**
@@ -69,11 +69,6 @@ class Media extends Authenticatable
     public function getCommentedAttribute($value) {
         $media_id = $this->attributes['id'];
         return DB::table('media_comments')->where('mediaId', $media_id)->get()->count();
-    }
-
-    public function getSharedAttribute($value) {
-        $media_id = $this->attributes['id'];
-        return DB::table('media_rates')->where('mediaId', $media_id)->sum('shared');
     }
 
     public function getVotedByMeAttribute($value) {

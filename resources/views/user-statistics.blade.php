@@ -51,7 +51,7 @@
                                                     <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
                                                     <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
                                                     <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                                    <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shared}}</i></span>
+                                                    <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
 
                                                 </div>
                                             </div>
@@ -79,7 +79,7 @@
                                                 <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
                                                 <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
                                                 <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shared}}</i></span>
+                                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
 
                                             </div>
                                         </div>
@@ -107,7 +107,7 @@
                                                 <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
                                                 <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
                                                 <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shared}}</i></span>
+                                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
                                             </div>
                                         </div>
                                     </div>

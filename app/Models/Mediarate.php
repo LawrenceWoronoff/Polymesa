@@ -23,7 +23,7 @@ class Mediarate extends Authenticatable
     protected $table  = 'media_rates';
 
     protected $fillable = [
-        'id', 'userId', 'mediaId', 'voted', 'liked', 'shared', 'reported', 
+        'id', 'userId', 'mediaId', 'voted', 'liked', 'reported', 
     ];
 
     /**
