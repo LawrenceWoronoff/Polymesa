@@ -46,7 +46,6 @@
             <div class="">
                 <ul class="image-gallery">
                     @foreach($medias as $media)
-                        @if($media->accepted >= Setting('minimumLikes') && $media->category->mediaType != "Audio")
                         <li>
                             <div class="gallery-content">
                                 <a href="{{route('media-detail', $media->id)}}">
@@ -83,7 +82,6 @@
                                 </a>
                             </div>
                         </li>
-                        @endif
                     @endforeach
                 </ul>
             </div>

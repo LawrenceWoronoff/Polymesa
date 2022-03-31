@@ -15,6 +15,7 @@ return [
   "Admin_Fonts" => "Admin Fonts",
 
   // Admin Menu
+  "Medias"=> "Medias",
   "Users"=> "Users",
   "Categories" => "Categories",
   "Tags" => "Tags",

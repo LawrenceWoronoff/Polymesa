@@ -48,8 +48,8 @@
                                     <div class="mb-3">
                                         <div class="float-end">
                                             @if (Route::has('password.request'))
-                                                <a href="{{ route('password.request') }}" class="text-muted">Forgot
-                                                    password?</a>
+                                                <!-- <a href="{{ route('password.request') }}" class="text-muted">Forgot
+                                                    password?</a> -->
                                             @endif
                                         </div>
                                         <label class="form-label" for="userpassword">Password</label>

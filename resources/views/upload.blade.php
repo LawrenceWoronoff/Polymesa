@@ -44,6 +44,8 @@
                         <div class="col-lg-8 col-md-12">
                             @if($remaining_week <= 0)
                                 <p class="font-size-20 text-danger"> You have exceeded the amount you can upload this week. </p>
+                            @elseif(Auth::user()->status == "deactive")
+                                <p class="font-size-20 text-danger"> Your account is deactive and unable to upload. </p>
                             @else
                             <form method="post" action="{{url('upload/store')}}" enctype="multipart/form-data" 
                                     class="dropzone" id="dropzone">

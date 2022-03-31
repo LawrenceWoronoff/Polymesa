@@ -56,7 +56,6 @@ class MediaController extends Controller
 
     public function upload(Request $request)
     {
-        
         $now = date('Y-m-d');
 
         if(date('w', strtotime($now)) == '1')
@@ -91,7 +90,7 @@ class MediaController extends Controller
         $media = NULL;
         foreach($vote_medias as $vote_media)
         {
-            if($vote_media->voted_by_me == false && $vote_media->declined < Setting('minimumLikes'))
+            if($vote_media->voted_by_me == false && $vote_media->approved == 0)
             {
                 $media = $vote_media;
                 break;
@@ -121,6 +120,15 @@ class MediaController extends Controller
             );
             $this->media_rate->where('userId', Auth::user()->id)->where('mediaId', $mediaId)->update($data);
         }
+
+        $media = $this->media->query()->where('id', $mediaId)->first();
+
+        if($media->accepted >= Setting('minimumLikes'))
+        {
+            $media->approved = 1;
+            $media->save();
+        }
+
         if($mode == 'accept')
             return redirect()->back()->with('success','You have approved the media');
         else
@@ -455,7 +463,7 @@ class MediaController extends Controller
     {
         $id = $request->id;
         $media = $this->media->query()->where('id', $id)->first();
-        if($media->day_difference > 7)
+        if($media->day_difference > 7 && Auth::user()->role != "admin")
             return json_encode("Media is published more than one week ago.");
         if($media->userId != Auth::user()->id && Auth::user()->role != "admin")
             return json_encode("It is not your media and unable to remove it");
@@ -525,7 +533,7 @@ class MediaController extends Controller
         
         $filteredMedias = array();
         foreach($medias as $media){
-            if($media->accepted >= Setting('minimumLikes')){
+            if($media->approved == 1 && $media->status == 'active'){
                 array_push($filteredMedias, $media);
             }
         }
@@ -550,7 +558,7 @@ class MediaController extends Controller
 
         $filteredMedias = array();
         foreach($medias as $media){
-            if($media->accepted >= Setting('minimumLikes')){
+            if($media->approved == 1 && $media->status == 'active'){
                 array_push($filteredMedias, $media);
             }
         }
@@ -558,5 +566,30 @@ class MediaController extends Controller
         return json_encode($filteredMedias);
     }
 
+    // ==================  Admin Role Media Page ================== //
+    public function adminList(Request $request)
+    {
+        if($request->start_date == NULL) 
+            $request->start_date = date('Y-m-d', strtotime("-6 days"));
 
+        if($request->end_date == NULL)
+            $request->end_date = date('Y-m-d');
+
+        $categories = $this->category->query()->get();
+        foreach($categories as $category)
+        {
+            $categoryId = $category->id;
+            $medias = $this->media->query()->where('categoryId', $categoryId)->where('approved', 1)->whereBetween('created_at', [$request->start_date. ' 00:00:00', $request->end_date. ' 23:59:59'])->get();
+            $category->filtered_medias = $medias;
+        }
+
+        return view('admin-medias', ['categories' => $categories, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $media = $this->media->query()->where('id', $request->id)->first();
+        $media->status = $request->status;
+        $media->save();
+    }
 }

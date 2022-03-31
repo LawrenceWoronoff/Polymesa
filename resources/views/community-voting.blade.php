@@ -59,7 +59,7 @@
                             @if($media != NULL)
                                 @if($media->category->mediaType == 'Image')
                                 <figure class="zoom img-fluid" onmousemove="zoom(event)" style="background-image: url({{'public/assets/medias'. '/'. $media->path}})">
-                                    <img src="{{ URL::asset('public/assets/medias'. '/640_'. $media->path) }}" />
+                                    <img src="{{ URL::asset('public/assets/medias'. '/1280_'. $media->path) }}" />
                                 </figure>
                                 @elseif($media->category->mediaType == 'Audio')
                                 <h4 class="text-center">{{$media->title}}</h4>
@@ -85,12 +85,12 @@
 @section('script-bottom')
 <script>
     function zoom(e){
-    var zoomer = e.currentTarget;
-    e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
-    e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
-    x = offsetX/zoomer.offsetWidth*100
-    y = offsetY/zoomer.offsetHeight*100
-    zoomer.style.backgroundPosition = x + '% ' + y + '%';
+        var zoomer = e.currentTarget;
+        e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
+        e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
+        x = offsetX/zoomer.offsetWidth*100
+        y = offsetY/zoomer.offsetHeight*100
+        zoomer.style.backgroundPosition = x + '% ' + y + '%';
     }
 </script>
 @endsection

@@ -74,7 +74,7 @@ class HomeController extends Controller
         $cnt = 0;
         foreach($medias as $media)
         {
-            if($media->accepted >= Setting('minimumLikes') && $media->category->mediaType != "Audio")
+            if($media->approved == 1 && $media->status == 'active' && $media->category->mediaType != "Audio")
             {
                 if($cnt == 40){
                     break;

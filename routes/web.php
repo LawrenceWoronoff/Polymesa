@@ -49,7 +49,6 @@ Route::get('/cookiesPolicy', [HomeController::class, 'cookiesPolicy']);   // Gue
 Route::get('/aboutUs', [HomeController::class, 'aboutUs']);   // Guest Mode
 Route::get('/forum', [HomeController::class, 'forum']);   // Guest Mode
 
-
 Route::get('/media-detail/{id}', [MediaController::class, 'mediaDetail'])->name('media-detail');        // Guest Mode
 Route::post('/media-download', [MediaController::class, 'mediaDownload'])->name('media-download');      // Guest Mode
 Route::post('/media-share', [MediaController::class, 'mediaShare'])->name('media-share');      // Guest Mode
@@ -91,6 +90,9 @@ Route::group(['middleware' => ['auth']], function () {
 // ============= Admin Role Routes ============= //
 
 Route::group(['middleware' => ['admin']], function () {
+    Route::get('/admin-medias', [MediaController::class, 'adminList'])->name('admin-medias');
+    Route::post('/media/changeStatus', [MediaController::class, 'changeStatus'])->name('media/changeStatus');    
+
     Route::get('/users',   [UserController::class, 'index'])->name('user-list');                        // Admin Role
     Route::get('/users/add',     [UserController::class, 'create'])->name('users/add');                 // Admin Role
     Route::post('/users/store',     [UserController::class, 'store'])->name('users/store');             // Admin Role

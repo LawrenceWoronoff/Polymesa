@@ -133,6 +133,11 @@
                         
                         @if(Auth::user()->role == "admin")
                         <li class="nav-item">
+                            <a class="nav-link" href="{{url('admin-medias')}}">
+                                <i class="far fa-file-alt me-2"></i> @lang('translation.Medias')
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{url('users')}}">
                                 <i class="fas fa-users me-2"></i> @lang('translation.Users')
                             </a>
