@@ -629,7 +629,7 @@ class MediaController extends Controller
         foreach($categories as $category)
         {
             $categoryId = $category->id;
-            $medias = $this->media->query()->where('userId', $uesr->id)->where('categoryId', $categoryId)->where('approved', 1)->orderBy('created_at', 'DESC')->get();
+            $medias = $this->media->query()->where('userId', $user->id)->where('categoryId', $categoryId)->where('approved', 1)->orderBy('created_at', 'DESC')->get();
             $category->user_medias = $medias;
         }
 
