@@ -22,7 +22,7 @@
                             <div class="mb-4 row">
                                 <label for="username" class="col-md-3 col-form-label">Username</label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" value="{{$user->username}}" id="username" name="username">
+                                    <input class="form-control" type="text" value="{{$user->username}}" id="username" name="username" disabled>
                                 </div>
                             </div>
                             <!-- Image Part -->

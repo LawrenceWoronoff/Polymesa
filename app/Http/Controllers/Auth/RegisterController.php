@@ -64,6 +64,13 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+    public static function quickRandom($length = 60)
+    {
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+    }
+
     protected function create(array $data)
     {
         return User::create([
@@ -75,6 +82,7 @@ class RegisterController extends Controller
             'avatar' => 'public/assets/images/users/default-avatar.png',
             'role' => 'customer',
             'status' => 'active',
+            'token' => $this->quickRandom(),
         ]);
     }
 }

@@ -27,6 +27,7 @@ class User extends Authenticatable
         'facebook', 'twitter', 'instagram', 'soundcloud', 'youtube', 'website', 'patereon', 'signinwith', 'communication', 'emailNotification',
         'cryptoSet', 'paypal', 'stripe', 'zelle', 'venmo', 'cashapp', 'userType', 
         'status',
+        'token',
     ];
 
     /**
@@ -36,7 +37,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**

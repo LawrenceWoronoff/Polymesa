@@ -57,13 +57,19 @@ class UserController extends Controller
         $cryptos = $this->crypto->query()->get();
         return view('user-edit', ['cryptos' => $cryptos, 'user' => $user]);
     }
+    
+    public static function quickRandom($length = 60)
+    {
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+    }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'username' => 'required | unique:users,deleted_at,NULL',
             'email' => 'required | unique:users,deleted_at,NULL',
-
             'password' => 'required',
             'confirmPassword' => 'required | same:password',
         ]);
@@ -99,6 +105,7 @@ class UserController extends Controller
             'cashapp' => $request->cashapp,
             'userType' => $request->userType,
             'status' => 'active',
+            'token' => $this->quickRandom(),
         );
         
         if($file) {
@@ -181,5 +188,11 @@ class UserController extends Controller
     {
         $this->user->find($id)->delete();
         return redirect()->back()->with('success', 'User is deleted.');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $token = $request->token;
+        return view('auth.passwords.changePwd', ['token' => $token]);
     }
 }

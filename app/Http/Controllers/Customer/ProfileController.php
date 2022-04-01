@@ -66,7 +66,6 @@ class ProfileController extends Controller
     {
         $file = $request->file('profile_pic');
         $data = array(
-            'username' => $request->username,
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,

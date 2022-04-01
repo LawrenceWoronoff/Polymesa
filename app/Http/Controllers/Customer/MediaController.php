@@ -611,4 +611,40 @@ class MediaController extends Controller
         $media->status = $request->status;
         $media->save();
     }
+
+    public function staticLink(Request $request, $username)
+    {
+        $user = $this->user->where('username', $username)->first();
+        if($user == NULL)
+            $exist = 0;
+        else {
+            $user_id = $user->id;
+            $exist = 1;
+        }
+
+        $categories = $this->category->query()->get();
+        $count_all = $this->media->query()->where('userId', $user->id)->get()->count();
+        $downloads = $this->media->query()->where('userId', $user->id)->sum('downloads');
+        $medias = $this->media->query()->where('userId', $user->id)->get();
+        $likes = 0;
+        $comments = 0;
+        foreach($medias as $media){
+            $likes += $media->liked;
+            $comments += $media->commented;
+        }
+        $shares = $this->media->query()->where('userId', $user->id)->sum('shares');
+
+        $popular = $this->media->query()->where('userId', $user->id)
+                                        ->where('approved', 1)
+                                        ->orderBy('views', 'DESC')->limit(50)->get();
+
+        $latest =  $this->media->query()->where('userId', $user->id)
+                                        ->where('approved', 1)
+                                        ->orderBy('created_at', 'DESC')
+                                        ->limit(50)->get();
+        return view('staticlink', ['user' => $user, 'exist' => $exist, 'categories' => $categories, 
+                                   'count_all' => $count_all, 'downloads' => $downloads, 'likes' => $likes, 'comments' => $comments, 'shares' => $shares,
+                                   'popular' => $popular, 'latest' => $latest,
+                                   ]);
+    }
 }

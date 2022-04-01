@@ -93,7 +93,7 @@
                             @endGuest
                         </div>
                         <div class="col-md-4">
-                            <div class="py-2 font-size-20"><a href="https://polymesa.com/{{$media->user->username}}">https://polymesa.com/{{$media->user->username}}</a></div>
+                            <div class="py-2 font-size-20"><a href="{{route('staticLink', $media->user->username)}}">{{route('staticLink', $media->user->username)}}</a></div>
                             <div id="ownder_section" class="d-flex py-2" style="border-bottom: solid 1px #d0d0d0">
                                 <img src="{{ asset($media->user->avatar) }}" alt="" class="rounded-circle avatar-md">
                                 <div class="ms-4">

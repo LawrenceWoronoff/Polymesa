@@ -1,6 +1,6 @@
 @extends('layouts.master-layouts-landing')
 @section('title')
-    @lang('translation.Home')
+    Search
 @endsection
 @section('content')
     <div>

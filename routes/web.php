@@ -59,7 +59,9 @@ Route::get('/media-search/{id}', [MediaController::class, 'mediaSearch'])->name(
 Route::get('/donation/{id}', [HomeController::class, 'donation'])->name('donation');
 
 Route::post('/medias/mediasByCategory',       [MediaController::class, 'mediasByCategory'])->name('medias/mediasByCategory');
+Route::get('/users/{username}',                 [MediaController::class, 'staticLink'])->name('staticLink');
 
+Route::get('resetPassword',                 [UserController::class, 'resetPassword'])->name('resetPassword');
 
 // =========== Auth Mode Routes =========== // (Means )
 
