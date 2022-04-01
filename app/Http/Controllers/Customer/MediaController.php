@@ -579,7 +579,7 @@ class MediaController extends Controller
         foreach($categories as $category)
         {
             $categoryId = $category->id;
-            $medias = $this->media->query()->where('categoryId', $categoryId)->where('approved', 1)->whereBetween('created_at', [$request->start_date. ' 00:00:00', $request->end_date. ' 23:59:59'])->get();
+            $medias = $this->media->query()->where('categoryId', $categoryId)->where('approved', 1)->whereBetween('created_at', [$request->start_date. ' 00:00:00', $request->end_date. ' 23:59:59'])->orderBy('created_at', 'DESC')->get();
             $category->filtered_medias = $medias;
         }
 
