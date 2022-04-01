@@ -93,6 +93,8 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin-medias', [MediaController::class, 'adminList'])->name('admin-medias');
     Route::post('/media/changeStatus', [MediaController::class, 'changeStatus'])->name('media/changeStatus');    
 
+    Route::get('/admin-unapproved-medias', [MediaController::class, 'unapprovedAdminList'])->name('admin-unapproved-medias');
+
     Route::get('/users',   [UserController::class, 'index'])->name('user-list');                        // Admin Role
     Route::get('/users/add',     [UserController::class, 'create'])->name('users/add');                 // Admin Role
     Route::post('/users/store',     [UserController::class, 'store'])->name('users/store');             // Admin Role

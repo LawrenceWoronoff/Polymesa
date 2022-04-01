@@ -586,6 +586,25 @@ class MediaController extends Controller
         return view('admin-medias', ['categories' => $categories, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
     }
 
+    public function unapprovedAdminList(Request $request)
+    {
+        if($request->start_date == NULL) 
+            $request->start_date = date('Y-m-d', strtotime("-6 days"));
+
+        if($request->end_date == NULL)
+            $request->end_date = date('Y-m-d');
+
+        $categories = $this->category->query()->get();
+        foreach($categories as $category)
+        {
+            $categoryId = $category->id;
+            $medias = $this->media->query()->where('categoryId', $categoryId)->where('approved', 0)->whereBetween('created_at', [$request->start_date. ' 00:00:00', $request->end_date. ' 23:59:59'])->orderBy('created_at', 'DESC')->get();
+            $category->filtered_medias = $medias;
+        }
+
+        return view('admin-medias', ['categories' => $categories, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
+    }
+
     public function changeStatus(Request $request)
     {
         $media = $this->media->query()->where('id', $request->id)->first();

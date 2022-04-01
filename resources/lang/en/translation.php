@@ -15,6 +15,7 @@ return [
   "Admin_Fonts" => "Admin Fonts",
 
   // Admin Menu
+  "UnapprovedMedias"=> "Unapproved Medias",
   "Medias"=> "Medias",
   "Users"=> "Users",
   "Categories" => "Categories",
