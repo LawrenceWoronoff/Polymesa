@@ -198,7 +198,7 @@
         <div class="tab-pane" id="accordiontab_{{$category->id}}" role="tabpanel">
             @if($category->mediaType == "Image")
                 <div class="row m-0">
-                    @foreach($category->my_media as $media)
+                    @foreach($category->user_medias as $media)
                     <div class="px-2 py-2  col-xl-3 col-lg-4 col-md-6 col-sm-12">
                         <div class="audio-card px-2 py-2">
                             <a href="{{route('media-detail', $media->id)}}" class="d-flex justify-content-center">
@@ -218,7 +218,7 @@
                 </div>
                 @elseif($category->mediaType == "Video")
                 <div class="row m-0">
-                    @foreach($category->my_media as $media)
+                    @foreach($category->user_medias as $media)
                     <div class="px-2 py-2  col-xl-3 col-lg-4 col-md-6 col-sm-12">
                         <div class="audio-card px-2 py-2">
                             <video controls preload="metadata" class="d-block w-100">
@@ -238,7 +238,7 @@
                 </div>
             @elseif($category->mediaType == "Audio")
                 <div class="row m-0">
-                    @foreach($category->my_media as $media)
+                    @foreach($category->user_medias as $media)
                     <div class="px-2 py-2  col-xl-3 col-lg-4 col-md-6 col-sm-12">
                         <div class="audio-card px-2 py-2">
                             <h4>{{$media->title}}</h4>
@@ -259,17 +259,6 @@
             @endif
         </div>
         @endforeach
-        <div class="tab-pane" id="messages1" role="tabpanel">
-            <p class="mb-0">
-                Etsy mixtape wayfarers, ethical wes anderson tofu before they
-                sold out mcsweeney's organic lomo retro fanny pack lo-fi
-                farm-to-table readymade. Messenger bag gentrify pitchfork
-                tattooed craft beer, iphone skateboard locavore carles etsy
-                salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
-                Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
-                mi whatever gluten-free carles.
-            </p>
-        </div>
         <div class="tab-pane" id="about_me" role="tabpanel">
             <p class="mb-0">
                 <textarea class="bio-area text-muted text-center font-size-18" placeholder="In a few words, tell us about yourself" rows="5" id="bio" name="bio" disabled>{{$user->bio}}</textarea>

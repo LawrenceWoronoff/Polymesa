@@ -616,13 +616,23 @@ class MediaController extends Controller
     {
         $user = $this->user->where('username', $username)->first();
         if($user == NULL)
+        {
             $exist = 0;
+            return;
+        }
         else {
             $user_id = $user->id;
             $exist = 1;
         }
 
         $categories = $this->category->query()->get();
+        foreach($categories as $category)
+        {
+            $categoryId = $category->id;
+            $medias = $this->media->query()->where('userId', $uesr->id)->where('categoryId', $categoryId)->where('approved', 1)->orderBy('created_at', 'DESC')->get();
+            $category->user_medias = $medias;
+        }
+
         $count_all = $this->media->query()->where('userId', $user->id)->get()->count();
         $downloads = $this->media->query()->where('userId', $user->id)->sum('downloads');
         $medias = $this->media->query()->where('userId', $user->id)->get();

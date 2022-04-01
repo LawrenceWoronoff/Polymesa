@@ -50,7 +50,7 @@ class Category extends Authenticatable
         $category_id = $this->attributes['id'];
         return Media::query()->where('userId', Auth::user()->id)->where('categoryId', $category_id)->orderBy('created_at', 'DESC')->get();
     }
-
+    
     public function getAllMediaAttribute($value)        // This is model function for admin dashbaord
     {
         $category_id = $this->attributes['id'];
