@@ -13,9 +13,9 @@
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div>
                         <a href="{{ url('index') }}" class="mb-5 d-block auth-logo">
-                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="22"
+                            <img src="{{ URL::asset('public/assets/images/logo-dark.png') }}" alt="" height="22"
                                 class="logo logo-dark">
-                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="22"
+                            <img src="{{ URL::asset('public/assets/images/logo-light.png') }}" alt="" height="22"
                                 class="logo logo-light">
                         </a>
                         <div class="card">
@@ -24,17 +24,17 @@
 
                                 <div class="text-center mt-2">
                                     <h5 class="text-primary">Reset Password</h5>
-                                    <p class="text-muted">Reset Password with Minible.</p>
+                                    <p class="text-muted">Reset Password with Polymesa.</p>
                                 </div>
                                 <div class="p-2 mt-4">
                                     <div class="alert alert-success text-center mb-4" role="alert">
                                         Enter your Email and instructions will be sent to you!
                                     </div>
-                                    <form action="{{ url('index') }}">
+                                    <form action="{{ route('sendResetEmail') }}">
 
                                         <div class="mb-3">
                                             <label class="form-label" for="useremail">Email</label>
-                                            <input type="email" class="form-control" id="useremail"
+                                            <input type="email" class="form-control" id="useremail" name="email"
                                                 placeholder="Enter email">
                                         </div>
 

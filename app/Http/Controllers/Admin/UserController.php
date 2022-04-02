@@ -190,6 +190,30 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'User is deleted.');
     }
 
+    public function sendResetEmail(Request $request)
+    {
+        $validate = $this->validate($request, [
+            'email' => 'required',
+        ]);
+
+        $user = $this->user->query()->where('email', $request->email)->first();
+        if($user == NULL)
+            return redirect()->back()->with("warning", "User Email doesn't exist");
+
+        $mail_to = $user->email;
+        $token = $user->token;
+
+        $param = array(
+            'reset_url' => url('resetPassword'). '?token='. $token,
+            'full_name' => $user->firstname == "" ? $user->lastname : $user->firstname,
+        );
+
+        Mail::send('email.reset_email', $param, function ($message)  use ($mail_to) {
+            $message->to($mail_to, 'Polymesa')->subject('Reset Password');
+            $message->from('no-reply@polymesa.com', 'Polymesa');
+        });
+    }
+
     public function resetPassword(Request $request)
     {
         $token = $request->token;

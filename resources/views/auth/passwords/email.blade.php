@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="home-btn d-none d-sm-block">
-        <a href="{{ url('index') }}" class="text-dark"><i class="mdi mdi-home-variant h2"></i></a>
+        <a href="{{ url('') }}" class="text-dark"><i class="mdi mdi-home-variant h2"></i></a>
     </div>
     <div class="account-pages my-5  pt-sm-5">
         <div class="container">
@@ -13,10 +13,10 @@
 
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div>
-                        <a href="{{ url('index') }}" class="mb-5 d-block auth-logo">
-                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="22"
+                        <a href="{{ url('') }}" class="mb-5 d-block auth-logo">
+                            <img src="{{ URL::asset('public/assets/images/logo-dark.png') }}" alt="" height="22"
                                 class="logo logo-dark">
-                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="22"
+                            <img src="{{ URL::asset('public/assets/images/logo-light.png') }}" alt="" height="22"
                                 class="logo logo-light">
                         </a>
                         <div class="card">
@@ -25,7 +25,7 @@
 
                                 <div class="text-center mt-2">
                                     <h5 class="text-primary">Reset Password</h5>
-                                    <p class="text-muted">Reset Password with Minible.</p>
+                                    <p class="text-muted">Reset Password with Polymesa.</p>
                                 </div>
                                 <div class="p-2 mt-4">
                                     @if (session('status'))
@@ -33,7 +33,7 @@
                                             {{ session('status') }}
                                         </div>
                                     @endif
-                                    <form method="POST" action="{{ route('password.email') }}">
+                                    <form method="POST" action="{{ route('sendResetEmail') }}">
                                         @csrf
 
                                         <div class="mb-3">

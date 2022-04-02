@@ -62,6 +62,8 @@ Route::post('/medias/mediasByCategory',       [MediaController::class, 'mediasBy
 Route::get('/users/{username}',                 [MediaController::class, 'staticLink'])->name('staticLink');
 
 Route::get('resetPassword',                 [UserController::class, 'resetPassword'])->name('resetPassword');
+Route::post('sendResetEmail',                 [UserController::class, 'sendResetEmail'])->name('sendResetEmail');
+
 Route::post('changePasswordToken',          [UserController::class, 'changePasswordToken12'])->name('changePasswordToken');
 
 

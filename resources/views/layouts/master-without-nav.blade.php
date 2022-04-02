@@ -9,6 +9,7 @@
 @section('body')
 
     <body class="authentication-bg">
+    @include('sweet::alert')
     @show
     @yield('content')
     @include('layouts.vendor-scripts')
