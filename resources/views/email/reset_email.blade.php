@@ -7,7 +7,7 @@
 
     <h3 style="color:black; margin-bottom: 0px;">Reset Password.</h3>
     <p style="color:black; margin-bottom: 0px;">You can click link to reset your password.</p>
-    <a style="color:red; margin:0px;" href="{{$pdf_url}}">{{$reset_url}}</a>
+    <a style="color:red; margin:0px;" href="{{$reset_url}}">{{$reset_url}}</a>
 
     <p style="color:black; margin-bottom: 0px;">If it is not you who requested reset password, you should ignore this email.</p>
 

@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Crypto;
 use Illuminate\Support\Facades\Hash;
 
+use Mail;
 
 class UserController extends Controller
 {
