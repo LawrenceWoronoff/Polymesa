@@ -195,4 +195,21 @@ class UserController extends Controller
         $token = $request->token;
         return view('auth.passwords.changePwd', ['token' => $token]);
     }
+
+    public function changePasswordToken12(Request $request)
+    {
+        $validate = $this->validate($request, [
+            'password' => 'required',
+            'password_confirmation' => 'required | same:password',
+        ]);
+     
+        $user = $this->user->where('token', $request->token)->first();
+        if($user == NULL)
+            return json_encode("Invalid token");
+        
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('login', ['email' => $user->email]);
+    }
 }

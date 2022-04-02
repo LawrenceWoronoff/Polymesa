@@ -13,9 +13,9 @@
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div>
                         <a href="{{ url('index') }}" class="mb-5 d-block auth-logo">
-                            <img src="{{ URL::asset('/assets/images/logo-dark.png') }}" alt="" height="22"
+                            <img src="{{ URL::asset('public/assets/images/logo-dark.png') }}" alt="" height="22"
                                 class="logo logo-dark">
-                            <img src="{{ URL::asset('/assets/images/logo-light.png') }}" alt="" height="22"
+                            <img src="{{ URL::asset('public/assets/images/logo-light.png') }}" alt="" height="22"
                                 class="logo logo-light">
                         </a>
                         <div class="card">
@@ -27,17 +27,15 @@
                                     <p class="text-muted">Reset Password with PolyMesa.</p>
                                 </div>
                                 <div class="p-2 mt-4">
-                                    <form method="POST" action="{{ route('password.update') }}">
+                                    <form method="POST" action="{{ route('changePasswordToken') }}">
                                         @csrf
 
                                         <input type="hidden" name="token" value="{{ $token }}">
 
                                         <div class="mb-3">
                                             <label for="password">{{ __('Password') }}</label>
-                                            <input id="password" type="password"
-                                                class="form-control @error('password') is-invalid @enderror" name="password"
-                                                required autocomplete="new-password">
-
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                                name="password" id="userpassword" placeholder="Enter password">
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -46,9 +44,19 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="password-confirm">{{ __('Confirm Password') }}</label>
-                                            <input id="password-confirm" type="password" class="form-control"
-                                                name="password_confirmation" required autocomplete="new-password">
+                                            <!-- <label for="password-confirm">{{ __('Confirm Password') }}</label>
+                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation"> -->
+
+                                            <label class="form-label" for="password_confirmation">Confirm Password</label>
+                                            <input type="password"
+                                                class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                name="password_confirmation" id="password_confirmation"
+                                                placeholder="Enter confirm password">
+                                            @error('password_confirmation')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
 
                                         <div class="mt-3 text-end">

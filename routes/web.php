@@ -62,6 +62,9 @@ Route::post('/medias/mediasByCategory',       [MediaController::class, 'mediasBy
 Route::get('/users/{username}',                 [MediaController::class, 'staticLink'])->name('staticLink');
 
 Route::get('resetPassword',                 [UserController::class, 'resetPassword'])->name('resetPassword');
+Route::post('changePasswordToken',          [UserController::class, 'changePasswordToken12'])->name('changePasswordToken');
+
+
 
 // =========== Auth Mode Routes =========== // (Means )
 

@@ -93,9 +93,9 @@
                             @endGuest
                         </div>
                         <div class="col-md-4">
-                            <div class="py-2 font-size-20"><a href="{{route('staticLink', $media->user->username)}}">{{route('staticLink', $media->user->username)}}</a></div>
+                            <div class="py-2 font-size-18"><a href="{{route('staticLink', $media->user->username)}}">{{route('staticLink', $media->user->username)}}</a></div>
                             <div id="ownder_section" class="d-flex py-2" style="border-bottom: solid 1px #d0d0d0">
-                                <img src="{{ asset($media->user->avatar) }}" alt="" class="rounded-circle avatar-md">
+                                <a href="{{route('staticLink', $media->user->username)}}"><img src="{{ asset($media->user->avatar) }}" alt="" class="rounded-circle avatar-md"></a>
                                 <div class="ms-4">
                                     <p class="mb-2 mt-2 font-size-18">{{$media->user->lastname. ' '. $media->user->firstname}} / {{$media->user->uploaded}} medias</p>
                                     <div class="d-flex position-relative">
@@ -156,7 +156,7 @@
                                 @endAuth
                                 @Guest
                                 <i class="fas fa-thumbs-up me-2 text-info font-size-18"> {{$media->liked}}</i>
-                                <a href="{{Route('login')}}" class="ms-2 text-info font-size-18" style="cursor: pointer;">Sign in</a> <span class="font-size-16">to evaluate</span>
+                                <a href="{{Route('login')}}" class="ms-2 text-info font-size-18" style="cursor: pointer;">Sign in</a> <span class="font-size-16">to like</span>
                                 @endGuest
 
                             </div>

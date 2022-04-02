@@ -87,14 +87,6 @@
                             <a href="{{route('media-detail', $media->id)}}" class="d-flex justify-content-center">
                                 <img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid grid-image" alt="Responsive image">
                             </a>
-                            <div class="py-2">
-                                <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
-
-                            </div>
                         </div>
                     </div>
                     @elseif($media->category->mediaType == "Audio")
@@ -106,13 +98,6 @@
                                     <source src="{{asset('public/assets/medias'. '/'. $media->path) }}" type="audio/ogg">
                                 </audio>
                             </div>
-                            <div class="py-2">
-                                <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
-                            </div>
                         </div>
                     </div>
                     @elseif($media->category->mediaType == "Video")
@@ -121,15 +106,6 @@
                             <video controls preload="metadata" class="d-block w-100">
                                 <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
                             </video>
-
-                            <div class="py-2">
-                                <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
-
-                            </div>
                         </div>
                     </div>
                     @endif
@@ -145,14 +121,6 @@
                             <a href="{{route('media-detail', $media->id)}}" class="d-flex justify-content-center">
                                 <img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid grid-image" alt="Responsive image">
                             </a>
-                            <div class="py-2">
-                                <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
-
-                            </div>
                         </div>
                     </div>
                     @elseif($media->category->mediaType == "Audio")
@@ -164,13 +132,6 @@
                                     <source src="{{asset('public/assets/medias'. '/'. $media->path) }}" type="audio/ogg">
                                 </audio>
                             </div>
-                            <div class="py-2">
-                                <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
-                            </div>
                         </div>
                     </div>
                     @elseif($media->category->mediaType == "Video")
@@ -179,15 +140,6 @@
                             <video controls preload="metadata" class="d-block w-100">
                                 <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
                             </video>
-
-                            <div class="py-2">
-                                <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
-
-                            </div>
                         </div>
                     </div>
                     @endif
@@ -204,14 +156,6 @@
                             <a href="{{route('media-detail', $media->id)}}" class="d-flex justify-content-center">
                                 <img src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}" class="img-fluid grid-image" alt="Responsive image">
                             </a>
-                            <div class="py-2">
-                                <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
-
-                            </div>
                         </div>
                     </div>
                     @endforeach
@@ -224,14 +168,6 @@
                             <video controls preload="metadata" class="d-block w-100">
                                 <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
                             </video>
-                            <div class="py-2">
-                                <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
-
-                            </div>
                         </div>
                     </div>
                     @endforeach
@@ -245,13 +181,6 @@
                             <audio controls preload="metadata" class="d-block w-100">
                                 <source src="{{asset('public/assets/medias'. '/'. $media->path) }}" type="audio/ogg">
                             </audio>
-                            <div class="py-2">
-                                <span class="font-size-16"><i class="fas fa-eye static-fa-icon"> {{$media->views}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-download static-fa-icon"> {{$media->downloads}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-thumbs-up static-fa-icon"> {{$media->liked}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-comment static-fa-icon"> {{$media->commented}}</i></span>
-                                <span class="font-size-16"><i class="fas fa-share-alt static-fa-icon"> {{$media->shares}}</i></span>
-                            </div>
                         </div>
                     </div>
                     @endforeach
