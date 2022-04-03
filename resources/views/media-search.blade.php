@@ -61,15 +61,17 @@
                         </div>
                         <p class="font-size-20 px-2"><span id="npTitle"></span></p>
                         <div id="audiowrap">
-                            <div class="d-flex justify-content-between">
-                                <audio id="audio1" preload controls>Your browser does not support HTML5 Audio! 😢</audio>
-                                <button type="button" class="btn btn-info btn-rounded waves-effect waves-light py-2 fw-bold" id="audioDetail" data-id="1"><i class="fas fa-eye"></i><span class="d-md-inline-block d-none ms-2">Detail</span></button>
-                            </div>
-                            <div id="nowPlay">
-                                <span id="npAction">Paused...</span>
-                            </div>
-                            <div class="mt-2" id="tracks">
-                                <a id="btnPrev">&larr;</a><a id="btnNext">&rarr;</a>
+                            <div class="audio-card px-2 py-4 mb-4">
+                                <div class="d-flex justify-content-between">
+                                    <audio id="audio1" preload controls>Your browser does not support HTML5 Audio! 😢</audio>
+                                    <button type="button" class="btn btn-info btn-rounded waves-effect waves-light py-2 fw-bold" id="audioDetail" data-id="1"><i class="fas fa-eye"></i><span class="d-md-inline-block d-none ms-2">Detail</span></button>
+                                </div>
+                                <div id="nowPlay">
+                                    <span id="npAction">Paused...</span>
+                                </div>
+                                <div class="mt-2" id="tracks">
+                                    <a id="btnPrev">&larr;</a><a id="btnNext">&rarr;</a>
+                                </div>
                             </div>
                         </div>
                         <div id="plwrap">
