@@ -214,7 +214,7 @@ class UserController extends Controller
             $message->from('no-reply@polymesa.com', 'Polymesa');
         });
 
-        return redirect()->back()->with("success", "Reset password link is sent to your email successfully.");
+        return redirect()->back()->with("success", "Please check your email account inbox or spam folder to reset password.");
     }
 
     public function resetPassword(Request $request)
