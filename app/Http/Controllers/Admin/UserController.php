@@ -210,7 +210,7 @@ class UserController extends Controller
         );
 
         Mail::send('email.reset_email', $param, function ($message)  use ($mail_to) {
-            $message->to($mail_to, 'Polymesa')->subject('Reset Password');
+            $message->to($mail_to, 'Polymesa')->subject('Welcome to Polymesa');
             $message->from('no-reply@polymesa.com', 'Polymesa');
         });
 
