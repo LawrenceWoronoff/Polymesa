@@ -209,7 +209,7 @@
             },
             acceptedFiles: ".jpeg,.jpg,.png,.mp3,.flac,.wav,.wma,.aac,.ogg,.m4a,.mp4,.avi,.mk",
             addRemoveLinks: true,
-            timeout: 50000,
+            timeout: 500000,
             removedfile: function(file) 
             {
                 $("#media_detail").hide();
