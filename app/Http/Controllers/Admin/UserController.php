@@ -210,8 +210,8 @@ class UserController extends Controller
         );
 
         Mail::send('email.reset_email', $param, function ($message)  use ($mail_to) {
-            $message->to($mail_to, 'zhangnengliang')->subject('Welcome to zhangnengliang');
-            $message->from('welcome@rapid.com', 'zhangnengliang');
+            $message->to($mail_to, 'Polymesa')->subject('Welcome to Polymesa');
+            $message->from('no-reply@polymesa.com', 'Polymesa');
         });
 
         return redirect()->back()->with("success", "Please check your email inbox or spam folder to reset password.");
