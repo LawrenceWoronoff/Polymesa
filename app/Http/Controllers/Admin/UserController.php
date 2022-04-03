@@ -237,6 +237,6 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('login', ['email' => $user->email]);
+        return redirect()->route('login', ['email' => $user->email])->with('success', 'You have reset password successfully');
     }
 }
