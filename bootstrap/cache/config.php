@@ -228,6 +228,12 @@
     ),
     'prefix' => 'laravel_cache',
   ),
+  'cloudinary' => 
+  array (
+    'notification_url' => '',
+    'cloud_url' => 'cloudinary://975354664356946:2z1Gu2G8O8aHGZ-I2K6NJ-WakXs@polymesa-com',
+    'upload_preset' => '',
+  ),
   'cors' => 
   array (
     'paths' => 
@@ -372,6 +378,10 @@
         'url' => NULL,
         'endpoint' => NULL,
       ),
+      'cloudinary' => 
+      array (
+        'driver' => 'cloudinary',
+      ),
     ),
     'links' => 
     array (
@@ -477,11 +487,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'mailhog',
-        'port' => '1025',
-        'encryption' => NULL,
-        'username' => NULL,
-        'password' => NULL,
+        'host' => 'mail.polymesa.com',
+        'port' => '587',
+        'encryption' => 'tls',
+        'username' => 'info@polymesa.com',
+        'password' => 'F1)#b*KF)ca=',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -514,8 +524,8 @@
     ),
     'from' => 
     array (
-      'address' => NULL,
-      'name' => 'Laravel',
+      'address' => 'no-reply@polymesa.com',
+      'name' => 'Polymesa',
     ),
     'markdown' => 
     array (

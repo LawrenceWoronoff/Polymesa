@@ -104,7 +104,7 @@
                     <div class="px-2 py-2  col-xl-3 col-lg-4 col-md-6 col-sm-12">
                         <div class="audio-card px-2 py-2 h-100 d-flex flex-column justify-content-between">
                             <video controls preload="metadata" class="d-block w-100">
-                                <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                <source src="{{ $media->video_1280 }}" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                     <div class="px-2 py-2  col-xl-3 col-lg-4 col-md-6 col-sm-12">
                         <div class="audio-card px-2 py-2 h-100 d-flex flex-column justify-content-between">
                             <video controls preload="metadata" class="d-block w-100">
-                                <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                <source src="{{ $media->video_1280 }}" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                     <div class="px-2 py-2  col-xl-3 col-lg-4 col-md-6 col-sm-12">
                         <div class="audio-card px-2 py-2">
                             <video controls preload="metadata" class="d-block w-100">
-                                <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                <source src="{{ $media->video_1280 }}" type="video/mp4">
                             </video>
                         </div>
                     </div>

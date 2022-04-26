@@ -88,7 +88,7 @@
                                         <i class="fas fa-play-circle text-white video-play-icon"></i>
 
                                         <video>
-                                            <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                            <source src="{{ $media->video_1280 }}" type="video/mp4">
                                         </video>
                                         <div class="content-details fadeIn-bottom">
                                         <div class="" style="float:right;">

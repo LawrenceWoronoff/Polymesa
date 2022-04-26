@@ -180,8 +180,23 @@
                 </div>
             </div>
         </div> <!-- end col -->
+        
     </div> <!-- end row -->
 
+    <div class="block-ui clear">
+            <div class="loading-info">
+                <div class="loading-text loading">
+                <div class="text" style="font-size: 16px;"> Processing Media ...</div>
+                <div class="loader" role="progressbar">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+                </div>
+            </div>
+        </div>
 @endsection
 @section('script')
     <!-- Plugins js -->
@@ -194,6 +209,22 @@
 
         var extension = "";
         var fileName = "";
+        var video_640 = "";
+        var video_1280 = "";
+        var video_1920 = "";
+        var video_org = "";
+        
+        var video_height_640 = "";
+        var video_height_1280 = "";
+        var video_height_1920 = "";
+        var video_width_org = "";
+        var video_height_org = "";
+
+        var video_bytes_640 = "";
+        var video_bytes_1280 = "";
+        var video_bytes_1920 = "";
+        var video_bytes_org = "";
+        
         var audio_duration = "";
 
         var resolution_width = 0;
@@ -210,6 +241,11 @@
             acceptedFiles: ".jpeg,.jpg,.png,.mp3,.flac,.wav,.wma,.aac,.ogg,.m4a,.mp4,.avi,.mk",
             addRemoveLinks: true,
             timeout: 500000,
+            // addedfile: function()
+            // {
+            //     $('.block-ui').removeClass('clear');
+            // },
+
             removedfile: function(file) 
             {
                 $("#media_detail").hide();
@@ -221,7 +257,9 @@
                     },
                     type: 'POST',
                     url: '{{ url("upload/delete") }}',
-                    data: {fileName: fileName},
+                    data: {
+                        fileName: fileName
+                    },
                     success: function (data){
                         console.log("File has been successfully removed!!");
                     },
@@ -235,6 +273,8 @@
        
             success: function(file, response) 
             {
+                $('.block-ui').addClass('clear');
+
                 initializeMediaConfirm();
 
                 var detail = JSON.parse(response);
@@ -258,6 +298,7 @@
                     $("#media_detail").html(html);
                     $("#media_detail").show();
                     fileName = detail['fileName'];
+                    
 
                     if(detail['resolution_error'])
                         $("#media_resolution_error").show();
@@ -283,6 +324,22 @@
                 } else if(fileType == "audio" || fileType == "video") {
                     
                     fileName = detail['fileName'];
+                    video_640 = detail['video_640'];
+                    video_1280 = detail['video_1280'];
+                    video_1920 = detail['video_1920'];
+                    video_org = detail['video_org'];
+
+                    video_height_640 = detail['video_height_640'];
+                    video_height_1280 = detail['video_height_1280'];
+                    video_height_1920 = detail['video_height_1920'];
+                    video_width_org = detail['video_width_org'];
+                    video_height_org = detail['video_height_org'];
+
+                    video_bytes_640 = detail['video_bytes_640'];
+                    video_bytes_1280 = detail['video_bytes_1280'];
+                    video_bytes_1920 = detail['video_bytes_1920'];
+                    video_bytes_org = detail['video_bytes_org'];
+
                     audio_duration = detail['duration_time_format'];
 
                     var html = "";
@@ -534,6 +591,21 @@
                             title: $("#audio_title").val(),
                             mediaType: result['mediaType'],
                             duration: audio_duration,
+                            video_640: video_640,
+                            video_1280: video_1280,
+                            video_1920: video_1920,
+                            video_org: video_org,
+
+                            video_height_640: video_height_640,
+                            video_height_1280: video_height_1280,
+                            video_height_1920: video_height_1920,
+                            video_width_org: video_width_org,
+                            video_height_org: video_height_org,
+
+                            video_bytes_640: video_bytes_640,
+                            video_bytes_1280: video_bytes_1280,
+                            video_bytes_1920: video_bytes_1920,
+                            video_bytes_org: video_bytes_org,
                         };
                         $.ajax({
                             url: "{{URL::to('/upload/addMedia')}}",

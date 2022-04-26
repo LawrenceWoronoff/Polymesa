@@ -63,7 +63,7 @@
                                         <img class="content-image" src="{{ URL::asset('public/assets/medias'). '/640_'. $media->path }}">
                                     @elseif($media->category->mediaType == "Video")
                                         <video>
-                                            <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                            <source src="{{ $media->video_640 }}" type="video/mp4">
                                         </video>
                                     @endif
 

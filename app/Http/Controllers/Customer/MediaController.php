@@ -275,6 +275,19 @@ class MediaController extends Controller
             $fileExtension = substr($media->path, strripos($media->path, '.') + 1);
             $final_img_info['fileExtension'] = $fileExtension;
 
+            // Get Video File Sizes
+            // $fileSize = \File::size($media->video_640);
+            // $size_640 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+            
+            // $fileSize = \File::size($media->video_1280);
+            // $size_1280 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+
+            // $fileSize = \File::size($media->video_1920);
+            // $size_1920 = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+
+            $fileSize = \File::size('public/assets/medias/'. $media->path);
+            $size_original = $fileSize / 1024 / 1024 < 1 ? number_format($fileSize / 1024, 0). " KB" : number_format($fileSize / 1024 / 1024, 1). "MB";
+
         } else if($media->category->mediaType == "Audio") {
             $fileExtension = substr($media->path, strripos($media->path, '.') + 1);
             $final_img_info['fileExtension'] = $fileExtension;
@@ -294,8 +307,11 @@ class MediaController extends Controller
         $media = $request->file('file');
         $extension = $media->extension();
 
-        ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+        ini_set('max_execution_time', 600); //600 seconds = 10 minutes
 
+        $final_img_info['video_640'] = '';
+        $final_img_info['video_1280'] = '';
+        $final_img_info['video_1920'] = '';
         
         switch(strtolower($extension)) {
             case 'jpg': case 'png': case 'jpeg':       // When uploaded file is image
@@ -420,20 +436,111 @@ class MediaController extends Controller
 
                 if($audio && $final_img_info['length_error'] == false && $final_img_info['size_error'] == false)
                 {   
-                    // if($final_img_info['fileType'] == "video"){
-                    //     VideoThumbnail::createThumbnail('public/assets/medias/1648131282_1648131282488star.mp4', 'thumbnails', 'movie.jpg', 2, 1920, 1080);
-                    // }
 
                     $fileName = time().'_'.$audio->getClientOriginalName();
+                    
+                    $resizedVideo = cloudinary()->uploadVideo($request->file('file')->getRealPath(), [
+                        'folder' => 'uploads',
+                        'transformation' => [
+                                  'width' => 640,
+                                  'height' => 640,
+                                  'quality' => 'auto', 
+                                  'crop' => 'limit',
+                         ]
+                    ]);
+                    $response = $resizedVideo->getResponse();
+                    $response_array = (array) $response;
+                    $height_640 = $response_array["height"];
+                    $bytes_640 = $response_array["bytes"] / 1024 / 1024 < 1 ? number_format($response_array["bytes"] / 1024, 0). " KB" : number_format($response_array["bytes"] / 1024 / 1024, 1). "MB";
+                    $video_duration = $response_array["duration"];
+                    $resizedVideo_640 = $resizedVideo->getSecurePath();
+
+
+                    $resizedVideo = cloudinary()->uploadVideo($request->file('file')->getRealPath(), [
+                        'folder' => 'uploads',
+                        'transformation' => [
+                                  'width' => 1280,
+                                  'height' => 1280,
+                                  'quality' => 'auto', 
+                                  'crop' => 'limit',
+                         ]
+                    ]);
+                    $response = $resizedVideo->getResponse();
+                    $response_array = (array) $response;
+                    $height_1280 = $response_array["height"];
+                    $bytes_1280 = $response_array["bytes"] / 1024 / 1024 < 1 ? number_format($response_array["bytes"] / 1024, 0). " KB" : number_format($response_array["bytes"] / 1024 / 1024, 1). "MB";;
+                    $resizedVideo_1280 = $resizedVideo->getSecurePath();
+                    
+
+                    $resizedVideo = cloudinary()->uploadVideo($request->file('file')->getRealPath(), [
+                        'folder' => 'uploads',
+                        'transformation' => [
+                                  'width' => 1920,
+                                  'height' => 1920,
+                                  'quality' => 'auto', 
+                                  'crop' => 'limit',
+                         ]
+                    ]);
+                    $response = $resizedVideo->getResponse();
+                    $response_array = (array) $response;
+                    $height_1920 = $response_array["height"];
+                    $bytes_1920 = $response_array["bytes"] / 1024 / 1024 < 1 ? number_format($response_array["bytes"] / 1024, 0). " KB" : number_format($response_array["bytes"] / 1024 / 1024, 1). "MB";;
+                    $resizedVideo_1920 = $resizedVideo->getSecurePath();
+
+
+                    $originalVideo = cloudinary()->uploadVideo($request->file('file')->getRealPath(), [
+                        'folder' => 'uploads',
+                    ]);
+                    $response = $originalVideo->getResponse();
+                    $response_array = (array) $response;
+                    $height_org = $response_array["height"];
+                    $width_org = $response_array["width"];
+                    $bytes_org = $response_array["bytes"] / 1024 / 1024 < 1 ? number_format($response_array["bytes"] / 1024, 0). " KB" : number_format($response_array["bytes"] / 1024 / 1024, 1). "MB";;
+                    $resizedVideo_org = $originalVideo->getSecurePath();
+                    
+                    if($final_img_info['fileType'] == "video")
+                    {
+                        $video_duration = (int)$video_duration;
+                        $final_img_info['duration_time_format'] = floor($video_duration / 60). ':'. floor($video_duration % 60);
+                        $final_img_info['duration'] = (floor($video_duration / 60) != 0 ? floor($video_duration / 60).' min ' : '') .floor($video_duration % 60).' sec';
+                        if(($video_duration / 60) > 15)
+                            $final_img_info['length_error'] = true;
+                    }
+
+                    $final_img_info['video_640'] = $resizedVideo_640;
+                    $final_img_info['video_height_640'] = $height_640;
+                    $final_img_info['video_bytes_640'] = $bytes_640;
+
+                    $final_img_info['video_1280'] = $resizedVideo_1280;
+                    $final_img_info['video_height_1280'] = $height_1280;
+                    $final_img_info['video_bytes_1280'] = $bytes_1280;
+
+                    $final_img_info['video_1920'] = $resizedVideo_1920;
+                    $final_img_info['video_height_1920'] = $height_1920;
+                    $final_img_info['video_bytes_1920'] = $bytes_1920;
+
+                    $final_img_info['video_org'] = $resizedVideo_org;
+                    $final_img_info['video_height_org'] = $height_org;
+                    $final_img_info['video_width_org'] = $width_org;
+                    $final_img_info['video_bytes_org'] = $bytes_org;
 
 
                     $final_img_info['fileName'] = $fileName;
-                    $audio->move('public/assets/medias/', $fileName);
-                    
+                    $audio->move('public/assets/medias/', $fileName);                    
                 }
                 break;
         }
         return json_encode($final_img_info);
+    }
+
+    public function get_property(object $object, string $property) {
+        $array = (array) $object;
+        $propertyLength = strlen($property);
+        foreach ($array as $key => $value) {
+            if (substr($key, -$propertyLength) === $property) {
+                return $value;
+            }
+        }
     }
 
     public function fileDestroy(Request $request)
@@ -499,6 +606,9 @@ class MediaController extends Controller
         $categoryId = $request->categoryId;
         $subcategoryId = $request->subcategoryId;
         $path = $request->path;
+        $video_640 = $request->video_640;
+        $video_1280 = $request->video_1280;
+        $video_1920 = $request->video_1920;
         $taglist = $request->taglist; 
         $title = $request->title;
         $mediaType = $request->mediaType; 
@@ -509,7 +619,21 @@ class MediaController extends Controller
             'categoryId' => $categoryId,
             'subcategoryId' => $subcategoryId,
             'path' => $path,
+            'video_640' => $video_640,
+            'video_1280' => $video_1280,
+            'video_1920' => $video_1920,
             'taglist' => $taglist,
+
+            'height_640' => $request->video_height_640,
+            'height_1280' => $request->video_height_1280,
+            'height_1920' => $request->video_height_1920,
+            'width_org' => $request->video_width_org,
+            'height_org' => $request->video_height_org,
+
+            'bytes_640' => $request->video_bytes_640,
+            'bytes_1280' => $request->video_bytes_1280,
+            'bytes_1920' => $request->video_bytes_1920,
+            'bytes_org' => $request->video_bytes_org,
         );
         if($mediaType == "Audio"){
             $data['title'] = $title;

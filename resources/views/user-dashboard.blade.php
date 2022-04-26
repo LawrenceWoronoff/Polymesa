@@ -63,7 +63,7 @@
                                                 <div class="audio-card px-2 py-2">
                                                     <h4>{{$media->title}}</h4>                                            
                                                     <video controls preload="metadata" class="d-block w-100">
-                                                        <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                                        <source src="{{ $media->video_640 }}" type="video/mp4">
                                                     </video>
                                                     <div class="px-2 py-2">
                                                     @foreach(json_decode($media->taglist) as $tag)

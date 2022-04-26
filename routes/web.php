@@ -35,8 +35,6 @@ use App\Http\Controllers\Customer\ProfileController;
 
 Auth::routes();
 
-
-
 // ============= Guest Mode Routes ============= //
 Route::get('/', [HomeController::class, 'root']);           // Guest Mode
 Route::get('/donate', [HomeController::class, 'donate']);   // Guest Mode

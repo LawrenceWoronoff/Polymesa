@@ -26,7 +26,11 @@ class Media extends Authenticatable
     protected $table  = 'medias';
 
     protected $fillable = [
-        'userId', 'title', 'categoryId', 'subcategoryId', 'path', 'taglist', 'views', 'downloads', 'shares', 'duration', 'approved', 'status'
+        'userId', 'title', 'categoryId', 'subcategoryId', 'path', 
+        'video_640', 'video_1280', 'video_1920', 
+        'height_640', 'height_1280', 'height_1920', 'width_org', 'height_org',
+        'bytes_640', 'bytes_1280', 'bytes_1920', 'bytes_org',
+        'taglist', 'views', 'downloads', 'shares', 'duration', 'approved', 'status'
     ];
 
     /**

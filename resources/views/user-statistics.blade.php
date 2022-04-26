@@ -65,7 +65,7 @@
                                         <div class="audio-card px-2 py-2">
                                             <h4>{{$media->title}}</h4>
                                             <video controls preload="metadata" class="d-block w-100">
-                                                <source src="{{ URL::asset('public/assets/medias'). '/'. $media->path }}" type="video/mp4">
+                                                <source src="{{ $media->video_640 }}" type="video/mp4">
                                             </video>
                                             @if($media->approved == 1 && $media->status == 'active')
                                                 <p class="text-center font-size-16 mt-2 mb-0"><i class="fas fa-award me-2" style="color: gray"> </i>Featured</p>
